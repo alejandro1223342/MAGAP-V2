@@ -35,9 +35,9 @@ if (!isset($_SESSION['usu_nombre'])) {
                 </div>
                 
                 <!-- Main content -->
-    <form id="formularioregistros">
+     <form action="" name="formulario" id="formulario" method="POST">
 
-    <section class="content" action="" name="formulario" id="formulario" method="POST">
+    <section class="content" id="formularioregistros">
     <div class="container-fluid">
         <div class="card card-default">
             <div class="card-header">
@@ -48,13 +48,13 @@ if (!isset($_SESSION['usu_nombre'])) {
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Nombre</label>
-                            <input type="text" class="form-control" name="cat_nombre" id="cat_nombre" placeholder="Nombre" required>
+                            <input type="text" class="form-control" name="cat_nombre" id="cat_nombre" placeholder="Nombre">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Descripción</label>
-                            <input type="text" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción" required>
+                            <label for="">Descripción</label>
+                            <input type="text" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
                         </div>
                     </div>
                 </div>

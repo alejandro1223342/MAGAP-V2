@@ -66,4 +66,58 @@ function cancelarform() {
   mostrarform(false);
 }
 
+//funcion para desactivar
+function desactivar(cat_id) {
+  bootbox.confirm("¿Esta seguro de desactivar este dato?", function (result) {
+    if (result) {
+      $.post(
+        "../ajax/catalogo.php?op=desactivar",
+        { cat_id: cat_id },
+        function (e) {
+          bootbox.alert(e);
+          tabla.ajax.reload();
+        }
+      );
+    }
+  });
+}
+
+function activar(cat_id) {
+  bootbox.confirm("¿Esta seguro de activar este dato?", function (result) {
+    if (result) {
+      $.post(
+        "../ajax/catalogo.php?op=activar",
+        { cat_id: cat_id },
+        function (e) {
+          bootbox.alert(e);
+          tabla.ajax.reload();
+        }
+      );
+    }
+  });
+}
+
+//funcion para guardaryeditar
+function guardaryeditar(e) {
+  e.preventDefault(); // Detiene la acción por defecto del formulario
+
+  $("#btnGuardar").prop("disabled", true);
+  var formData = new FormData($("#formulario")[0]);
+
+  $.ajax({
+    url: "../ajax/catalogo.php?op=guardaryeditar",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (datos) {
+      bootbox.alert(datos);
+      mostrarform(false);
+      tabla.ajax.reload();
+    },
+  });
+
+  limpiar();
+}
 init();

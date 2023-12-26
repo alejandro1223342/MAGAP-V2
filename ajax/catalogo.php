@@ -46,6 +46,33 @@ switch ($_GET["op"]) {
             echo json_encode($results);
             break;
 
+          
+            
+            case 'desactivar':
+                $rspta=$catalogo->desactivar($cat_id);
+                echo $rspta ? "Datos desactivados correctamente" : "No se pudo desactivar los datos";
+                break;
+
+            case 'activar':
+                $rspta=$catalogo->activar($cat_id);
+                echo $rspta ? "Datos activados correctamente" : "No se pudo activar los datos";
+                break;
+
+
+                case 'guardaryeditar':
+                    if (empty($cat_id)) {
+                        $rspta=$catalogo->insertar($cat_nombre,$cat_descripcion,$cat_padre);
+                        echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
+                    }else{
+                        echo "Valor de cat_id: " . $cat_id; // Imprime el valor de cat_id
+                
+                         $rspta=$catalogo->editar($cat_id,$cat_nombre,$cat_descripcion,$cat_padre);
+                        echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
+                    }
+                        break;
+
+
+
 
 }
 

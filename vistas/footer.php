@@ -41,6 +41,9 @@
 <script src="../public/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../public/js/adminlte.js"></script>
+<!-- Bootbox -->
+<script src="../public/js/bootbox.all.min.js"></script>
+<script src="../public/js/bootbox.min.js"></script>
 
 <!-- DATATABLES -->
 <!-- DataTables  & Plugins -->
@@ -56,6 +59,8 @@
 <script src="../public/datatables/js/buttons.html5.min.js"></script>
 <script src="../public/datatables/js/buttons.print.min.js"></script>
 <script src="../public/datatables/js/buttons.colVis.min.js"></script>
+
+
 <!-- <script src="../public/js/dashboard.js"></script> -->
 
 </body>
