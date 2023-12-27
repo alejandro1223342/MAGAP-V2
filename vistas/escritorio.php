@@ -32,7 +32,7 @@ require 'header.php';
             
                   <div class="col-sm-12">
                     <div class="position-relative" style="min-height: 180px;">
-                      <img src="../files/img/FRONTAL2.jpg" alt="Photo 3" class="img-fluid">
+                      <img src="../files/img/FRONTAL.png" alt="Photo 3" class="img-fluid">
                       
                     </div>
                   </div>

@@ -20,7 +20,7 @@ if (!isset($_SESSION['usu_nombre'])) {
               <!-- /.card-header -->
 
                 <div class="card-body">
-                        <table id="listadoregistros" class="table table-bordered table-striped">
+                        <table id="tbllistado" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th></th>
@@ -40,9 +40,9 @@ if (!isset($_SESSION['usu_nombre'])) {
                 </div>
                 
                 <!-- Main content -->
-    <form id="formularioregistros">
+    <form action="" name="formulario" id="formulario" method="POST">
 
-    <section class="content" action="" name="formulario" id="formulario" method="POST">
+    <section class="content" id="formularioregistros">
     <div class="container-fluid">
         <div class="card card-default">
             <div class="card-header">
@@ -52,29 +52,16 @@ if (!isset($_SESSION['usu_nombre'])) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nombres y Apellidos(*)</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nro Identificación" required>
+                        <input type= "hidden" class="form-control" type="text" name="usu_id" id="usu_id">
+    
+                        <label>Nombres y Apellidos(*)</label>
+                            <input type="text" class="form-control" name="usu_nombre" id="usu_nombre" placeholder="Nombres y apellidos" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Cédula(*)</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Otro campo" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Telefono(*)</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nro Identificación" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Correo(*)</label>
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Otro campo" required>
+                            <label>Cédula(*)</label>
+                            <input type="text" class="form-control"name="usu_cedula" id="usu_cedula" placeholder="Cédula" required>
                         </div>
                     </div>
                 </div>
@@ -82,14 +69,14 @@ if (!isset($_SESSION['usu_nombre'])) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Cargo(*)</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nro Identificación" required>
+                            <label>Telefono(*)</label>
+                            <input type="text" class="form-control" name="usu_telefono" id="usu_telefono" placeholder="Télefono" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Login(*)</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Otro campo" required>
+                            <label>Correo Electrónico(*)</label>
+                            <input type="email" class="form-control" name="usu_correo" id="usu_correo" placeholder="Correo Electrónico" required>
                         </div>
                     </div>
                 </div>
@@ -97,8 +84,24 @@ if (!isset($_SESSION['usu_nombre'])) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Clave(*)</label>
-                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="Nro Identificación" required>
+                            <label>Cargo(*)</label>
+                            <input type="text" class="form-control" name="usu_cargo" id="usu_cargo" placeholder="Cargo" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Login(*)</label>
+                            <input type="text" class="form-control" name="usu_login" id="usu_login" placeholder="Login" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Clave(*)</label>
+                            <input class="form-control" type="hidden" name="claveu" id="claveu">
+                            <input type="password" class="form-control" name="usu_clave" id="usu_clave" placeholder="Clave" required>
                         </div>
                     </div>
 
@@ -113,12 +116,14 @@ if (!isset($_SESSION['usu_nombre'])) {
                             <div class="card-body">
                               <!-- Minimal style -->
                               <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                   <!-- checkbox -->
                                   <div class="form-group clearfix">
                                     <div class="icheck-primary d-inline">
-                                      <input type="checkbox" id="permiso" checked>
-                                      <label for="checkboxPrimary1">
+                                   <ul id="permiso" style="list-style: none;">
+ 
+<!--                                       <input type="checkbox" checked id="permiso">
+ -->                                    <label>
 
                                       </label>
                                     </div>
@@ -174,7 +179,7 @@ if (!isset($_SESSION['usu_nombre'])) {
   }
   require 'footer.php';
 ?>
-  <script src="scripts/catalogo.js"></script>
+  <script src="scripts/usuario.js"></script>
 <!--   <script src="../public/js/select2.full.min.js"></script>
  -->
 <?php
