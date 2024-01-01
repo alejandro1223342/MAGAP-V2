@@ -15,6 +15,8 @@ if (strlen(session_id())<1)
      <!-- Bootstrap -->
    <!-- Font Awesome -->
   <link rel="stylesheet" href="../public/css/all.min.css">
+  <link rel="stylesheet" href="../public/css/fontawesome.css">
+
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="../public/css/icheck-bootstrap.min.css">
   <!-- Theme style -->
@@ -317,13 +319,13 @@ if (strlen(session_id())<1)
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
+                  <a href="ventanilla.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Solicitantes</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
+                <!--<li class="nav-item">
+                  <a href="ventanilla.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>DataTables</p>
                   </a>
@@ -333,7 +335,7 @@ if (strlen(session_id())<1)
                     <i class="far fa-circle nav-icon"></i>
                     <p>jsGrid</p>
                   </a>
-                </li>
+                </li>-->
               </ul>
             </li>';
             }
@@ -351,12 +353,12 @@ if (strlen(session_id())<1)
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
+                  <a href="catastros.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Validación Documentos</p>
+                    <p>Solicitantes</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="pages/tables/data.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>DataTables</p>
@@ -367,7 +369,7 @@ if (strlen(session_id())<1)
                     <i class="far fa-circle nav-icon"></i>
                     <p>jsGrid</p>
                   </a>
-                </li>
+                </li>-->
               </ul>
             </li>';
             }

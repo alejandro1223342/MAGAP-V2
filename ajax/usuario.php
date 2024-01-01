@@ -86,9 +86,9 @@ switch ($_GET["op"]) {
             while ($reg=$rspta->fetch_object()) {
                 $data[]=array(
                     "0"=>($reg->usu_condicion) ?
-                    '<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->usu_id.')"><i class="fa fa-pencil"></i></button>' .
+                    '<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->usu_id.')"><i class="fa fa-pen"></i></button>' .
                     '<button class="btn btn-danger btn-xs" onclick="desactivar('.$reg->usu_id.')"><i class="fa fa-times"></i></button>' :
-                    '<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->usu_id.')"><i class="fa fa-pencil"></i></button>' .
+                    '<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->usu_id.')"><i class="fa fa-pen"></i></button>' .
                     '<button class="btn btn-primary btn-xs" onclick="activar('.$reg->usu_id.')"><i class="fa fa-check"></i></button>',
                     "1"=>$reg->usu_nombre,
                     "2"=>$reg->usu_login,
