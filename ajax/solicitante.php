@@ -62,7 +62,7 @@ case 'verificar':
        //destruimos la sesion
      session_destroy();
            //redireccionamos al usu_login
-     header("Location: ../indexsol.php");
+     header("Location: ../vistas/indexsol.php");
      break;
     }
 

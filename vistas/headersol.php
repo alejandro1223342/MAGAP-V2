@@ -76,7 +76,7 @@ if (strlen(session_id())<1)
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header"><?php echo $_SESSION['sol_nombre']; ?></span>
                         <div class="dropdown-divider"></div>
-                        <a href="../ajax/usuario.php?op=salir" class="dropdown-item">
+                        <a href="../ajax/solicitante.php?op=salir" class="dropdown-item">
                             <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
                         </a>
                     </div>
