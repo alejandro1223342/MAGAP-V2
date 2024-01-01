@@ -43,8 +43,8 @@
 <script src="../public/js/adminlte.js"></script>
 <!-- Bootbox -->
 <script src="../public/js/bootbox.all.min.js"></script>
-<script src="../public/js/bootbox.min.js"></script>
-
+<!-- <script src="../public/js/bootbox.min.js"></script>
+ -->
 <!-- DATATABLES -->
 <!-- DataTables  & Plugins -->
 <script src="../public/datatables/js/jquery.dataTables.min.js"></script>
@@ -59,6 +59,9 @@
 <script src="../public/datatables/js/buttons.html5.min.js"></script>
 <script src="../public/datatables/js/buttons.print.min.js"></script>
 <script src="../public/datatables/js/buttons.colVis.min.js"></script>
+
+<!-- BS-Stepper -->
+<script src="../public/js/bs-stepper.min.js"></script>
 
 
 <!-- <script src="../public/js/dashboard.js"></script> -->

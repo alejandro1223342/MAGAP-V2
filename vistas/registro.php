@@ -72,30 +72,24 @@
                   </div>
 
                   <form action="" name="formulario" id="formulario" method="POST">
-
+ 
                   <div class="bs-stepper-content">
                     <!-- your steps content here -->
                     <div id="parte_uno" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                       <div class="form-group">
                           <label>Identificación(*)</label>
-                          <select class="form-control select2" style="width: 100%;" required>
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                          <select class="form-control select2" style="width: 100%;" name="cat_id_identificacion" id="cat_id_identificacion" >
+                            
                           </select>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Nro Identificación(*)</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nro Identificación" required>
+                        <label>Nro Identificación(*)</label>
+                        <input type="text" class="form-control" name="sol_identificacion" id="sol_identificacion" placeholder="Nro Identificación" >
                       </div>
                   
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Correo Electrónico(*)</label>
-                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Correo Electrónico" required>
+                        <label>Correo Electrónico(*)</label>
+                        <input type="email" class="form-control" name="sol_correo" id="sol_correo" placeholder="Correo Electrónico">
                       </div>
                       
                       <button class="btn btn-primary btn-next">
@@ -111,13 +105,13 @@
                     <div id="parte_dos" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
 
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Nombres y Apellidos(*)</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nombres y Apellidos" required>
+                        <label>Nombres y Apellidos(*)</label>
+                        <input type="text" class="form-control" name="sol_nombre" id="sol_nombre" placeholder="Nombres y Apellidos">
                       </div>
 
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Teléfono(*)</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Teléfono" required>
+                        <label>Teléfono(*)</label>
+                        <input type="text" class="form-control" name="sol_telefono" id="sol_telefono" placeholder="Teléfono">
                       </div>
 
                       <button class="btn btn-primary btn-prev">
@@ -129,19 +123,17 @@
                     </div>
 
                     <!-- Paso 3 -->
-                    <div id="parte_tres" class="content" role="tabpanel" aria-labelledby="information-part-trigger" required>
+                    <div id="parte_tres" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                     
                     <div class="form-group ">
-                        <label for="exampleInputPassword1">Dirección(*)</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Teléfono" required >
+                        <label>Dirección(*)</label>
+                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Teléfono" >
                       </div>
 
                       <div class="form-group">
                       <label>Provincia(*)</label>
-                      <select class="form-control select2" style="width: 100%;" required>
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option>Alabama</option>
-                        <option>Alaska</option>
+                      <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia" >
+    
                         <!-- Resto de opciones -->
                       </select>
                     </div>
@@ -149,40 +141,22 @@
 
                       <div class="form-group">
                           <label>Cantón(*)</label>
-                          <select class="form-control select2" style="width: 100%;" required>
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                          <select class="form-control select2" style="width: 100%;" name="cat_id_canton" id="cat_id_canton" >
+                           
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Parroquia(*)</label>
-                          <select class="form-control select2" style="width: 100%;" required>
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                          <select class="form-control select2" style="width: 100%;" name="cat_id_parroquia" id="cat_id_parroquia" >
+                            
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Sector(*)</label>
-                          <select class="form-control select2" style="width: 100%;" required>
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                          <select class="form-control select2" style="width: 100%;" name="cat_id_sector" id="cat_id_sector" >
+                           
                           </select>
                       </div>
 
@@ -197,14 +171,15 @@
                     <div id="parte_cuatro" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                       <div class="form-group">
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Contraseña de Usuario(*)</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
+                        <label>Contraseña de Usuario(*)</label>
+                        <input class="form-control" type="hidden" name="claveu" id="claveu">
+                        <input type="password" class="form-control" name="sol_clave" id="sol_clave" placeholder="Contraseña">
                       </div>
                       </div>
                       <button class="btn btn-primary btn-prev">
                         <i class="fas fa-arrow-left"></i> Anterior 
                       </button>
-                      <button type="submit" class="btn btn-primary">
+                      <button type="submit" class="btn btn-success" id="btnGuardar">
                       <i class="fas fa-save"></i> Guardar 
                       </button>
                     </div>
@@ -241,7 +216,9 @@
 <!-- BS-Stepper -->
 <script src="../public/js/bs-stepper.min.js"></script>
 
-
+<!-- Bootbox -->
+<script src="../public/js/bootbox.all.min.js"></script>
+<script src="../public/js/bootbox.min.js"></script>
 
 <!-- Combobox -->
 <script src="scripts/registro.js"></script>

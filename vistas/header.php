@@ -39,6 +39,9 @@ if (strlen(session_id())<1)
   <link rel="stylesheet" href="../public/datatables/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../public/datatables/css/buttons.bootstrap4.min.css">
 
+   <!-- BS Stepper -->
+   <link rel="stylesheet" href="../public/css/bs-stepper.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -308,7 +311,7 @@ if (strlen(session_id())<1)
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Tables
+                  Ventanilla
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -316,7 +319,7 @@ if (strlen(session_id())<1)
                 <li class="nav-item">
                   <a href="pages/tables/simple.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
+                    <p>Solicitantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -342,7 +345,7 @@ if (strlen(session_id())<1)
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Tables
+                  Catastros
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -350,7 +353,7 @@ if (strlen(session_id())<1)
                 <li class="nav-item">
                   <a href="pages/tables/simple.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
+                    <p>Validación Documentos</p>
                   </a>
                 </li>
                 <li class="nav-item">
