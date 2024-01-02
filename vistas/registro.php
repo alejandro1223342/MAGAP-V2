@@ -127,36 +127,30 @@
                     
                     <div class="form-group ">
                         <label>Dirección(*)</label>
-                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Teléfono" >
+                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Direccion" >
                       </div>
 
                       <div class="form-group">
                       <label>Provincia(*)</label>
                       <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia" >
-    
-                        <!-- Resto de opciones -->
                       </select>
                     </div>
-
 
                       <div class="form-group">
                           <label>Cantón(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_canton" id="cat_id_canton" >
-                           
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Parroquia(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_parroquia" id="cat_id_parroquia" >
-                            
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Sector(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_sector" id="cat_id_sector" >
-                           
                           </select>
                       </div>
 
