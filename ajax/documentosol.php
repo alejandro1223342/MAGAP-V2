@@ -20,8 +20,8 @@ switch ($_GET["op"]) {
         if (empty($doc_id)) {
             // Manejo de la subida del archivo
             $parentFolderId = '1tL4bVET1g382sIaw3uJHiq__kRg10hMc';
-            if (!empty($_FILES['doc_url']['name']) && file_exists($_FILES['doc_url']['tmp_name'])) {
-                $doc_path = $_FILES['doc_url']['tmp_name'];
+            if (!empty($_FILES['exampleInputFile']['name']) && file_exists($_FILES['exampleInputFile']['tmp_name'])) {
+                $doc_path = $_FILES['exampleInputFile']['tmp_name'];
                 $fileName = $nombreSeleccionado.'-'.$sol_identificacion;
                 // Leer el contenido del archivo
                 $fileContent = file_get_contents($doc_path);

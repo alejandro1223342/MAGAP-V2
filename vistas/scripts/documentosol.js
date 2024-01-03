@@ -76,7 +76,7 @@ function guardaryeditar(e) {
     $("#btnGuardar").prop("disabled", true);
 
     var formData = new FormData($("#formulario")[0]);
-    formData.append("doc_url", $("#doc_url")[0].files[0]);
+    formData.append("exampleInputFile", $("#exampleInputFile")[0].files[0]);
 
     var nombreSeleccionado = $("#cat_id_tipodoc option:selected").text();
     formData.append("nombreSeleccionado", nombreSeleccionado);
