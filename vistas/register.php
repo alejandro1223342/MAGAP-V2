@@ -59,7 +59,7 @@
                                        placeholder="Correo Electrónico">
                             </div>
                         </div>
-                        <input type="button" name="next" class="next action-button" value="Next"/>
+                        <input type="button" name="next" class="next action-button" value="Siguiente"/>
 
                     </fieldset>
                     <fieldset>
@@ -91,8 +91,8 @@
                             </div>
 
                         </div>
-                        <input type="button" name="next" class="next action-button" value="Next"/>
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                        <input type="button" name="next" class="next action-button" value="Siguiente"/>
+                        <input type="button" name="previous" class="previous action-button-previous" value="Regresar"/>
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <input type="button" name="next" id="btnGuardar" class="next action-button" value="Submit"/>
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                        <input type="button" name="previous" class="previous action-button-previous" value="Regresar"/>
                     </fieldset>
                     <fieldset>
                         <div class="form-card">

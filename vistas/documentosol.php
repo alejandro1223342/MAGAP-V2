@@ -24,6 +24,7 @@ if (!isset($_SESSION['sol_nombre'])) {
                         <!-- /.card-header -->
 
                         <div class="card-body">
+                            <input type="hidden" name="nombre_tipodoc" id="nombre_tipodoc">
                             <table id="tbllistado" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
