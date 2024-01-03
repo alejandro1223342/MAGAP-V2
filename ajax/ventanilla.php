@@ -106,5 +106,11 @@ switch ($_GET["op"]) {
         }
         break;
 
+    case 'guardardocumento':
+        $cat_id_estado = $_POST['cat_id_estado'];
+        $tra_id = $_POST['tra_id'];
+        $pro_observacion = $_POST['pro_observacion'];
+        $rspta = $ventanilla->guardardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion);
+        break;
 }
 ?>
