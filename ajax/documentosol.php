@@ -30,7 +30,7 @@ switch ($_GET["op"]) {
                     // Subir el contenido del archivo a Google Drive
                     $resultadoSubida = uploadFileToDrive($parentFolderId, $sol_identificacion, $fileName, $fileContent);
                     // Insertar en la base de datos con el resultado de la subida a Drive
-                    $rspta = $documentosol->insertar($sol_identificacion, $cat_id_tipodoc, $resultadoSubida);
+                    $rspta = $documentosol->insertar($sol_identificacion, $cat_id_tipodoc,$fileName, $resultadoSubida);
 
                     echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
                 } else {

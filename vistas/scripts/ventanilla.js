@@ -100,6 +100,7 @@ function mostrar(tra_id) {
       $("#tra_id").val(data.tra_id);
       $("#sol_nombre").val(data.sol_nombre);
       $("#doc_url").val(data.doc_url);
+      $("#sol_iden").val(data.sol_identificacion);
       $("#tra_id").val(data.tra_id);
     }
   );

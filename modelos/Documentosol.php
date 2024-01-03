@@ -17,9 +17,9 @@ class Documentosol
 //metodo insertar regiustro
 
 
-    public function insertar($sol_iden, $cat_id_tipodoc, $doc_url)
+    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url)
     {
-		$sql = "call sp_documentosol('ing', '$sol_iden', $cat_id_tipodoc, '0', '$doc_url')";
+		$sql = "call sp_documentosol('ing', '$sol_iden', $cat_id_tipodoc, '$fileName', '$doc_url')";
         //return ejecutarConsulta($sql);
         $row = ejecutarConsultaSP($sql);
 
@@ -35,11 +35,10 @@ class Documentosol
 
                 //echo "El valor de current_sol_id es nulo o vacio";
 
-                $current_sol_id = $_SESSION['sol_id'][$num_elementos];
+                $current_sol_id = $_SESSION['sol_id'];
 
                 $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
-
-
+                echo $sql_detalle;
                 ejecutarConsultaSP($sql_detalle) or $sw = false;
                 $num_elementos = $num_elementos + 1;
 

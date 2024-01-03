@@ -24,7 +24,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <thead>
                         <tr>
                             <th></th>
-                            <th>Solicitantes</th>
+                            <th>Identificación</th>
+                            <th>Solicitante</th>
                             <th>Telefono</th>
                             <th>Dirección</th>
                         </tr>
@@ -46,16 +47,17 @@ if (!isset($_SESSION['usu_nombre'])) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Nombres y Apellidos:</label>
-                            <input type="text" class="form-control" name="sol_nombre" id="sol_nombre" placeholder="Nombre">
+                            <!--<label for="">Nombres y Apellidos:</label>
+                            <input type="text" class="form-control" name="sol_nombre" id="sol_nombre" placeholder="Nombre">-->
+                            <input type="hidden" name="sol_iden" id="sol_iden">
                         </div>
                     </div>
 
                     
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Descripción</label>
-                            <input type="text" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
+                            <!--<label for="">Descripción</label>
+                            <input type="text" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción"> -->
                         </div>
                     </div>
                 </div>
@@ -63,9 +65,9 @@ if (!isset($_SESSION['usu_nombre'])) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Categoría</label>
+                            <!--<label>Categoría</label>
                             <select class="form-control select2" style="width: 100%; height: 40px;"  name="cat_id_estado" id="cat_id_estado">  
-                            </select>
+                            </select>-->
                         </div>
                     </div>
                     <div class="col-md-6">
