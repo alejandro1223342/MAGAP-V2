@@ -70,8 +70,26 @@ if (!isset($_SESSION['usu_nombre'])) {
                             </select>-->
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <!-- Otro campo de formulario -->
+                        <table id="tabla_pdf" class="table table-striped  dt-responsive nowrap"
+                               style="width:100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Documento</th>
+                                <th>Fecha</th>
+                                <th>Observación</th>
+                                <th></th>
+                                <th>Acción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Aquí se cargarán los datos desde la base de datos -->
+                            </tbody>
+                        </table>
                     </div>
 
                     

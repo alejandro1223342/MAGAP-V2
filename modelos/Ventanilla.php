@@ -33,6 +33,13 @@ public function mostrar($tra_id){
 	//ejecutarConsultaSimpleFila($sql));
 }
 
+	public function tabla($id)
+	{
+		$sql = "call sp_documentosol('listedi',0,0,'$id',0)";
+		return ejecutarConsulta($sql);
+	}
+
+
 public function insertar($usu_id,$tra_id,$cat_id_estado,$pro_observacion){
 
 	$sql="call sp_ventanilla('ing',0, '$usu_id', '$tra_id', '$cat_id_estado','$pro_observacion')";

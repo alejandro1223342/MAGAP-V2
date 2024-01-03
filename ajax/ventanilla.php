@@ -51,6 +51,37 @@ switch ($_GET["op"]) {
         echo json_encode($rspta);
         break;
 
+    case 'tabla':
+        $sol_identificacion = "1005233679";
+        $rspta = $ventanilla->tabla($sol_identificacion);
+        $data = array();
+
+        if ($rspta) {
+            while ($row = $rspta->fetch_object()) {
+                $data[] = array(
+                    "0" => '<button class="btn btn-dropbox btn-xs">Ver</button>',
+                    "1" => '<input type="checkbox" name="cat_id_estado" id="cat_id_estado">',
+                    "2" => $row->tra_id,
+                    "3" => $row->doc_nombre,
+                    "4" => $row->doc_fechareg,
+                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación">',
+                    "6" => $row->doc_url,
+                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>'
+                );
+            }
+
+        }
+
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
+
+        break;
+
     case 'estado':
         $rspta = $ventanilla->estado();
         while ($reg = $rspta->fetch_object()) {
