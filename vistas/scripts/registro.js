@@ -1,8 +1,4 @@
 function init() {
-  $("#formulario").on("submit", function (e) {
-    guardaryeditar(e);
-  });
-
   $.post("../ajax/registro.php?op=identificacion", function (r) {
     $("#cat_id_identificacion").html(r); // Actualiza el contenido del select con la respuesta del servidor
     $("#cat_id_identificacion").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
@@ -47,7 +43,7 @@ $(document).ready(function () {
 
 function guardaryeditar(e) {
   e.preventDefault(); //no se activara la accion predeterminada
-  $("#btnGuardar").prop("disabled", true);
+  $("#btnGuardar").prop("disabled", false);
   var formData = new FormData($("#formulario")[0]);
 
   $.ajax({
@@ -59,13 +55,27 @@ function guardaryeditar(e) {
 
     success: function (datos) {
       bootbox.alert(datos);
-      tabla.ajax.reload();
       window.location.href = "loginsol.html";
     },
   });
 
   limpiar();
 }
+
+/* $("#formulario").on("submit", function (e) {
+  e.preventDefault();
+  guardaryeditar(e);
+}); */
+
+$("#btnGuardar").on("click", function (e) {
+  e.preventDefault(); // Prevenir la acción predeterminada del botón
+  guardaryeditar(e); // Ejecutar la función guardaryeditar al hacer clic en el botón "Guardar"
+});
+
+$("#formulario").on("submit", function (e) {
+  e.preventDefault(); // Prevenir la acción predeterminada del envío del formulario
+  // Aquí no es necesario llamar a guardaryeditar() ya que se maneja el envío del formulario con el botón de "Guardar"
+});
 
 function limpiar() {
   $("#cat_id_identificacion").val("");

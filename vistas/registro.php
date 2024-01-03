@@ -35,12 +35,14 @@
               <div class="card-header">
                 <h3 class="card-title">Registro de Usuarios</h3>
               </div>
+              <form action="" name="formulario" id="formulario" method="POST">
+
               <div class="card-body p-0">
                 <div class="bs-stepper">
                   <div class="bs-stepper-header" role="tablist">
                     <!-- your steps here -->
                     <div class="step" data-target="#parte_uno">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="paso_uno">
                       <span class="bs-stepper-label">Paso</span> 
                       <span class="bs-stepper-circle">1</span>
                       </button>
@@ -48,7 +50,7 @@
                     </div>
                     <div class="line"></div>
                     <div class="step" data-target="#parte_dos">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="paso_dos">
                       <span class="bs-stepper-label">Paso</span>  
                       <span class="bs-stepper-circle">2</span>
                       </button>
@@ -56,7 +58,7 @@
                     <div class="line"></div>
 
                     <div class="step" data-target="#parte_tres">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="paso_tres">
                       <span class="bs-stepper-label">Paso</span>  
                       <span class="bs-stepper-circle">3</span>
                       </button>
@@ -64,14 +66,13 @@
                     <div class="line"></div>
 
                     <div class="step" data-target="#parte_cuatro">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="paso_cuatro">
                       <span class="bs-stepper-label">Paso</span>  
                       <span class="bs-stepper-circle">4</span>
                       </button>
                     </div>
                   </div>
 
-                  <form action="" name="formulario" id="formulario" method="POST">
  
                   <div class="bs-stepper-content">
                     <!-- your steps content here -->
