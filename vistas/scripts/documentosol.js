@@ -71,6 +71,31 @@ function cancelarform() {
     mostrarform(false);
 }
 
+function guardaryeditar(e) {
+    e.preventDefault();
+    $("#btnGuardar").prop("disabled", true);
+
+    var formData = new FormData($("#formulario")[0]);
+    formData.append("doc_url", $("#doc_url")[0].files[0]);
+
+    var nombreSeleccionado = $("#cat_id_tipodoc option:selected").text();
+    formData.append("nombreSeleccionado", nombreSeleccionado);
+
+    $.ajax({
+        url: "../ajax/documentosol.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+            bootbox.alert(datos);
+            mostrarform(false);
+            tabla.ajax.reload();
+        },
+    });
+    limpiar();
+}
+
 function mostrar(doc_id) {
     $.post(
         "../ajax/documentosol.php?op=mostrar",

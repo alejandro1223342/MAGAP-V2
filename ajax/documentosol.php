@@ -1,11 +1,13 @@
 <?php 
 require_once "../modelos/Documentosol.php";
+require "../ajax/upload.php";
 
 $documentosol=new Documentosol();
 
 $doc_id=isset($_POST["doc_id"])? limpiarCadena($_POST["doc_id"]):"";
 $cat_id_tipodoc=isset($_POST["cat_id_tipodoc"])? limpiarCadena($_POST["cat_id_tipodoc"]):"";
 $doc_nombre=isset($_POST["doc_nombre"])? limpiarCadena($_POST["doc_nombre"]):"";
+$nombreSeleccionado = isset($_POST["nombreSeleccionado"]) ? $_POST["nombreSeleccionado"] : "";
 $doc_url=isset($_POST["doc_url"])? limpiarCadena($_POST["doc_url"]):"";
 $cat_id_estado=isset($_POST["cat_id_estado"])? limpiarCadena($_POST["cat_id_estado"]):"";
 $sol_id = isset($_SESSION['sol_id']) ? $_SESSION['sol_id'] : 0;
