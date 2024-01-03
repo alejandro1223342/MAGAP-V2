@@ -35,6 +35,8 @@
               <div class="card-header">
                 <h3 class="card-title">Registro de Usuarios</h3>
               </div>
+              <form action="" name="formulario" id="formulario" method="POST">
+
               <div class="card-body p-0">
                 <div class="bs-stepper">
                   <div class="bs-stepper-header" role="tablist">
@@ -71,7 +73,6 @@
                     </div>
                   </div>
 
-                  <form action="" name="formulario" id="formulario" method="POST">
  
                   <div class="bs-stepper-content">
                     <!-- your steps content here -->
