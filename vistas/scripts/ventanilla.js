@@ -177,4 +177,134 @@ function outsideClick(e) {
   }
 }
 
+function guardar() {
+  event.preventDefault();
+  let fila = $(event.target).closest('tr');
+  let datosFila = {
+    cat_id_estado: fila.find('input[type="checkbox"]').is(':checked') ? 18 : 28,
+    tra_id: fila.find('td:eq(2)').text(),
+    pro_observacion: fila.find('input[type="text"]').val(),
+  };
+
+  $.ajax({
+    url: '../ajax/ventanilla.php?op=guardardocumento',
+    type: 'POST',
+    data: datosFila,
+    success: function (response) {
+      bootbox.alert("Documento guardado correctamente");
+
+      // Manejar la respuesta del servidor
+      let estado = response.cat_id_estado;
+      let observacion = response.pro_observacion;
+
+      // Modificar la tabla y almacenar los cambios en localStorage
+      let estadoTexto = estado === '18' ? 'Aprobado' : 'No Aprobado';
+      fila.find('td:eq(1)').text(estadoTexto);
+      fila.find('td:eq(5)').text(observacion).prop('readonly', true);
+      fila.find('td:last').html('<button class="btn btn-editar">Editar</button>');
+
+      // Almacenar los cambios en localStorage
+      guardarCambiosEnLocalStorage(fila.index(), estado, observacion);
+
+      // Manejador de eventos para el botón Editar
+      $('.btn-editar').on('click', function () {
+        event.preventDefault();
+        let originalHtml = $(this).parent().html();
+        let originalEstado = fila.find('td:eq(1)').text();
+        let originalObservacion = fila.find('td:eq(5)').text();
+
+        fila.find('td:eq(1)').html('<input type="checkbox" checked="' + (estado === '18') + '">');
+        fila.find('td:eq(5)').html('<input type="text" value="' + observacion + '">');
+        fila.find('td:last').html('<button class="btn btn-guardar">Guardar</button><button class="btn btn-cancelar">Cancelar</button>');
+
+        // Manejadores de eventos para los nuevos botones
+        $('.btn-guardar').on('click', function () {
+          event.preventDefault();
+          // Acciones para guardar
+          // ...
+
+          // Restaurar el botón Editar al guardar
+          fila.find('td:last').html(originalHtml);
+        });
+
+        $('.btn-cancelar').on('click', function () {
+          event.preventDefault();
+          // Restaurar valores originales al cancelar
+          fila.find('td:eq(1)').text(originalEstado);
+          fila.find('td:eq(5)').text(originalObservacion).prop('readonly', true);
+
+          // Restaurar el botón Editar al cancelar
+          fila.find('td:last').html(originalHtml);
+        });
+      });
+
+    },
+    error: function (error) {
+      console.log("Algo salió mal: " + error);
+    }
+  });
+}
+
+// Función para almacenar los cambios en localStorage
+function guardarCambiosEnLocalStorage(index, estado, observacion) {
+  let cambios = {
+    cat_id_estado: estado,
+    pro_observacion: observacion
+  };
+  localStorage.setItem('fila_' + index, JSON.stringify(cambios));
+}
+
+function cargarDatosGuardados() {
+  $('#tabla_pdf tbody tr').each((index, element) => {
+    let cambios = localStorage.getItem('fila_' + index);
+    if (cambios) {
+      let datos = JSON.parse(cambios);
+      let estado = datos.cat_id_estado;
+      let estadoTexto = estado === '18' ? 'Aprobado' : 'No Aprobado';
+      $(element).find('td:eq(1)').text(estadoTexto).data('estado', estado);
+      $(element).find('td:eq(5)').html('<input type="text" value="' + datos.pro_observacion + '" readonly>');
+      $(element).find('td:last').html('<button class="btn btn-editar">Editar</button>');
+    }
+  });
+
+  $('body').on('click', '.btn-editar', function(event) {
+    event.preventDefault();
+    let fila = $(this).closest('tr');
+    let estado = fila.find('td:eq(1)').data('estado');
+
+    if (estado === '18') {
+      fila.find('td:eq(1)').html('<input type="checkbox" checked>');
+    } else {
+      fila.find('td:eq(1)').html('<input type="checkbox">');
+    }
+
+    fila.find('td:eq(5) input[type="text"]').prop('readonly', false);
+    $(this).hide();
+    fila.find('.btn-aceptar, .btn-cancelar').remove();
+    fila.find('td:last').append('<button class="btn btn-aceptar">Aceptar</button><button class="btn btn-cancelar">Cancelar</button>');
+  });
+
+  $('body').on('click', '.btn-cancelar', function(event) {
+    event.preventDefault();
+    let fila = $(this).closest('tr');
+    let estado = fila.find('td:eq(1)').data('estado');
+    let estadoTexto = estado === '18' ? 'Aprobado' : 'No Aprobado';
+
+    fila.find('td:eq(1)').text(estadoTexto);
+    fila.find('td:eq(5) input[type="text"]').prop('readonly', true);
+    fila.find('.btn-aceptar, .btn-cancelar').remove();
+    fila.find('.btn-editar').show();
+  });
+
+  $('body').on('click', '.btn-aceptar', function(event) {
+    event.preventDefault();
+    guardar();
+    let fila = $(this).closest('tr');
+    fila.find('td:eq(1)').data('estado', fila.find('td:eq(1) input[type="checkbox"]').prop('checked') ? '18' : '28');
+    fila.find('td:eq(5) input[type="text"]').prop('readonly', true);
+    fila.find('.btn-aceptar, .btn-cancelar').remove();
+    fila.find('.btn-editar').show();
+  });
+}
+
 init();
