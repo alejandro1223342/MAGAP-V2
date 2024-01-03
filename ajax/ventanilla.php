@@ -52,7 +52,7 @@ switch ($_GET["op"]) {
         break;
 
     case 'tabla':
-        $sol_identificacion = "1005233679";
+        $sol_identificacion = "1001399490";
         $rspta = $ventanilla->tabla($sol_identificacion);
         $data = array();
 

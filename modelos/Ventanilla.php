@@ -71,6 +71,4 @@ public function insertar($usu_id,$tra_id,$cat_id_estado,$pro_observacion){
 
 }
 
-}
-
 ?>
