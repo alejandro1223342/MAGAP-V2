@@ -32,7 +32,7 @@ switch ($_GET["op"]) {
             $data=Array();
             while ($reg=$rspta->fetch_object()) {
                 $data[]=array(
-                    "0" =>'<center><button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->tra_id . ')"><i class="fa fa-pen"></i></button></center>',
+                    "0" =>'<center><button class="btn btn-primary btn-xs" onclick="mostrar(' . $reg->tra_id . ')"><i class="fa fa-eye"></i></button></center>',
                     "1"=>$reg->sol_nombre,
                     "2"=>$reg->sol_telefono,
                     "3"=>$reg->sol_direccion

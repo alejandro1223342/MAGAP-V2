@@ -49,7 +49,7 @@ if (strlen(session_id())<1)
     <div class="wrapper">
     <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="../files/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="../files/img/logo-carga.png" alt="AdminLTELogo" height="60" width="60">
         </div> 
         
 

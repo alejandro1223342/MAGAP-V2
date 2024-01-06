@@ -11,26 +11,7 @@ if (!isset($_SESSION['sol_nombre'])) {
     <div class="content-wrapper">
       <section class="content-header" style="padding: 4px ;"></section>
 
-      <section class="content">
-        <div class="container-fluid">
-        <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Documentos <button class="btn btn-success" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>Agregar</button></h3>
-              </div>
-              <!-- /.card-header -->
-
-                <div class="card-body">
-                        <table id="tbllistado" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Tipo de Documento</th>
-                            <th>Documento</th>
-                        </tr>
-                        </thead>
-                        
-                        </table>
-                </div>
+        
                 
                 <!-- Main content -->
      <form action="" name="formulario" id="formulario" method="POST">
@@ -39,7 +20,7 @@ if (!isset($_SESSION['sol_nombre'])) {
     <div class="container-fluid">
         <div class="card card-default">
             <div class="card-header">
-                <h3 class="card-title">Subida de Documentos</h3>
+                <h3 class="card-title">Cargar Documentos</h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -71,13 +52,36 @@ if (!isset($_SESSION['sol_nombre'])) {
                     <div class="col-md-12">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
-                            <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                         </div>
                     </div>
                 </div>
+                <section class="content-header" style="padding: 20px ;"></section>
+
+                <div class="container-fluid">
+        <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Documentos Cargados</h3>
+              </div>
+              <!-- /.card-header -->
+
+                <div class="card-body">
+                        <table id="tbllistado" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tipo de Documento</th>
+                            <th>Documento</th>
+                        </tr>
+                        </thead>
+                        
+                        </table>
+                </div>
             </div>
         </div>
+        
     </div>
+
+    
 </section>
     </form>
 

@@ -2,8 +2,8 @@ var tabla;
 
 //funcion que se ejecuta al inicio
 function init() {
-  mostrarform(false);
-  listar();
+  /*   mostrarform(false);
+   */ listar();
 
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
@@ -29,7 +29,7 @@ function limpiar() {
   $("#doc_id").val("");
 }
 
-function mostrarform(flag) {
+/* function mostrarform(flag) {
   limpiar();
   if (flag) {
     $("#tbllistado").hide();
@@ -43,7 +43,7 @@ function mostrarform(flag) {
     $("#formularioregistros").hide();
     $("#btnagregar").show();
   }
-}
+} */
 
 function listar() {
   tabla = $("#tbllistado")
@@ -61,10 +61,10 @@ function listar() {
     .DataTable();
 }
 
-function cancelarform() {
+/* function cancelarform() {
   limpiar();
   mostrarform(false);
-}
+} */
 
 function mostrar(doc_id) {
   $.post(
