@@ -31,7 +31,7 @@ switch ($_GET["op"]) {
             }
 
 	if (empty($sol_id)) {
-		$rspta=$registro->insertar($cat_id_identificacion,$sol_identificacion ,$sol_nombre,$sol_correo,
+		$rspta=$registro->insertar($cat_id_identificacion,$sol_identificacion ,$sol_correo,$sol_nombre,
         $sol_telefono,$sol_direccion,$cat_id_provincia,  $cat_id_canton,$cat_id_parroquia,  
         $cat_id_sector,$usu_clavehash);
         echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";

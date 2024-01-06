@@ -59,7 +59,7 @@ function guardaryeditar(e) {
 
     success: function (datos) {
       bootbox.alert(datos);
-      tabla.ajax.reload();
+      //tabla.ajax.reload();
       window.location.href = "loginsol.html";
     },
   });
