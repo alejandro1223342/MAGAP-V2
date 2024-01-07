@@ -24,7 +24,7 @@ switch ($_GET["op"]) {
                 $doc_path = $_FILES['exampleInputFile']['tmp_name'];
                 $fileName = $nombreSeleccionado.'-'.$sol_identificacion;
                 // Leer el contenido del archivo
-                $fileContent = file_get_contents($doc_path, FILE_BINARY);
+                $fileContent = $doc_path;
                 // Verificar si se pudo leer el contenido del archivo
                 if ($fileContent != false) {
                     // Subir el contenido del archivo a Google Drive
@@ -60,7 +60,7 @@ switch ($_GET["op"]) {
             $data=Array();
             while ($reg=$rspta->fetch_object()) {
                 $data[]=array(
-                    "0" =>'<button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->doc_id . ')"><i class="fa fa-pen"></i></button>',
+                    "0" =>'<button class="btn btn-warning btn-xs" onclick="mostrar()"><i class="fa fa-pen"></i></button>',
                     "1"=>$reg->cat_nombre,
                     "2"=>$reg->doc_url,
                 );

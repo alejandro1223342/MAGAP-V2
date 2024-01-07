@@ -19,7 +19,7 @@ class Documentosol
 
     public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url)
     {
-		$sql = "call sp_documentosol('ing', '$sol_iden', $cat_id_tipodoc, '$fileName', '$doc_url')";
+        $sql = "call sp_documentosol('ing', '$sol_iden', $cat_id_tipodoc, '$fileName', '$doc_url')";
         //return ejecutarConsulta($sql);
         $row = ejecutarConsultaSP($sql);
 
@@ -28,24 +28,13 @@ class Documentosol
         } else {
             $iddoc = $row->fetch_row()[0];
 
-            $num_elementos = 0;
-            $sw = true;
+            $current_sol_id = $_SESSION['sol_id'];
 
-            while ($num_elementos < count($_SESSION['sol_id'])) {
+            $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
+            echo $sql_detalle;
 
-                //echo "El valor de current_sol_id es nulo o vacio";
+            ejecutarConsultaSP($sql_detalle);
 
-                $current_sol_id = $_SESSION['sol_id'];
-
-                $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
-                echo $sql_detalle;
-
-                ejecutarConsultaSP($sql_detalle) or $sw = false;
-                $num_elementos = $num_elementos + 1;
-
-            }
-
-            return $sw;
         }
 
     }

@@ -98,7 +98,7 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
         $file = $service->files->create(
             $fileMetadata,
             array(
-                'data' => $fileTempPath,
+                'data' =>  file_get_contents($fileTempPath, FILE_BINARY),
                 'mimeType' => 'application/pdf',
                 'uploadType' => 'media'
             )

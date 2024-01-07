@@ -29,7 +29,7 @@ switch ($_GET["op"]) {
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<button class="btn btn-warning btn-xs" onclick="mostrarTabla()"><i class="fa fa-pen"></i></button>',
+                "0" => '<button class="btn btn-warning btn-xs" onclick="mostrarTabla('.$reg->s_ident.')"><i class="fa fa-pen"></i></button>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
@@ -52,9 +52,9 @@ switch ($_GET["op"]) {
 
     case 'tabla':
 
-        $sol_identificacion = "1001399490";
+        $s_ident = isset($_GET['s_ident']) ? $_GET['s_ident'] : '';
 
-        $rspta = $ventanilla->tabla($sol_identificacion);
+        $rspta = $ventanilla->tabla($s_ident);
         $data = array();
 
         if ($rspta) {
@@ -67,7 +67,8 @@ switch ($_GET["op"]) {
                     "4" => $row->doc_fechareg,
                     "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación">',
                     "6" => $row->doc_url,
-                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>'
+                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
+                    "8" => $s_ident,
                 );
             }
 
