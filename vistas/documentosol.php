@@ -38,7 +38,7 @@ if (!isset($_SESSION['sol_nombre'])) {
                         </div>
 
                         <!-- Main content -->
-                        <form action="" name="formulario" id="formulario" method="POST">
+                        <form action="" name="formulario" id="formulario" method="POST" enctype="multipart/form-data">
 
                             <section class="content" id="formularioregistros">
                                 <div class="container-fluid">
@@ -65,7 +65,8 @@ if (!isset($_SESSION['sol_nombre'])) {
                                                             <div class="input-group">
                                                                 <div class="custom-file">
                                                                     <input type="file" class="custom-file-input"
-                                                                           id="exampleInputFile">
+                                                                           id="exampleInputFile"
+                                                                           accept="application/pdf">
                                                                     <label class="custom-file-label"
                                                                            for="exampleInputFile"></label>
                                                                 </div>

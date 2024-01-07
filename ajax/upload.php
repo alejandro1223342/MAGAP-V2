@@ -98,16 +98,13 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
         $file = $service->files->create(
             $fileMetadata,
             array(
-                'data' => $fileTempPath, // Usar el contenido leído del archivo
+                'data' => $fileTempPath,
                 'mimeType' => 'application/pdf',
                 'uploadType' => 'media'
             )
         );
 
         return 'https://drive.google.com/file/d/' . $file->id . '/preview';
-    } catch (Google_Service_Exception $gs) {
-        $mensaje = json_decode($gs->getMessage());
-        return $mensaje->error->message;
     } catch (Exception $e) {
         return $e->getMessage();
     }

@@ -7,7 +7,7 @@ $documentosol=new Documentosol();
 $doc_id=isset($_POST["doc_id"])? limpiarCadena($_POST["doc_id"]):"";
 $cat_id_tipodoc=isset($_POST["cat_id_tipodoc"])? limpiarCadena($_POST["cat_id_tipodoc"]):"";
 $doc_nombre=isset($_POST["doc_nombre"])? limpiarCadena($_POST["doc_nombre"]):"";
-$nombreSeleccionado = isset($_POST["nombreSeleccionado"]) ? $_POST["nombreSeleccionado"] : "";
+$nombreSeleccionado = $_POST["nombreSeleccionado"] ? limpiarCadena($_POST["nombreSeleccionado"]):"";
 $doc_url=isset($_POST["doc_url"])? limpiarCadena($_POST["doc_url"]):"";
 $cat_id_estado=isset($_POST["cat_id_estado"])? limpiarCadena($_POST["cat_id_estado"]):"";
 $sol_id = isset($_SESSION['sol_id']) ? $_SESSION['sol_id'] : 0;
@@ -24,7 +24,7 @@ switch ($_GET["op"]) {
                 $doc_path = $_FILES['exampleInputFile']['tmp_name'];
                 $fileName = $nombreSeleccionado.'-'.$sol_identificacion;
                 // Leer el contenido del archivo
-                $fileContent = file_get_contents($doc_path);
+                $fileContent = file_get_contents($doc_path, FILE_BINARY);
                 // Verificar si se pudo leer el contenido del archivo
                 if ($fileContent != false) {
                     // Subir el contenido del archivo a Google Drive
@@ -56,11 +56,11 @@ switch ($_GET["op"]) {
 
 
         case 'listar':
-            $rspta=$documentosol->listar();
+            $rspta=$documentosol->listar($sol_identificacion);
             $data=Array();
             while ($reg=$rspta->fetch_object()) {
                 $data[]=array(
-                    "0" =>'<center><button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->doc_id . ')"><i class="fa fa-pen"></i></button></center>',
+                    "0" =>'<button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->doc_id . ')"><i class="fa fa-pen"></i></button>',
                     "1"=>$reg->cat_nombre,
                     "2"=>$reg->doc_url,
                 );
@@ -81,4 +81,3 @@ switch ($_GET["op"]) {
 		break;
 
 }
- ?>

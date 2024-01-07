@@ -29,7 +29,7 @@ switch ($_GET["op"]) {
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->tra_id . ')"><i class="fa fa-pen"></i></button></center>',
+                "0" => '<button class="btn btn-warning btn-xs" onclick="mostrarTabla()"><i class="fa fa-pen"></i></button>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
@@ -45,21 +45,22 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
 
-    case 'mostrar':
-        //echo $_POST["cat_id"];
+    /*case 'mostrar':
         $rspta = $ventanilla->mostrar($tra_id);
         echo json_encode($rspta);
-        break;
+        break;*/
 
     case 'tabla':
+
         $sol_identificacion = "1001399490";
+
         $rspta = $ventanilla->tabla($sol_identificacion);
         $data = array();
 
         if ($rspta) {
             while ($row = $rspta->fetch_object()) {
                 $data[] = array(
-                    "0" => '<button class="btn btn-dropbox btn-xs">Ver</button>',
+                    "0" => '<button class="btn btn-secondary btn-xs">Ver</button>',
                     "1" => '<input type="checkbox" name="cat_id_estado" id="cat_id_estado">',
                     "2" => $row->tra_id,
                     "3" => $row->doc_nombre,

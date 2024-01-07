@@ -39,6 +39,7 @@ class Documentosol
 
                 $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
                 echo $sql_detalle;
+
                 ejecutarConsultaSP($sql_detalle) or $sw = false;
                 $num_elementos = $num_elementos + 1;
 
@@ -120,9 +121,9 @@ class Documentosol
     }
 
 //listar registros
-    public function listar()
+    public function listar($sol_identificacion)
     {
-        $sql = "CALL sp_documentosol('list',0, 0,'','')";
+        $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'','')";
         return ejecutarConsultaSP($sql);
     }
 
