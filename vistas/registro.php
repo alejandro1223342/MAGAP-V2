@@ -35,6 +35,8 @@
               <div class="card-header">
                 <h3 class="card-title">Registro de Usuarios</h3>
               </div>
+              <form action="" name="formulario" id="formulario" method="POST">
+
               <div class="card-body p-0">
                 <div class="bs-stepper">
                   <div class="bs-stepper-header" role="tablist">
@@ -71,7 +73,6 @@
                     </div>
                   </div>
 
-                  <form action="" name="formulario" id="formulario" method="POST">
  
                   <div class="bs-stepper-content">
                     <!-- your steps content here -->
@@ -127,30 +128,36 @@
                     
                     <div class="form-group ">
                         <label>Dirección(*)</label>
-                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Direccion" >
+                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Teléfono" >
                       </div>
 
                       <div class="form-group">
                       <label>Provincia(*)</label>
                       <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia" >
+    
+                        <!-- Resto de opciones -->
                       </select>
                     </div>
+
 
                       <div class="form-group">
                           <label>Cantón(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_canton" id="cat_id_canton" >
+                           
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Parroquia(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_parroquia" id="cat_id_parroquia" >
+                            
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Sector(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_sector" id="cat_id_sector" >
+                           
                           </select>
                       </div>
 

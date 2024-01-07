@@ -1,13 +1,15 @@
 <?php 
 require_once "../modelos/Documentosol.php";
-require "../ajax/upload.php";
 
 $documentosol=new Documentosol();
 
 $doc_id=isset($_POST["doc_id"])? limpiarCadena($_POST["doc_id"]):"";
 $cat_id_tipodoc=isset($_POST["cat_id_tipodoc"])? limpiarCadena($_POST["cat_id_tipodoc"]):"";
 $doc_nombre=isset($_POST["doc_nombre"])? limpiarCadena($_POST["doc_nombre"]):"";
+<<<<<<< HEAD
 $nombreSeleccionado = $_POST["nombreSeleccionado"] ? limpiarCadena($_POST["nombreSeleccionado"]):"";
+=======
+>>>>>>> bd02747d85ad47a0626f36da264b7a75ea7e736c
 $doc_url=isset($_POST["doc_url"])? limpiarCadena($_POST["doc_url"]):"";
 $cat_id_estado=isset($_POST["cat_id_estado"])? limpiarCadena($_POST["cat_id_estado"]):"";
 $sol_id = isset($_SESSION['sol_id']) ? $_SESSION['sol_id'] : 0;
@@ -16,6 +18,7 @@ $sol_identificacion = $_SESSION['sol_identificacion'];
 
 switch ($_GET["op"]) {
 
+<<<<<<< HEAD
     case 'guardaryeditar':
         if (empty($doc_id)) {
             // Manejo de la subida del archivo
@@ -46,6 +49,9 @@ switch ($_GET["op"]) {
             echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
         }
         break;
+=======
+	
+>>>>>>> bd02747d85ad47a0626f36da264b7a75ea7e736c
 
 	case 'documentos':
 		$rspta=$documentosol->documentos();

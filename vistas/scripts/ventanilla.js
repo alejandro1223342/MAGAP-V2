@@ -91,6 +91,7 @@ function guardaryeditar(e) {
 }
 
 function mostrar(tra_id) {
+<<<<<<< HEAD
     $.post(
         "../ajax/ventanilla.php?op=mostrar",
         { tra_id: tra_id },
@@ -308,4 +309,19 @@ function cargarDatosGuardados() {
     });
 }
 
+=======
+  $.post(
+    "../ajax/ventanilla.php?op=mostrar",
+    { tra_id: tra_id },
+    function (data, status) {
+      data = JSON.parse(data);
+      mostrarform(true);
+      $("#tra_id").val(data.tra_id);
+      $("#sol_nombre").val(data.sol_nombre);
+      $("#doc_url").val(data.doc_url);
+      $("#tra_id").val(data.tra_id);
+    }
+  );
+}
+>>>>>>> bd02747d85ad47a0626f36da264b7a75ea7e736c
 init();

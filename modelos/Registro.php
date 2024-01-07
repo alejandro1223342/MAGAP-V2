@@ -14,9 +14,13 @@ public function insertar($cat_id_identificacion,$sol_identificacion,$sol_correo 
 $sol_telefono,$sol_direccion,$cat_id_provincia,  $cat_id_canton,$cat_id_parroquia,  
 $cat_id_sector,$sol_clave){
 
-	$sql="call sp_solicitante('ing','$cat_id_identificacion','$sol_identificacion','$sol_correo',
+	$sql="call sp_solicitante('ing','$cat_id_identificacion','$sol_identificacion','sol_correo',
 	'$sol_nombre','$sol_telefono','$sol_direccion','$cat_id_provincia','$cat_id_canton',
 	'$cat_id_parroquia','$cat_id_sector','$sol_clave')";
+<<<<<<< HEAD
+=======
+		
+>>>>>>> bd02747d85ad47a0626f36da264b7a75ea7e736c
 	return ejecutarConsulta($sql);
 }
 
