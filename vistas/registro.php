@@ -35,14 +35,12 @@
               <div class="card-header">
                 <h3 class="card-title">Registro de Usuarios</h3>
               </div>
-              <form action="" name="formulario" id="formulario" method="POST">
-
               <div class="card-body p-0">
                 <div class="bs-stepper">
                   <div class="bs-stepper-header" role="tablist">
                     <!-- your steps here -->
                     <div class="step" data-target="#parte_uno">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="paso_uno">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
                       <span class="bs-stepper-label">Paso</span> 
                       <span class="bs-stepper-circle">1</span>
                       </button>
@@ -50,7 +48,7 @@
                     </div>
                     <div class="line"></div>
                     <div class="step" data-target="#parte_dos">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="paso_dos">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
                       <span class="bs-stepper-label">Paso</span>  
                       <span class="bs-stepper-circle">2</span>
                       </button>
@@ -58,7 +56,7 @@
                     <div class="line"></div>
 
                     <div class="step" data-target="#parte_tres">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="paso_tres">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
                       <span class="bs-stepper-label">Paso</span>  
                       <span class="bs-stepper-circle">3</span>
                       </button>
@@ -66,13 +64,14 @@
                     <div class="line"></div>
 
                     <div class="step" data-target="#parte_cuatro">
-                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="paso_cuatro">
+                      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
                       <span class="bs-stepper-label">Paso</span>  
                       <span class="bs-stepper-circle">4</span>
                       </button>
                     </div>
                   </div>
 
+                  <form action="" name="formulario" id="formulario" method="POST">
  
                   <div class="bs-stepper-content">
                     <!-- your steps content here -->
@@ -128,36 +127,30 @@
                     
                     <div class="form-group ">
                         <label>Dirección(*)</label>
-                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Teléfono" >
+                        <input type="text" class="form-control" name="sol_direccion" id="sol_direccion" placeholder="Direccion" >
                       </div>
 
                       <div class="form-group">
                       <label>Provincia(*)</label>
                       <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia" >
-    
-                        <!-- Resto de opciones -->
                       </select>
                     </div>
-
 
                       <div class="form-group">
                           <label>Cantón(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_canton" id="cat_id_canton" >
-                           
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Parroquia(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_parroquia" id="cat_id_parroquia" >
-                            
                           </select>
                       </div>
 
                       <div class="form-group">
                           <label>Sector(*)</label>
                           <select class="form-control select2" style="width: 100%;" name="cat_id_sector" id="cat_id_sector" >
-                           
                           </select>
                       </div>
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 //ip de la pc servidor base de datos
 //define("DB_HOST", "10.10.35.218");
 define("DB_HOST", "localhost");
@@ -8,7 +8,7 @@ define("DB_HOST", "localhost");
 // nombre de la base de datos
 //define("DB_NAME", "systemag");
 //define("DB_NAME", "tesis");
-define("DB_NAME", "mag_ist17j");
+define("DB_NAME", "mag_ist17j2");
 
 
 
@@ -30,5 +30,3 @@ define("DB_ENCODE", "utf8");
 
 //nombre del proyecto
 define("PRO_NOMBRE", "SYSTEMAG");
-
- ?>
