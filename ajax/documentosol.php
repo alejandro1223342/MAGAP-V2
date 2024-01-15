@@ -59,7 +59,7 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $doc_id = $reg->doc_id;
             $data[] = array(
-                "0" => '<button class="btn btn-primary" onclick="mostrar('.$doc_id.')"><i class="fa fa-pen"></i></button>',
+                "0" => '<button class="btn btn-primary" onclick="mostrar(' . $doc_id . ')"><i class="fa fa-pen"></i></button>',
                 "1" => $reg->cat_nombre,
                 "2" => $reg->doc_fechareg,
                 "3" => $reg->doc_url,
@@ -68,10 +68,11 @@ switch ($_GET["op"]) {
         }
 
         $results = array(
-            "sEcho" => 1,//info para datatables
-            "iTotalRecords" => count($data),//enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data),//enviamos el total de registros a visualizar
-            "aaData" => $data);
+            "sEcho" => 1, //info para datatables
+            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+            "aaData" => $data
+        );
         echo json_encode($results);
         break;
 
@@ -80,5 +81,4 @@ switch ($_GET["op"]) {
         $rspta = $documentosol->mostrar($doc_id);
         echo json_encode($rspta);
         break;
-
 }

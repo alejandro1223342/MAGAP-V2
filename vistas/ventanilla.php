@@ -7,7 +7,7 @@ if (!isset($_SESSION['usu_nombre'])) {
 } else {
     if ($_SESSION['Ventanilla'] == 1) {
         require 'header.php';
-        ?>
+?>
         <div class="content-wrapper">
             <section class="content-header" style="padding: 4px ;"></section>
 
@@ -20,18 +20,21 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <!-- /.card-header -->
 
                         <div class="card-body">
+
+
                             <table id="tbllistado" class="table table-bordered table-striped">
                                 <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Identificación</th>
-                                    <th>Solicitante</th>
-                                    <th>Telefono</th>
-                                    <th>Dirección</th>
-                                </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>Identificación</th>
+                                        <th>Solicitante</th>
+                                        <th>Telefono</th>
+                                        <th>Dirección</th>
+                                    </tr>
                                 </thead>
 
                             </table>
+
                         </div>
 
                         <!-- Main content -->
@@ -68,8 +71,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         <h2>Modal Header</h2>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <iframe id="modal-iframe" width="100%" height="480"
-                                                                allow="autoplay"></iframe>
+                                                        <iframe id="modal-iframe" width="100%" height="480" allow="autoplay"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <h3>Modal Footer</h3>
@@ -87,23 +89,21 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                 </div>
                                                 <div class="col-md-12">
                                                     <!-- Otro campo de formulario -->
-                                                    <table id="tabla_pdf"
-                                                           class="table table-striped  dt-responsive nowrap"
-                                                           style="width:100%">
+                                                    <table id="tabla_pdf" class="table table-striped  dt-responsive nowrap" style="width:100%">
                                                         <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th>ID</th>
-                                                            <th>Documento</th>
-                                                            <th>Fecha</th>
-                                                            <th>Observación</th>
-                                                            <th></th>
-                                                            <th>Acción</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th>ID</th>
+                                                                <th>Documento</th>
+                                                                <th>Fecha</th>
+                                                                <th>Observación</th>
+                                                                <th></th>
+                                                                <th>Acción</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <!-- Aquí se cargarán los datos desde la base de datos -->
+                                                            <!-- Aquí se cargarán los datos desde la base de datos -->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -114,11 +114,9 @@ if (!isset($_SESSION['usu_nombre'])) {
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <button class="btn btn-primary" type="submit" id="btnGuardar"><i
-                                                                    class="fa fa-save"></i> Guardar
+                                                        <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar
                                                         </button>
-                                                        <button class="btn btn-danger" onclick="cancelarform()"
-                                                                type="button"><i class="fa fa-arrow-circle-left"></i>
+                                                        <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i>
                                                             Cancelar
                                                         </button>
                                                     </div>
@@ -143,7 +141,7 @@ if (!isset($_SESSION['usu_nombre'])) {
 
         </div>
 
-        <?php
+    <?php
     } else {
         require 'noacceso.php';
     }
@@ -152,7 +150,7 @@ if (!isset($_SESSION['usu_nombre'])) {
     <script src="scripts/ventanilla.js"></script>
     <!--   <script src="../public/js/select2.full.min.js"></script>
      -->
-    <?php
+<?php
 }
 ob_end_flush();
 ?>

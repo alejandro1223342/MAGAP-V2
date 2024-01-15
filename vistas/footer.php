@@ -1,11 +1,11 @@
 <html>
 </body>
-<footer class="main-footer" >
-    <strong>Copyright &copy; 2023-2025 <a href="https://web.ist17dejulio.edu.ec/">IST17J</a>.</strong>
-    Todos los derechos reservados.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0.0
-    </div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2023-2025 <a href="https://web.ist17dejulio.edu.ec/">IST17J</a>.</strong>
+  Todos los derechos reservados.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Version</b> 1.0.0
+  </div>
 </footer>
 
 <!-- jQuery -->
@@ -67,4 +67,5 @@
 <!-- <script src="../public/js/dashboard.js"></script> -->
 
 </body>
+
 </html>

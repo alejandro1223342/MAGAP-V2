@@ -29,7 +29,7 @@ switch ($_GET["op"]) {
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<button class="btn btn-warning btn-xs" onclick="mostrarTabla('.$reg->s_ident.')"><i class="fa fa-pen"></i></button>',
+                "0" => '<button class="btn btn-warning btn-xs" onclick="mostrarTabla(' . $reg->s_ident . ')"><i class="fa fa-pen"></i></button>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
@@ -38,14 +38,15 @@ switch ($_GET["op"]) {
         }
 
         $results = array(
-            "sEcho" => 1,//info para datatables
-            "iTotalRecords" => count($data),//enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data),//enviamos el total de registros a visualizar
-            "aaData" => $data);
+            "sEcho" => 1, //info para datatables
+            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+            "aaData" => $data
+        );
         echo json_encode($results);
         break;
 
-    /*case 'mostrar':
+        /*case 'mostrar':
         $rspta = $ventanilla->mostrar($tra_id);
         echo json_encode($rspta);
         break;*/
@@ -71,7 +72,6 @@ switch ($_GET["op"]) {
                     "8" => $s_ident,
                 );
             }
-
         }
 
         $results = array(
@@ -115,4 +115,3 @@ switch ($_GET["op"]) {
         $rspta = $ventanilla->guardardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion);
         break;
 }
-?>

@@ -11,10 +11,9 @@ class Documentosol
     //implementamos nuestro constructor
     public function __construct()
     {
-
     }
 
-//metodo insertar regiustro
+    //metodo insertar regiustro
 
 
     public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url)
@@ -93,7 +92,7 @@ class Documentosol
         return ejecutarConsulta($sql);
     }
 
-//metodo para mostrar registros
+    //metodo para mostrar registros
     public function documentos()
     {
         $sql = "CALL sp_catalgo('spa','0','', '',13)";
@@ -108,22 +107,19 @@ class Documentosol
 
         $result = ejecutarConsultaSP($sql);
         return $result->fetch_assoc();
-
     }
 
-//listar registros
+    //listar registros
     public function listar($sol_identificacion)
     {
         $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'','')";
         return ejecutarConsultaSP($sql);
     }
 
-//listar y mostrar en selct
+    //listar y mostrar en selct
     public function select()
     {
         $sql = "SELECT * FROM categoria WHERE condicion=1";
         return ejecutarConsulta($sql);
     }
 }
-
-?>

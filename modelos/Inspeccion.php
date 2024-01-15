@@ -5,47 +5,108 @@ class Inspeccion
 {
 
 
-	//implementamos nuestro constructor
-	public function __construct()
-	{
-	}
+    //implementamos nuestro constructor
+    public function __construct()
+    {
+    }
 
-	//metodo insertar registro
-	public function insertar($cat_nombre, $cat_descripcion, $cat_padre)
-	{
-		$sql = "call sp_catalgo('ing','0','$cat_nombre','$cat_descripcion',$cat_padre)";
-
-		return ejecutarConsulta($sql);
-	}
-
-
-	public function mostrar()
-	{
-		$sql = "CALL sp_catalgo('spa','0','', '',0)";
-		return ejecutarConsultaSP($sql);
-	}
+    //metodo insertar registro
 
 
 
-	/* public function listar(){
-	$sql="CALL sp_catalgo('list','0','', '',0)";
-	return ejecutarConsultaSP($sql);
-} */
+    /* Metodo listar solicitantes*/
+    public function listar()
+    {
+        $sql = "CALL sp_inspeccion('list',0)";
+        return ejecutarConsultaSP($sql);
+    }
+    /* Fin metodo listar solicitantes */
 
-	public function listar()
-	{
-		$sql = "CALL sp_inspeccion('list')";
-		return ejecutarConsultaSP($sql);
-	}
 
-	public function desactivar($cat_id)
-	{
-		$sql = "CALL sp_catalgo('des','$cat_id','', '',0)";
-		return ejecutarConsulta($sql);
-	}
-	public function activar($cat_id)
-	{
-		$sql = "CALL sp_catalgo('act','$cat_id','', '',0)";
-		return ejecutarConsulta($sql);
-	}
+    /* Metodos llenar combobox */
+    public function explicacion()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function vias()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function infraestructura()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function historia()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function obtencion()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function construccion()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function materiales()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function estado_construccion()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function concepto()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function concepto_suelo()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function estado_suelo()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function destino_economico()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function estado_infraestructura()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',0)";
+        return ejecutarConsultaSP($sql);
+    }
+    /* Fin metodos llenar combobox */
+
+    public function mostrar($pro_id)
+    {
+        $sql = "call sp_inspeccion('mos',$pro_id)";
+        $result = ejecutarConsultaSP($sql);
+        return $result->fetch_assoc();
+    }
 }
