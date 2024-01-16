@@ -14,14 +14,58 @@ $cat_estado = isset($_POST["cat_estado"]) ? limpiarCadena($_POST["cat_estado"]) 
 
 switch ($_GET["op"]) {
 
-
+        /* Listar solicitantes */
     case 'listar':
         $rspta = $inspeccion->listar();
         $data = array();
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrarform(true)(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
+                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
+                "1" => $reg->sol_identificacion,
+                "2" => $reg->sol_nombre,
+                "3" => $reg->sol_telefono,
+                "4" => $reg->sol_direccion
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //info para datatables
+            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
+        /* Listar construcciones */
+    case 'listar_construcciones':
+        $rspta = $inspeccion->listar_construcciones();
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
+                "1" => $reg->sol_identificacion,
+                "2" => $reg->sol_nombre,
+                "3" => $reg->sol_telefono,
+                "4" => $reg->sol_direccion
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //info para datatables
+            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
+        /* Listar infraestructuras */
+    case 'listar_infraestructura':
+        $rspta = $inspeccion->listar_infraestructura();
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
@@ -37,6 +81,8 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
 
+
+        /* Selects */
     case 'explicacion':
         $rspta = $inspeccion->explicacion();
         while ($reg = $rspta->fetch_object()) {
@@ -128,9 +174,11 @@ switch ($_GET["op"]) {
         }
         break;
 
+        /* Fin selects */
+
     case 'mostrar':
-        //echo $_POST["cat_id"];
-        $rspta = $inspeccion->mostrar($pro_id);
+
+        $rspta = $inspeccion->mostrar($_GET["pro"]);
 
         echo json_encode($rspta);
         break;

@@ -4,6 +4,10 @@ var tabla;
 function init() {
   mostrarform(false);
   listar();
+  listar_construcciones();
+  listar_infraestructura();
+  listar_suelousos();
+  listar_apoyo();
 
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
@@ -127,10 +131,56 @@ function listar() {
 
 /* Listar construcciones */
 function listar_construcciones() {
-  tabla = $("#tblconstruccion")
+  tabla2 = $("#tblconstruccion")
     .dataTable({
       ajax: {
         url: "../ajax/inspeccion.php?op=listar_construcciones",
+        type: "get",
+        dataType: "json",
+        error: function (e) {
+          console.log(e.responseText);
+        },
+      },
+    })
+    .DataTable();
+}
+/* Listar infraestructura */
+function listar_infraestructura() {
+  tabla3 = $("#tblinfraestructura")
+    .dataTable({
+      ajax: {
+        url: "../ajax/inspeccion.php?op=listar_infraestructura",
+        type: "get",
+        dataType: "json",
+        error: function (e) {
+          console.log(e.responseText);
+        },
+      },
+    })
+    .DataTable();
+}
+/* Listar uso de suelos */
+function listar_suelousos() {
+  tabla4 = $("#tblusosuelo")
+    .dataTable({
+      ajax: {
+        url: "../ajax/inspeccion.php?op=listar_usosuelos",
+        type: "get",
+        dataType: "json",
+        error: function (e) {
+          console.log(e.responseText);
+        },
+      },
+    })
+    .DataTable();
+}
+
+/* Listar apoyo */
+function listar_apoyo() {
+  tabla5 = $("#tblaccionesapoyo")
+    .dataTable({
+      ajax: {
+        url: "../ajax/inspeccion.php?op=listar_apoyo",
         type: "get",
         dataType: "json",
         error: function (e) {
@@ -166,20 +216,35 @@ function cancelarform() {
 } */
 
 function mostrar(pro_id) {
-  $.post(
-    "../ajax/inspeccion.php?op=mostrar",
+  $.ajax({
+    url: "../ajax/inspeccion.php?op=mostrar&pro=" + pro_id,
+    type: "POST",
+    contentType: false,
+    processData: false,
+    success: function (datos) {
+      data = JSON.parse(datos);
+      $("#pro_id").val(data.pro_id);
+      $("#provincia").val(data.provincia);
+      $("#canton").val(data.canton);
+      $("#parroquia").val(data.parroquia);
+      $("#sector").val(data.sector);
+      mostrarform(true);
+    },
+  });
+
+  /*  $.post(
+    ,
     { pro_id: pro_id },
     function (data, status) {
-      data = JSON.parse(data);
-      mostrarform(true);
+      //data = JSON.parse(data);
+      alert(data);
+      /* mostrarform(true);
       $("#pro_id").val(data.pro_id);
 
       $("#provincia").val(data.provincia);
       $("#canton").val(data.parroquia);
       $("#parroquia").val(data.parroquia);
-      $("#sector").val(data.sector);
-    }
-  );
+      $("#sector").val(data.sector);*/
 }
 
 init();

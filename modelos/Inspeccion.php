@@ -21,7 +21,11 @@ class Inspeccion
         return ejecutarConsultaSP($sql);
     }
     /* Fin metodo listar solicitantes */
-
+    public function listar_construcciones()
+    {
+        /* $sql = "CALL sp_inspeccion('list',0)";
+        return ejecutarConsultaSP($sql); */
+    }
 
     /* Metodos llenar combobox */
     public function explicacion()
