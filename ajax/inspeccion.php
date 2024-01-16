@@ -43,11 +43,14 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
-                "1" => $reg->sol_identificacion,
-                "2" => $reg->sol_nombre,
-                "3" => $reg->sol_telefono,
-                "4" => $reg->sol_direccion
+                "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
+                "1" => $reg->construccion,
+                "2" => $reg->materiales,
+                "3" => $reg->estado,
+                "4" => $reg->ins_dato1,
+                "5" => $reg->ins_dato2,
+                "6" => $reg->ins_dato3
+
             );
         }
         $results = array(

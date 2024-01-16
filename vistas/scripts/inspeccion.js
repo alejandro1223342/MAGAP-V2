@@ -131,18 +131,16 @@ function listar() {
 
 /* Listar construcciones */
 function listar_construcciones() {
-  tabla2 = $("#tblconstruccion")
-    .dataTable({
-      ajax: {
-        url: "../ajax/inspeccion.php?op=listar_construcciones",
-        type: "get",
-        dataType: "json",
-        error: function (e) {
-          console.log(e.responseText);
-        },
+  tabla2 = $("#tblconstruccion").DataTable({
+    ajax: {
+      url: "../ajax/inspeccion.php?op=listar_construcciones",
+      type: "get",
+      dataType: "json",
+      error: function (e) {
+        console.log(e.responseText);
       },
-    })
-    .DataTable();
+    },
+  });
 }
 /* Listar infraestructura */
 function listar_infraestructura() {

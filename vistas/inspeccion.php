@@ -388,7 +388,6 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                 <div class="card-body">
                                                     <!-- Contenido del primer formulario -->
                                                     <div class="table-responsive">
-
                                                         <table id="tblconstruccion" class="table table-bordered table-striped">
                                                             <thead>
                                                                 <tr>
@@ -397,434 +396,436 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                     <th>Materiales</th>
                                                                     <th>Estado</th>
                                                                     <th>Superficie</th>
-                                                                    <th>Edad de Construcción</th>
-                                                                    <th>Tiempo de Ocupación</th>
+                                                                    <th>Edad</th>
+                                                                    <th>Ocupación</th>
                                                                 </tr>
                                                             </thead>
 
                                                         </table>
+
                                                     </div>
                                                 </div>
-
                                             </div>
 
-                                            <!-- Fin del cuarto panel -->
+                                        </div>
 
-                                            <!-- Quinto panel dentro del formulario -->
+                                        <!-- Fin del cuarto panel -->
 
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Infraestructura Agropecuaria
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_infraestructura" id="form_infraestructura" method="POST">
+                                        <!-- Quinto panel dentro del formulario -->
 
-                                                    <section class="content" id="formulario_informe">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Infraestructura Agropecuaria
+                                                </h3>
+                                            </div>
+                                            <form action="" name="form_infraestructura" id="form_infraestructura" method="POST">
 
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
+                                                <section class="content" id="formulario_informe">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
 
-                                                                        <label>Concepto(*)</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_concepto" id="cat_concepto">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
 
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+                                                                    <label>Concepto(*)</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_concepto" id="cat_concepto">
 
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Unidad de Medida</label>
-                                                                        <input type="text" class="form-control" name="medida" id="medida" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Cantidad</label>
-                                                                        <input type="text" class="form-control" name="cantidad" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Estado</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_estado_infraestructura" id="cat_estado_infraestructura">
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
-                                                            <!-- Botones de Acción -->
-                                                            <div class="card-body">
-                                                                <div class="table-responsive">
 
-                                                                    <table id="tblinfraestructura" class="table table-bordered table-striped">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th></th>
-                                                                                <th>Concepto</th>
-                                                                                <th>Unid. de Medida</th>
-                                                                                <th>Cantidad</th>
-                                                                                <th>Estado</th>
-
-                                                                            </tr>
-                                                                        </thead>
-                                                                    </table>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Unidad de Medida</label>
+                                                                    <input type="text" class="form-control" name="medida" id="medida" placeholder="Descripción">
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Cantidad</label>
+                                                                    <input type="text" class="form-control" name="cantidad" id="cat_descripcion" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Estado</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_estado_infraestructura" id="cat_estado_infraestructura">
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
 
                                                         </div>
-
-
-                                                    </section>
-                                                </form>
-
-                                            </div>
-
-                                            <!-- Fin del quinto panel -->
-
-                                            <!-- Sexto panel dentro del formulario -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Caracteristicas Agrológicas del Terreno
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_agrologicas" id="form_agrologicas" method="POST">
-
-                                                    <section class="content" id="formulario_informe">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-
-                                                                        <label>Características del Suelo:</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Seleccione:</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Clase:</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Pluviosidad:</label>
-                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Temperatura media:</label>
-                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Altitud:</label>
-                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
                                                                 </div>
                                                             </div>
-
-                                                            <!-- Botones de Acción -->
-
                                                         </div>
 
-
-                                                    </section>
-                                                </form>
-
-                                            </div>
-
-
-                                            <!-- Fin del sexto panel -->
-
-                                            <!-- Septimo panel dentro del formulario -->
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Uso Actual del Suelo
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_usosuelo" id="form_usosuelo" method="POST">
-
-                                                    <section class="content" id="formulario_informe">
+                                                        <!-- Botones de Acción -->
                                                         <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-
-                                                                        <label>Concepto:</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_concepto_suelo" id="cat_concepto_suelo">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Superficie (.ha)</label>
-                                                                        <input type="number" class="form-control" name="sueperficie" id="sueperficie" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-
-                                                                        <label>Estado:</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_estado_suelo" id="cat_estado_suelo">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Edad de Cultivos</label>
-                                                                        <input type="number" class="form-control" name="edad_cultivos" id="edad_cultivos" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Destino Económico</label>
-                                                                        <div class="select2-purple">
-                                                                            <select class="select2" multiple="multiple" data-placeholder="Destino Económico" data-dropdown-css-class="select2-purple" style="width: 100%;" name="cat_destino_economico" id="cat_destino_economico">
-
-
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Observaciones:</label>
-                                                                        <textarea class="form-control" name="suelo_observaciones" id="suelo_observaciones" placeholder="Descripción"></textarea>
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- Botones de Acción -->
                                                             <div class="table-responsive">
 
-                                                                <table id="tblusosuelo" class="table table-bordered table-striped">
+                                                                <table id="tblinfraestructura" class="table table-bordered table-striped">
                                                                     <thead>
                                                                         <tr>
                                                                             <th></th>
                                                                             <th>Concepto</th>
-                                                                            <th>Superficie</th>
+                                                                            <th>Unid. de Medida</th>
+                                                                            <th>Cantidad</th>
                                                                             <th>Estado</th>
-                                                                            <th>Edad de Cultivos</th>
-                                                                            <th>Destino Economico</th>
-                                                                            <th>Observaciones</th>
+
                                                                         </tr>
                                                                     </thead>
-
                                                                 </table>
                                                             </div>
                                                         </div>
 
-
-                                                    </section>
-                                                </form>
-
-                                            </div>
-
-                                            <!-- Fin del septimo panel -->
-
-                                            <!-- Octavo panel dentro del formulario -->
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Acciones de Apoyo
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_accionesapoyo" id="form_accionesapoyo" method="POST">
-
-                                                    <section class="content" id="formulario_informe">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-
-                                                                        <label for="">Apellido y Nombres de Asistentes a la Inspección</label>
-                                                                        <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>En Calidad de:(*)</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_asistentes" id="cat_colindantes">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-
-                                                                        <label for="">Apellidos y Nombres de Testigos o Colindantes</label>
-                                                                        <input type="text" class="form-control" name="colindates" id="colindates" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Conclusiones y Recomendaciones:(*)</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_conclusiones" id="cat_coclusiones">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="table-responsive">
-
-                                                                <table id="tblaccionesapoyo" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th></th>
-                                                                            <th>Asistentes</th>
-                                                                            <th>En calidad de:</th>
-                                                                            <th>Colindantes</th>
-                                                                            <th>Conclusiones</th>
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                </table>
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-
-                                                        </div>
-
-
-                                                    </section>
-                                                </form>
-
-                                            </div>
-
-                                            <!-- Fin del octavo panel -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-danger">
-                                                            Crear PDF <i class="fa fa-file-pdf"></i>
-                                                        </button>
                                                     </div>
+
+
+                                                </section>
+                                            </form>
+
+                                        </div>
+
+                                        <!-- Fin del quinto panel -->
+
+                                        <!-- Sexto panel dentro del formulario -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Caracteristicas Agrológicas del Terreno
+                                                </h3>
+                                            </div>
+                                            <form action="" name="form_agrologicas" id="form_agrologicas" method="POST">
+
+                                                <section class="content" id="formulario_informe">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+
+                                                                    <label>Características del Suelo:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Seleccione:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Clase:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Pluviosidad:</label>
+                                                                    <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Temperatura media:</label>
+                                                                    <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Altitud:</label>
+                                                                    <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Botones de Acción -->
+
+                                                    </div>
+
+
+                                                </section>
+                                            </form>
+
+                                        </div>
+
+
+                                        <!-- Fin del sexto panel -->
+
+                                        <!-- Septimo panel dentro del formulario -->
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Uso Actual del Suelo
+                                                </h3>
+                                            </div>
+                                            <form action="" name="form_usosuelo" id="form_usosuelo" method="POST">
+
+                                                <section class="content" id="formulario_informe">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+
+                                                                    <label>Concepto:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_concepto_suelo" id="cat_concepto_suelo">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Superficie (.ha)</label>
+                                                                    <input type="number" class="form-control" name="sueperficie" id="sueperficie" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+
+                                                                    <label>Estado:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_estado_suelo" id="cat_estado_suelo">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Edad de Cultivos</label>
+                                                                    <input type="number" class="form-control" name="edad_cultivos" id="edad_cultivos" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Destino Económico</label>
+                                                                    <div class="select2-purple">
+                                                                        <select class="select2" multiple="multiple" data-placeholder="Destino Económico" data-dropdown-css-class="select2-purple" style="width: 100%;" name="cat_destino_economico" id="cat_destino_economico">
+
+
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">Observaciones:</label>
+                                                                    <textarea class="form-control" name="suelo_observaciones" id="suelo_observaciones" placeholder="Descripción"></textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Botones de Acción -->
+                                                        <div class="table-responsive">
+
+                                                            <table id="tblusosuelo" class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Concepto</th>
+                                                                        <th>Superficie</th>
+                                                                        <th>Estado</th>
+                                                                        <th>Edad de Cultivos</th>
+                                                                        <th>Destino Economico</th>
+                                                                        <th>Observaciones</th>
+                                                                    </tr>
+                                                                </thead>
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+
+                                                </section>
+                                            </form>
+
+                                        </div>
+
+                                        <!-- Fin del septimo panel -->
+
+                                        <!-- Octavo panel dentro del formulario -->
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Acciones de Apoyo
+                                                </h3>
+                                            </div>
+                                            <form action="" name="form_accionesapoyo" id="form_accionesapoyo" method="POST">
+
+                                                <section class="content" id="formulario_informe">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+
+                                                                    <label for="">Apellido y Nombres de Asistentes a la Inspección</label>
+                                                                    <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>En Calidad de:(*)</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_asistentes" id="cat_colindantes">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+
+                                                                    <label for="">Apellidos y Nombres de Testigos o Colindantes</label>
+                                                                    <input type="text" class="form-control" name="colindates" id="colindates" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Conclusiones y Recomendaciones:(*)</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_conclusiones" id="cat_coclusiones">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="table-responsive">
+
+                                                            <table id="tblaccionesapoyo" class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Asistentes</th>
+                                                                        <th>En calidad de:</th>
+                                                                        <th>Colindantes</th>
+                                                                        <th>Conclusiones</th>
+
+                                                                    </tr>
+                                                                </thead>
+
+                                                            </table>
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+
+                                                    </div>
+
+
+                                                </section>
+                                            </form>
+
+                                        </div>
+
+                                        <!-- Fin del octavo panel -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <button class="btn btn-danger">
+                                                        Crear PDF <i class="fa fa-file-pdf"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                 </div>
 
-
-                            </section>
-                        </form>
-
-                        <!-- FIN PRIMER INFORME -->
-                        <!-- SEGUNDO INFORME -->
-
-
-
-
-                        <!-- FIN DE SEGUNDO INFORME -->
-
                     </div>
 
 
-
-                </div>
-
-
             </section>
+            </form>
+
+            <!-- FIN PRIMER INFORME -->
+            <!-- SEGUNDO INFORME -->
+
+
+
+
+            <!-- FIN DE SEGUNDO INFORME -->
+
+        </div>
+
+
+
+        </div>
+
+
+        </section>
 
 
 
