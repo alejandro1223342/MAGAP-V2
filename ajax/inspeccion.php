@@ -3,14 +3,27 @@ require_once "../modelos/Inspeccion.php";
 
 $inspeccion = new Inspeccion();
 
-/* $cat_id = isset($_POST["cat_id"]) ? limpiarCadena($_POST["cat_id"]) : "";
-$cat_nombre = isset($_POST["cat_nombre"]) ? limpiarCadena($_POST["cat_nombre"]) : "";
-$cat_descripcion = isset($_POST["cat_descripcion"]) ? limpiarCadena($_POST["cat_descripcion"]) : "";
-$cat_padre = isset($_POST["cat_padre"]) ? limpiarCadena($_POST["cat_padre"]) : "";
-$cat_estado = isset($_POST["cat_estado"]) ? limpiarCadena($_POST["cat_estado"]) : ""; */
+/*Construcciones*/
+$ins_id = isset($_POST["ins_id"]) ? limpiarCadena($_POST["ins_id"]) : "";
+$pro_id = isset($_POST["pro_id"]) ? limpiarCadena($_POST["pro_id"]) : "";
+$cat_construccion = isset($_POST["cat_construccion"]) ? limpiarCadena($_POST["cat_construccion"]) : "";
+$cat_materiales = isset($_POST["cat_materiales"]) ? limpiarCadena($_POST["cat_materiales"]) : "";
+$cat_estado_construccion = isset($_POST["cat_estado_construccion"]) ? limpiarCadena($_POST["cat_estado_construccion"]) : "";
+$superficie = isset($_POST["superficie"]) ? limpiarCadena($_POST["superficie"]) : "";
+$edad_const = isset($_POST["edad_const"]) ? limpiarCadena($_POST["edad_const"]) : "";
+$tiempo_ocupacion = isset($_POST["tiempo_ocupacion"]) ? limpiarCadena($_POST["tiempo_ocupacion"]) : "";
+/*Fin*/
+
+/*Estado de Tenencia*/
+$pro_id_tenencia = isset($_POST["pro_id_tenencia"]) ? limpiarCadena($_POST["pro_id_tenencia"]) : "";
+$cat_tenencia = isset($_POST["cat_tenencia"]) ? limpiarCadena($_POST["cat_tenencia"]) : "";
+$cat_historia = isset($_POST["cat_historia"]) ? limpiarCadena($_POST["cat_historia"]) : "";
+$cat_tipo_posesion = isset($_POST["cat_tipo_posesion"]) ? limpiarCadena($_POST["cat_tipo_posesion"]) : "";
+$tiempo_posesion = isset($_POST["tiempo_posesion"]) ? limpiarCadena($_POST["tiempo_posesion"]) : "";
+$tenencia_observaciones = isset($_POST["tenencia_observaciones"]) ? limpiarCadena($_POST["tenencia_observaciones"]) : "";
 
 
-
+/*Fin*/
 
 switch ($_GET["op"]) {
 
@@ -21,7 +34,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
+                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . '); mostrar2(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
@@ -43,7 +56,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
+                "0" => '<center><button class="btn btn-danger btn-xs" id="btn_eliminar" onclick=" eliminar_construcciones(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
                 "1" => $reg->construccion,
                 "2" => $reg->materiales,
                 "3" => $reg->estado,
@@ -68,11 +81,11 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
-                "1" => $reg->sol_identificacion,
-                "2" => $reg->sol_nombre,
-                "3" => $reg->sol_telefono,
-                "4" => $reg->sol_direccion
+                "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
+                "1" => $reg->concepto,
+                "2" => $reg->unidad_medida,
+                "3" => $reg->cantidad,
+                "4" => $reg->estado
             );
         }
         $results = array(
@@ -177,6 +190,13 @@ switch ($_GET["op"]) {
         }
         break;
 
+    case 'tipo_posesion':
+        $rspta = $inspeccion->tipo_posesion();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
+        }
+        break;
+
         /* Fin selects */
 
     case 'mostrar':
@@ -185,4 +205,58 @@ switch ($_GET["op"]) {
 
         echo json_encode($rspta);
         break;
+
+    case 'mostrar_ten':
+
+        $rspta = $inspeccion->mostrar_ten($_GET["pro"]);
+
+        echo json_encode($rspta);
+        break;
+
+        /* Eliminar informacion de las tablas */
+    case 'eliminar':
+        $rspta = $inspeccion->eliminar($ins_id);
+        echo "Valor de ins_id: " . $ins_id;
+
+        echo $rspta ? "Datos eliminados correctamente" : "No se pudo eliminar los datos";
+        break;
+        /* Fin  */
+
+        /* Guardar Construcciones*/
+    case 'guardar_construccion':
+
+
+        if (empty($ins_id)) {
+            $rspta = $inspeccion->guardar_construccion(
+                $pro_id_cons,
+                $cat_construccion,
+                $cat_materiales,
+                $cat_estado_construccion,
+                $superficie,
+                $edad_const,
+                $tiempo_ocupacion,
+
+            );
+            echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
+        }
+        break;
+        /* Guardar Estado de tenencias */
+    case 'guardaryeditar_tenencia':
+
+
+        if (empty($ins_id)) {
+
+            $rspta = $inspeccion->guardaryeditar_tenencia(
+                $pro_id_tenencia,
+                $cat_tenencia,
+                $cat_historia,
+                $cat_tipo_posesion,
+                $tiempo_posesion,
+                $tenencia_observaciones,
+            );
+            echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
+        }
+        break;
+
+        /*Fin*/
 }

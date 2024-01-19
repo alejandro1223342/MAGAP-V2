@@ -1,16 +1,25 @@
 var tabla;
-
+var tablaConstrucciones;
+var tablaInfraestructura;
+var tablaSueloUsos;
+var tablaAccionesApoyo;
 //funcion que se ejecuta al inicio
 function init() {
   mostrarform(false);
+  mostrarform_const(false);
+  mostrarform_tenen(false);
   listar();
   listar_construcciones();
   listar_infraestructura();
   listar_suelousos();
   listar_apoyo();
 
-  $("#formulario").on("submit", function (e) {
-    guardaryeditar(e);
+  $("#form_construccion").on("submit", function (e) {
+    guardar_const(e);
+  });
+
+  $("#form_tenencia").on("submit", function (e) {
+    guardaryeditar_tenencia(e);
   });
   //cargamos los items al select categoria
 
@@ -80,10 +89,15 @@ function init() {
     $("#cat_destino_economico").html(r); // Actualiza el contenido del select con la respuesta del servidor
     $("#cat_destino_economico").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
   });
-
+  /* select infraestructura */
   $.post("../ajax/inspeccion.php?op=estado_infraestructura", function (r) {
     $("#cat_estado_infraestructura").html(r); // Actualiza el contenido del select con la respuesta del servidor
     $("#cat_estado_infraestructura").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
+  });
+  /* select tipo_posesion */
+  $.post("../ajax/inspeccion.php?op=tipo_posesion", function (r) {
+    $("#cat_tipo_posesion").html(r); // Actualiza el contenido del select con la respuesta del servidor
+    $("#cat_tipo_posesion").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
   });
 }
 
@@ -93,6 +107,12 @@ function limpiar() {
   $("#cat_nombre").val("");
   $("#cat_descripcion").val("");
   $("#cat_padre").val("");
+}
+
+function limpiar_construcciones() {
+  $("#superficie").val("");
+  $("#edad_const").val("");
+  $("#tiempo_ocupacion").val("");
 }
 
 //funcion mostrar formulario
@@ -113,6 +133,48 @@ function mostrarform(flag) {
     $("#btnagregar").show();
   }
 }
+
+function mostrarform_const(flag2) {
+  limpiar();
+  if (flag2) {
+    $("#tblconstruccion").hide();
+    $("#tblconstruccion_wrapper").hide();
+    $("#btnGuardar_const").prop("disabled", false);
+    $("#btnAgregar_const").hide();
+    $("#btnRegresar").show();
+    $("#formulariocons").show();
+  } else {
+    $("#tblconstruccion").show();
+    $("#tblconstruccion_wrapper").show();
+    $("#btnAgregar_const").show();
+    $("#btnRegresar").hide();
+    $("#formulariocons").hide();
+  }
+}
+
+function mostrarform_tenen(flag3) {
+  limpiar();
+  if (flag3) {
+    $("#btnGuardar_Tenencia").prop("disabled", false);
+    $("#btnAgregar_ten").show();
+    $("#btnRegresar_tenencia").show();
+    $("#formtenencia").show();
+  } else {
+    $("#btnAgregar_ten").hide();
+    $("#btnRegresar_tenencia").hide();
+    $("#formtenencia").hide();
+  }
+}
+
+//Funcion regresar
+$("#btnRegresar").on("click", function () {
+  mostrarform_const(false); // Puedes ajustar esto según tu lógica
+});
+
+$("#btnRegresar_tenencia").on("click", function () {
+  mostrarform_tenen(false); // Puedes ajustar esto según tu lógica
+});
+
 /* Listar Solicitantes */
 function listar() {
   tabla = $("#tblsolicitantes")
@@ -131,7 +193,7 @@ function listar() {
 
 /* Listar construcciones */
 function listar_construcciones() {
-  tabla2 = $("#tblconstruccion").DataTable({
+  tablaConstrucciones = $("#tblconstruccion").DataTable({
     ajax: {
       url: "../ajax/inspeccion.php?op=listar_construcciones",
       type: "get",
@@ -140,11 +202,28 @@ function listar_construcciones() {
         console.log(e.responseText);
       },
     },
+    /* initComplete: function deshabilitar_boton() {
+      console.log(registros); // Agrega esta línea para verificar el valor de registros
+
+      // Verificar si hay registros
+      var registros = tablaConstrucciones.rows().data().length;
+
+      // Obtener el botón btn_Ocultar
+      var btnOcultar = $("#btn_Ocultar");
+
+      // Habilitar o deshabilitar el botón según la cantidad de registros
+      if (registros > 0) {
+        btnOcultar.prop("disabled", false);
+      } else {
+        btnOcultar.prop("disabled", true);
+      }
+    }, */
   });
 }
+
 /* Listar infraestructura */
 function listar_infraestructura() {
-  tabla3 = $("#tblinfraestructura")
+  tabla = $("#tblinfraestructura")
     .dataTable({
       ajax: {
         url: "../ajax/inspeccion.php?op=listar_infraestructura",
@@ -159,7 +238,7 @@ function listar_infraestructura() {
 }
 /* Listar uso de suelos */
 function listar_suelousos() {
-  tabla4 = $("#tblusosuelo")
+  tabla = $("#tblusosuelo")
     .dataTable({
       ajax: {
         url: "../ajax/inspeccion.php?op=listar_usosuelos",
@@ -175,7 +254,7 @@ function listar_suelousos() {
 
 /* Listar apoyo */
 function listar_apoyo() {
-  tabla5 = $("#tblaccionesapoyo")
+  tabla = $("#tblaccionesapoyo")
     .dataTable({
       ajax: {
         url: "../ajax/inspeccion.php?op=listar_apoyo",
@@ -221,11 +300,13 @@ function mostrar(pro_id) {
     processData: false,
     success: function (datos) {
       data = JSON.parse(datos);
-      $("#pro_id").val(data.pro_id);
       $("#provincia").val(data.provincia);
       $("#canton").val(data.canton);
       $("#parroquia").val(data.parroquia);
       $("#sector").val(data.sector);
+      $("#pro_id_cons").val(data.pro_id);
+      $("#pro_id_tenencia").val(data.pro_id);
+
       mostrarform(true);
     },
   });
@@ -243,6 +324,76 @@ function mostrar(pro_id) {
       $("#canton").val(data.parroquia);
       $("#parroquia").val(data.parroquia);
       $("#sector").val(data.sector);*/
+}
+
+function mostrar2(pro_id) {
+  $.ajax({
+    url: "../ajax/inspeccion.php?op=mostrar_ten&pro=" + pro_id,
+    type: "POST",
+    contentType: false,
+    processData: false,
+    success: function (datos) {
+      data = JSON.parse(datos);
+      $("#cat_tenencia").val(data.forma_tenencia);
+      $("#cat_historia").val(data.historia_tenencia);
+      $("#cat_tipo_posesion").val(data.obtencion_predio);
+      $("#tiempo_posesion").val(data.tiempo_posesion);
+      $("#tenencia_observaciones").val(data.observaciones);
+    },
+  });
+}
+function eliminar_construcciones(ins_id) {
+  bootbox.confirm("¿Esta seguro de eliminar este dato?", function (result) {
+    if (result) {
+      $.post(
+        "../ajax/inspeccion.php?op=eliminar",
+        { ins_id: ins_id },
+        function (e) {
+          bootbox.alert(e);
+          tablaConstrucciones.ajax.reload();
+        }
+      );
+    }
+  });
+}
+
+function guardar_const(e) {
+  e.preventDefault(); //no se activara la accion predeterminada
+  $("#btnGuardar_const").prop("disabled", false);
+  var formData = new FormData($("#form_construccion")[0]);
+
+  $.ajax({
+    url: "../ajax/inspeccion.php?op=guardar_construccion",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (datos) {
+      bootbox.alert(datos);
+      tablaConstrucciones.ajax.reload();
+    },
+  });
+
+  limpiar_construcciones();
+}
+
+function guardaryeditar_tenencia(e) {
+  e.preventDefault(); //no se activara la accion predeterminada
+  $("#btnGuardar_Tenencia").prop("disabled", false);
+  var formData = new FormData($("#form_tenencia")[0]);
+
+  $.ajax({
+    url: "../ajax/inspeccion.php?op=guardaryeditar_tenencia",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (datos) {
+      bootbox.alert(datos);
+    },
+  });
 }
 
 init();

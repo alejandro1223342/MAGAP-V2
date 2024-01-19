@@ -36,379 +36,395 @@ if (!isset($_SESSION['usu_nombre'])) {
                         </div>
                         <!-- PRIMER INFORME -->
 
-                        <form action="../reportes/rpt_inftec.php" name="inftec" id="inftec" method="POST" target="_blank">
-                            <section class="content" id="informe_tecnico">
-                                <div class="container-fluid">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">INFORME TÉCNICO DE INSPECCIÓN </h3>
+                        <section class="content" id="informe_tecnico">
+                            <div class="container-fluid">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">INFORME TÉCNICO DE INSPECCIÓN </h3>
 
-                                        </div>
-                                        <!-- Primer panel dentro del formulario -->
+                                    </div>
+                                    <!-- Primer panel dentro del formulario -->
 
-                                        <div class="card-body">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Motivo
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_motivo" id="form_motivo" method="POST">
-
-                                                    <section class="content" id="formulario_informe">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-
-                                                                        <label>Explicación(*)</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_explicacion" id="cat_explicacion">
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Descripción</label>
-                                                                        <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Descripción"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-
-
-                                                        </div>
-
-
-                                                    </section>
-                                                </form>
-
+                                    <div class="card-body">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Motivo
+                                                </h3>
                                             </div>
-                                            <!-- Fin del primer panel -->
+                                            <form action="" name="form_motivo" id="form_motivo" method="POST">
 
+                                                <section class="content" id="formulario_informe">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
 
-                                            <!-- Segundo panel dentro del formulario -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Ubicación del Predio y Vías de Acceso
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_ubicacion" id="form_ubicacion" method="POST">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
 
-                                                    <section class="content" id="formulario_informe">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-                                                                <input class="form-control" type="text" name="pro_id" id="pro_id">
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-
-                                                                        <label for="">Provincia</label>
-                                                                        <input type="text" class="form-control" name="provincia" id="provincia" placeholder="Nombre">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Cantón</label>
-                                                                        <input type="text" class="form-control" name="canton" id="canton" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Parroquia</label>
-                                                                        <input type="text" class="form-control" name="parroquia" id="parroquia" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Sector</label>
-                                                                        <input type="text" class="form-control" name="sector" id="sector" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Nombre del Predio ó N° de Lote</label>
-                                                                        <input type="text" class="form-control" name="predio" id="predio" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Superficie</label>
-                                                                        <input type="text" class="form-control" name="superficie" id="superficie" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Distancia a la cabecera Parroquial(*)</label>
-                                                                        <input type="number" class="form-control" name="cabecera_parroquial" id="cabecera_parroquial" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Vías de Acceso</label>
-                                                                        <div class="select2-purple">
-                                                                            <select class="select2" multiple="multiple" data-placeholder="Vías de Acceso" data-dropdown-css-class="select2-purple" style="width: 100%;" name='cat_vias' id='cat_vias'>
-
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Infraestructura</label>
-                                                                        <div class="select2-purple">
-                                                                            <select class="select2" multiple="multiple" data-placeholder="Infraestructura" data-dropdown-css-class="select2-purple" style="width: 100%;" name='cat_infraestructura' id='cat_infraestructura'>
-
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Distancia a la cabecera Parroquial(*)</label>
-                                                                        <div class="input-group">
-                                                                            <input type="text" class="form-control" name="latitud[]" placeholder="Latitud">
-                                                                            <input type="text" class="form-control" name="longitud[]" placeholder="Longitud">
-                                                                            <div class="input-group-append">
-                                                                                <button class="btn btn-primary btn-add">Agregar</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
+                                                                    <label>Explicación(*)</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_explicacion" id="cat_explicacion">
+                                                                    </select>
                                                                 </div>
                                                             </div>
-                                                            <!-- Botones de Acción -->
 
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Descripción</label>
+                                                                    <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Descripción"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
 
                                                         </div>
-
-
-                                                    </section>
-                                                </form>
-
-                                            </div>
-                                            <!-- Fin del segundo panel -->
-
-                                            <!-- Tercer panel dentro del formulario -->
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Estado de Tenencia
-                                                    </h3>
-                                                </div>
-                                                <form action="" name="form_tenencia" id="form_tenencia" method="POST">
-
-                                                    <section class="content">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-
-                                                                        <label>Forma de Tenecia(*)</label>
-                                                                        <select class="form-control" style="width: 100%;" name="cat_tenencia" id="cat_tenencia" data-live-search="true">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Tiempo de posesión</label>
-                                                                        <input type="number" class="form-control" name="tiempo_posesion" id="tiempo_posesion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Historia de Tenencia</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_historia" id="cat_historia">
-
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Observaciones:</label>
-                                                                        <textarea class="form-control" name="tenencia_observaciones" id="tenencia_observaciones" placeholder="Descripción"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
                                                                 </div>
                                                             </div>
-                                                            <!-- Botones de Acción -->
-
-
                                                         </div>
+                                                        <!-- Botones de Acción -->
 
-
-                                                    </section>
-                                                </form>
-
-                                            </div>
-
-                                            <!-- Fin del tercer panel -->
-
-                                            <!-- Cuarto panel dentro del formulario -->
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Construcciones
-                                                    </h3>
-                                                </div>
-
-
-                                                <form action="" name="form_construccion" id="form_construccion" method="POST">
-
-                                                    <section class="content">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <!-- Contenido del primer formulario -->
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Construcción(*)</label>
-                                                                        <select class="form-control " style="width: 100%;" name="cat_construccion" id="cat_construccion">
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Materiales(*)</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_materiales" id="cat_materiales">
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Estado</label>
-                                                                        <select class="form-control select2" style="width: 100%;" name="cat_estado_construccion" id="cat_estado_construccion">
-                                                                            <!-- Resto de opciones -->
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Superficie (.ha)</label>
-                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Edad de Const.</label>
-                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Tiempo de Ocupación</label>
-                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
-
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                                                            <i class="fa fa-save"></i> Guardar
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Botones de Acción -->
-
-
-                                                        </div>
-
-
-                                                    </section>
-                                                </form>
-
-                                                <div class="card-body">
-                                                    <!-- Contenido del primer formulario -->
-                                                    <div class="table-responsive">
-                                                        <table id="tblconstruccion" class="table table-bordered table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>Construcción</th>
-                                                                    <th>Materiales</th>
-                                                                    <th>Estado</th>
-                                                                    <th>Superficie</th>
-                                                                    <th>Edad</th>
-                                                                    <th>Ocupación</th>
-                                                                </tr>
-                                                            </thead>
-
-                                                        </table>
 
                                                     </div>
-                                                </div>
+
+
+                                                </section>
+                                            </form>
+
+                                        </div>
+                                        <!-- Fin del primer panel -->
+
+
+                                        <!-- Segundo panel dentro del formulario -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Ubicación del Predio y Vías de Acceso
+                                                </h3>
                                             </div>
+                                            <form action="" name="form_ubicacion" id="form_ubicacion" method="POST">
+
+                                                <section class="content" id="formulario_informe">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
+                                                            <input class="form-control" type="text" name="pro_id" id="pro_id">
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+
+                                                                    <label for="">Provincia</label>
+                                                                    <input type="text" class="form-control" name="provincia" id="provincia" placeholder="Nombre">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Cantón</label>
+                                                                    <input type="text" class="form-control" name="canton" id="canton" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Parroquia</label>
+                                                                    <input type="text" class="form-control" name="parroquia" id="parroquia" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Sector</label>
+                                                                    <input type="text" class="form-control" name="sector" id="sector" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Nombre del Predio ó N° de Lote</label>
+                                                                    <input type="text" class="form-control" name="predio" id="predio" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Superficie</label>
+                                                                    <input type="text" class="form-control" name="superficie" id="superficie" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Distancia a la cabecera Parroquial(*)</label>
+                                                                    <input type="number" class="form-control" name="cabecera_parroquial" id="cabecera_parroquial" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Vías de Acceso</label>
+                                                                    <div class="select2-purple">
+                                                                        <select class="select2" multiple="multiple" data-placeholder="Vías de Acceso" data-dropdown-css-class="select2-purple" style="width: 100%;" name='cat_vias' id='cat_vias'>
+
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Infraestructura</label>
+                                                                    <div class="select2-purple">
+                                                                        <select class="select2" multiple="multiple" data-placeholder="Infraestructura" data-dropdown-css-class="select2-purple" style="width: 100%;" name='cat_infraestructura' id='cat_infraestructura'>
+
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Distancia a la cabecera Parroquial(*)</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="latitud[]" placeholder="Latitud">
+                                                                        <input type="text" class="form-control" name="longitud[]" placeholder="Longitud">
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-primary btn-add">Agregar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+
+
+                                                    </div>
+
+
+                                                </section>
+                                            </form>
+
+                                        </div>
+                                        <!-- Fin del segundo panel -->
+
+                                        <!-- Tercer panel dentro del formulario -->
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Estado de Tenencia <button class="btn btn-success" onclick="mostrarform_tenen(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
+                                                    <button class="btn btn-danger" id="btnRegresar_tenencia" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
+                                                </h3>
+                                            </div>
+                                            <form action="" name="form_tenencia" id="form_tenencia" method="POST">
+
+                                                <section class="content" id="formtenencia">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
+                                                            <input class="form-control" type="text" name="pro_id_tenencia" id="pro_id_tenencia">
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+
+                                                                    <label>Forma de Tenecia:</label>
+                                                                    <select class="form-control" style="width: 100%;" name="cat_tenencia" id="cat_tenencia" data-live-search="true">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Historia de Tenencia:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_historia" id="cat_historia">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>El predio se obtuvo mediante:</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_tipo_posesion" id="cat_tipo_posesion">
+
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Tiempo de posesión:</label>
+                                                                    <input type="number" class="form-control" name="tiempo_posesion" id="tiempo_posesion" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">Observaciones:</label>
+                                                                    <textarea class="form-control" name="tenencia_observaciones" id="tenencia_observaciones" placeholder="Descripción"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar_Tenencia">
+                                                                        <i class="fa fa-save"></i> Guardar Estado
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+
+
+                                                    </div>
+
+
+                                                </section>
+                                            </form>
 
                                         </div>
 
+                                        <!-- Fin del tercer panel -->
+
+                                        <!-- Cuarto panel dentro del formulario -->
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Construcciones <button class="btn btn-success" onclick="mostrarform_const(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
+                                                    <button class="btn btn-danger" id="btnRegresar" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
+                                                </h3>
+                                            </div>
+
+
+                                            <form action="" name="form_construccion" id="form_construccion" method="POST">
+
+                                                <section class="content" id="formulariocons">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- Contenido del primer formulario -->
+                                                            <input class="form-control" type="text" name="pro_id_cons" id="pro_id_cons">
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Construcción(*)</label>
+                                                                    <select class="form-control " style="width: 100%;" name="cat_construccion" id="cat_construccion">
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Materiales(*)</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_materiales" id="cat_materiales">
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Estado</label>
+                                                                    <select class="form-control select2" style="width: 100%;" name="cat_estado_construccion" id="cat_estado_construccion">
+                                                                        <!-- Resto de opciones -->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Superficie (.ha)</label>
+                                                                    <input type="text" class="form-control" name="superficie" id="superficie" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Edad de Const.</label>
+                                                                    <input type="text" class="form-control" name="edad_const" id="edad_const" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Tiempo de Ocupación</label>
+                                                                    <input type="text" class="form-control" name="tiempo_ocupacion" id="tiempo_ocupacion" placeholder="Descripción">
+                                                                </div>
+                                                            </div>
+                                                            <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                        </div>
+                                                        <!-- Botones de Acción -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary" type="submit" id="btnGuardar_const">
+                                                                        <i class="fa fa-save"></i> Guardar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Botones de Acción -->
+
+
+                                                    </div>
+
+
+                                                </section>
+                                            </form>
+
+                                            <div class="card-body">
+                                                <!-- Contenido del primer formulario -->
+                                                <div class="table-responsive">
+                                                    <table id="tblconstruccion" class="table table-bordered table-striped " style="width: 100%; ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Construcción</th>
+                                                                <th>Materiales</th>
+                                                                <th>Estado</th>
+                                                                <th>Superficie</th>
+                                                                <th>Edad</th>
+                                                                <th>Ocupación</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                    </table>
+
+                                                </div>
+                                                <section class="content-header" style="padding: 6px ;"></section>
+
+                                            </div>
+
+                                        </div>
                                         <!-- Fin del cuarto panel -->
 
                                         <!-- Quinto panel dentro del formulario -->
@@ -480,7 +496,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         <div class="card-body">
                                                             <div class="table-responsive">
 
-                                                                <table id="tblinfraestructura" class="table table-bordered table-striped">
+                                                                <table id="tblinfraestructura" class="table table-bordered table-striped" style="width: 100%; ">
                                                                     <thead>
                                                                         <tr>
                                                                             <th></th>
@@ -801,36 +817,16 @@ if (!isset($_SESSION['usu_nombre'])) {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
+                            </div>
+                        </section>
                     </div>
-
-
+                </div>
             </section>
-            </form>
-
             <!-- FIN PRIMER INFORME -->
             <!-- SEGUNDO INFORME -->
-
-
-
-
             <!-- FIN DE SEGUNDO INFORME -->
-
         </div>
-
-
-
-        </div>
-
-
-        </section>
-
-
-
-
-
         </div>
 
     <?php
