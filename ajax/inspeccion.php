@@ -21,6 +21,8 @@ $cat_historia = isset($_POST["cat_historia"]) ? limpiarCadena($_POST["cat_histor
 $cat_tipo_posesion = isset($_POST["cat_tipo_posesion"]) ? limpiarCadena($_POST["cat_tipo_posesion"]) : "";
 $tiempo_posesion = isset($_POST["tiempo_posesion"]) ? limpiarCadena($_POST["tiempo_posesion"]) : "";
 $tenencia_observaciones = isset($_POST["tenencia_observaciones"]) ? limpiarCadena($_POST["tenencia_observaciones"]) : "";
+$ins_tenencia = isset($_POST["ins_tenencia"]) ? limpiarCadena($_POST["ins_tenencia"]) : "";
+
 
 
 /*Fin*/
@@ -51,18 +53,19 @@ switch ($_GET["op"]) {
         break;
         /* Listar construcciones */
     case 'listar_construcciones':
-        $rspta = $inspeccion->listar_construcciones();
+        $rspta = $inspeccion->listar_construcciones($_GET["pro"]);
         $data = array();
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
                 "0" => '<center><button class="btn btn-danger btn-xs" id="btn_eliminar" onclick=" eliminar_construcciones(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                "1" => $reg->construccion,
-                "2" => $reg->materiales,
-                "3" => $reg->estado,
-                "4" => $reg->ins_dato1,
-                "5" => $reg->ins_dato2,
-                "6" => $reg->ins_dato3
+                "1" => $reg->pro_id,
+                "2" => $reg->construccion,
+                "3" => $reg->materiales,
+                "4" => $reg->estado,
+                "5" => $reg->ins_dato1,
+                "6" => $reg->ins_dato2,
+                "7" => $reg->ins_dato3
 
             );
         }
@@ -244,7 +247,7 @@ switch ($_GET["op"]) {
     case 'guardaryeditar_tenencia':
 
 
-        if (empty($ins_id)) {
+        if (empty($ins_tenencia)) {
 
             $rspta = $inspeccion->guardaryeditar_tenencia(
                 $pro_id_tenencia,
@@ -252,9 +255,15 @@ switch ($_GET["op"]) {
                 $cat_historia,
                 $cat_tipo_posesion,
                 $tiempo_posesion,
-                $tenencia_observaciones,
+                $tenencia_observaciones
             );
             echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
+        } else {
+            echo "Entró en el bloque else";
+
+            $rspta = $inspeccion->editar_tenencia($ins_tenencia, $cat_tenencia, $cat_historia, $cat_tipo_posesion, $tiempo_posesion, $tenencia_observaciones);
+
+            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar Login existente";
         }
         break;
 

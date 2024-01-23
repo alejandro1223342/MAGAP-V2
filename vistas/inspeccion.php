@@ -20,7 +20,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <div class="table-responsive">
 
                             <div class="card-body">
-                                <table id="tblsolicitantes" class="table table-bordered table-striped">
+                                <table id="tblsolicitantes" class="table table-bordered table-striped" style="width: 100%; ">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -40,7 +40,10 @@ if (!isset($_SESSION['usu_nombre'])) {
                             <div class="container-fluid">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">INFORME TÉCNICO DE INSPECCIÓN </h3>
+                                        <h3 class="card-title">INFORME TÉCNICO DE INSPECCIÓN <button class="btn btn-primary" onclick="mostrarform_inspe(true)"><i class="fa fa-arrow-circle-down"></i> Mostrar</button>
+                                            <button class="btn btn-danger" id="btnOcultar_inspe" type="button"><i class="fa fa-arrow-circle-up"></i> Ocultar</button>
+
+                                        </h3>
 
                                     </div>
                                     <!-- Primer panel dentro del formulario -->
@@ -116,8 +119,9 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
 
-                                                                    <label for="">Provincia</label>
+                                                                    <label>Provincia</label>
                                                                     <input type="text" class="form-control" name="provincia" id="provincia" placeholder="Nombre">
+
                                                                 </div>
                                                             </div>
 
@@ -240,6 +244,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         <div class="row">
                                                             <!-- Contenido del primer formulario -->
                                                             <input class="form-control" type="text" name="pro_id_tenencia" id="pro_id_tenencia">
+                                                            <input class="form-control" type="text" name="ins_tenencia" id="ins_tenencia">
+
 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
@@ -408,6 +414,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         <thead>
                                                             <tr>
                                                                 <th></th>
+                                                                <th></th>
+
                                                                 <th>Construcción</th>
                                                                 <th>Materiales</th>
                                                                 <th>Estado</th>

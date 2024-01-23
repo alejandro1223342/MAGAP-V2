@@ -8,6 +8,7 @@ function init() {
   mostrarform(false);
   mostrarform_const(false);
   mostrarform_tenen(false);
+  mostrarform_inspe(false);
   listar();
   listar_construcciones();
   listar_infraestructura();
@@ -166,6 +167,17 @@ function mostrarform_tenen(flag3) {
   }
 }
 
+function mostrarform_inspe(flag4) {
+  limpiar();
+  if (flag4) {
+    $("#btnOcultar_inspe").show();
+    $("#informe_tecnico").show();
+  } else {
+    $("#btnOcultar_inspe").hide();
+    $("#informe_tecnico").hide();
+  }
+}
+
 //Funcion regresar
 $("#btnRegresar").on("click", function () {
   mostrarform_const(false); // Puedes ajustar esto según tu lógica
@@ -192,17 +204,27 @@ function listar() {
 }
 
 /* Listar construcciones */
-function listar_construcciones() {
+function listar_construcciones(pro_id) {
   tablaConstrucciones = $("#tblconstruccion").DataTable({
     ajax: {
-      url: "../ajax/inspeccion.php?op=listar_construcciones",
+      url: "../ajax/inspeccion.php?op=listar_construcciones&pro=" + pro_id,
       type: "get",
       dataType: "json",
+      data: { pro_id: pro_id },
       error: function (e) {
         console.log(e.responseText);
       },
     },
-    /* initComplete: function deshabilitar_boton() {
+
+    columnDefs: [
+      {
+        targets: [1], // Índice de la columna que quieres ocultar
+        visible: false,
+      },
+    ],
+  });
+}
+/* initComplete: function deshabilitar_boton() {
       console.log(registros); // Agrega esta línea para verificar el valor de registros
 
       // Verificar si hay registros
@@ -218,8 +240,6 @@ function listar_construcciones() {
         btnOcultar.prop("disabled", true);
       }
     }, */
-  });
-}
 
 /* Listar infraestructura */
 function listar_infraestructura() {
@@ -300,7 +320,12 @@ function mostrar(pro_id) {
     processData: false,
     success: function (datos) {
       data = JSON.parse(datos);
+
+      // Asigna el valor al input con id 'provincia'
+      $("#pro_id").val(data.pro_id);
       $("#provincia").val(data.provincia);
+      // Asigna el valor al label con id 'provi'
+      // Resto de tu código...
       $("#canton").val(data.canton);
       $("#parroquia").val(data.parroquia);
       $("#sector").val(data.sector);
@@ -310,8 +335,9 @@ function mostrar(pro_id) {
       mostrarform(true);
     },
   });
+}
 
-  /*  $.post(
+/*  $.post(
     ,
     { pro_id: pro_id },
     function (data, status) {
@@ -324,7 +350,6 @@ function mostrar(pro_id) {
       $("#canton").val(data.parroquia);
       $("#parroquia").val(data.parroquia);
       $("#sector").val(data.sector);*/
-}
 
 function mostrar2(pro_id) {
   $.ajax({
@@ -334,6 +359,7 @@ function mostrar2(pro_id) {
     processData: false,
     success: function (datos) {
       data = JSON.parse(datos);
+      $("#ins_tenencia").val(data.ins_id);
       $("#cat_tenencia").val(data.forma_tenencia);
       $("#cat_historia").val(data.historia_tenencia);
       $("#cat_tipo_posesion").val(data.obtencion_predio);

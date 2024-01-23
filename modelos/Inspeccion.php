@@ -26,6 +26,13 @@ class Inspeccion
         return ejecutarConsulta($sql);
     }
 
+    public function editar_tenencia($ins_id, $ins_dato1, $cat_id_1, $cat_id_2, $cat_id_3, $observaciones)
+    {
+        $sql = "call sp_inspeccion('edit_ten',0,$ins_id,0,'$ins_dato1',0,0,'$cat_id_1','$cat_id_2','$cat_id_3','$observaciones')";
+
+        return ejecutarConsulta($sql);
+    }
+
 
     /* Metodo listar solicitantes*/
     public function listar()
@@ -37,9 +44,9 @@ class Inspeccion
         return ejecutarConsultaSP($sql);
     }
     /* Fin metodo listar construcciones */
-    public function listar_construcciones()
+    public function listar_construcciones($pro_id)
     {
-        $sql = "CALL sp_inspeccion('list_const',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+        $sql = "CALL sp_inspeccion('list_const',$pro_id, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
     }
 
