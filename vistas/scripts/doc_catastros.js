@@ -2,8 +2,8 @@ var tabla;
 
 //funcion que se ejecuta al inicio
 function init() {
-    mostrarform(true, formulario = "");
-    mostrarform(false, formulario = "#editar_documento");
+    mostrarform(false, (formulario = ""));
+    mostrarform(false, (formulario = "#editar_documento"));
     listar();
 
     $("#formulario").on("submit", function (e) {
@@ -13,11 +13,11 @@ function init() {
         editarDocumento(e);
     });
     //cargamos los items al celect categoria
-    $.post("../ajax/documentosol.php?op=documentos", function (r) {
+    $.post("../ajax/doc_catastros.php?op=documentos", function (r) {
         $("#cat_id_tipodoc").html(r);
         $("#cat_id_tipodoc").select2();
     });
-// Captura el cambio en el select y guarda el nombre seleccionado en el input
+    // Captura el cambio en el select y guarda el nombre seleccionado en el input
     $("#cat_id_tipodoc").change(function () {
         var nombreSeleccionado = $("#cat_id_tipodoc option:selected").text();
         $("#nombre_tipodoc").val(nombreSeleccionado);
@@ -27,7 +27,7 @@ function init() {
 $(document).ready(function () {
     // Inicializar Select2
     $(".select2").select2();
-    $(".select2bs4").select2({theme: "bootstrap4"});
+    $(".select2bs4").select2({ theme: "bootstrap4" });
 });
 
 //funcion limpiar
@@ -46,7 +46,7 @@ function mostrarform(flag, formulario = "") {
             $("#tbllistado").hide();
             $("#tbllistado_wrapper").hide();
             $(formulario).show();
-            $("#btnEditar").prop("disabled", false);
+            $("#btnGuardar").prop("disabled", false);
             $("#btnagregar").hide();
         } else {
             $(formulario).hide();
@@ -72,8 +72,8 @@ function mostrarform(flag, formulario = "") {
 
 function mostrar(doc_id) {
     $.post(
-        "../ajax/documentosol.php?op=mostrar",
-        {doc_id: doc_id},
+        "../ajax/doc_catastros.php?op=mostrar",
+        { doc_id: doc_id },
         function (data, status) {
             data = JSON.parse(data);
             mostrarform(true, "#editar_documento");
@@ -85,58 +85,54 @@ function mostrar(doc_id) {
     );
 }
 
-
 function listar() {
     tabla = $("#tbllistado")
         .dataTable({
             responsive: true,
             ajax: {
-                url: "../ajax/documentosol.php?op=listar",
+                url: "../ajax/doc_catastros.php?op=listar",
                 type: "get",
                 dataType: "json",
                 error: function (e) {
                     console.log(e.responseText);
-                }
+                },
             },
-            "columnDefs": [
-                {"targets": [3], "visible": false, "searchable": false}
-            ]
+            columnDefs: [{ targets: [3], visible: false, searchable: false }],
         })
         .DataTable();
-    tabla.on('click', '.btn.btn-info', function (event) {
+    tabla.on("click", ".btn.btn-info", function (event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
-        let rowData = tabla.row($(this).parents('tr')).data(); // Obtener los datos de la fila
+        let rowData = tabla.row($(this).parents("tr")).data(); // Obtener los datos de la fila
         let url = rowData[3];
         openModal(url);
     });
-
 }
 
 function openModal(url) {
-    let modal = document.querySelector('#my-modal');
-    modal.style.display = 'block';
+    let modal = document.querySelector("#my-modal");
+    modal.style.display = "block";
 
-    let iframe = document.querySelector('#modal-iframe');
+    let iframe = document.querySelector("#modal-iframe");
     iframe.src = url;
 
-    let closeBtn = document.querySelector('.close');
-    closeBtn.addEventListener('click', closeModal);
+    let closeBtn = document.querySelector(".close");
+    closeBtn.addEventListener("click", closeModal);
 
-    window.addEventListener('click', outsideClick);
+    window.addEventListener("click", outsideClick);
 }
 
 function closeModal() {
-    let modal = document.querySelector('#my-modal');
-    modal.style.display = 'none';
+    let modal = document.querySelector("#my-modal");
+    modal.style.display = "none";
 
-    let closeBtn = document.querySelector('.close');
-    closeBtn.removeEventListener('click', closeModal);
+    let closeBtn = document.querySelector(".close");
+    closeBtn.removeEventListener("click", closeModal);
 
-    window.removeEventListener('click', outsideClick);
+    window.removeEventListener("click", outsideClick);
 }
 
 function outsideClick(e) {
-    let modal = document.querySelector('#my-modal');
+    let modal = document.querySelector("#my-modal");
     if (e.target === modal) {
         closeModal();
     }
@@ -144,8 +140,8 @@ function outsideClick(e) {
 
 function cancelarform() {
     limpiar();
-    mostrarform(false, formulario = "");
-    mostrarform(false, formulario = "#editar_documento");
+    mostrarform(false, (formulario = ""));
+    mostrarform(false, (formulario = "#editar_documento"));
 }
 
 function guardaryeditar(e) {
@@ -160,14 +156,14 @@ function guardaryeditar(e) {
     formData.append("nombreSeleccionado", nombreSeleccionado);
 
     $.ajax({
-        url: "../ajax/documentosol.php?op=guardaryeditar",
+        url: "../ajax/doc_catastros.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         success: function (datos) {
             bootbox.alert(datos);
-            mostrarform(true, formulario = "");
+            mostrarform(false, (formulario = ""));
             tabla.ajax.reload();
         },
     });
@@ -180,30 +176,31 @@ function editarDocumento(e) {
 
     var formData = new FormData($("#editar")[0]);
     formData.append("exampleInputFile", $("#editInputFile")[0].files[0]);
+
     // Obtener el texto del option seleccionado en el select
     var nombreDocumento = $("#nombre_tipodoc").val();
     formData.append("nombreSeleccionado", nombreDocumento);
+    console.log(nombreDocumento);
 
     $.ajax({
-        url: "../ajax/documentosol.php?op=guardaryeditar",
+        url: "../ajax/doc_catastros.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         success: function (datos) {
             bootbox.alert(datos);
-            mostrarform(false, formulario = "#editar_documento");
+            mostrarform(false, (formulario = "#editar_documento"));
             tabla.ajax.reload();
         },
     });
     limpiar();
 }
 
-
 function mostrar(doc_id) {
     $.post(
-        "../ajax/documentosol.php?op=mostrar",
-        {doc_id: doc_id},
+        "../ajax/doc_catastros.php?op=mostrar",
+        { doc_id: doc_id },
         function (data, status) {
             data = JSON.parse(data);
             mostrarform(true, "#editar_documento");

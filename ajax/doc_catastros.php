@@ -1,8 +1,8 @@
 <?php
-require_once "../modelos/Documentosol.php";
+require_once "../modelos/Doc_Catastros.php";
 require "../ajax/upload.php";
 
-$documentosol = new Documentosol();
+$doc_catastros = new Doc_Catastros();
 
 $doc_id = isset($_POST["doc_id"]) ? limpiarCadena($_POST["doc_id"]) : "";
 $cat_id_tipodoc = isset($_POST["cat_id_tipodoc"]) ? limpiarCadena($_POST["cat_id_tipodoc"]) : "";
@@ -28,12 +28,12 @@ switch ($_GET["op"]) {
                 if (empty($doc_id)) {
                     // Si el doc_id está vacío, se inserta un nuevo registro
                     $resultadoSubida = uploadFileToDrive($parentFolderId, $sol_identificacion, $fileName, $fileContent);
-                    $rspta = $documentosol->insertar($sol_identificacion, $cat_id_tipodoc, $fileName, $resultadoSubida);
+                    $rspta = $doc_catastros->insertar($sol_identificacion, $cat_id_tipodoc, $fileName, $resultadoSubida);
                     echo $rspta ? "Datos registrados correctamente" : "Este documento ya ha sido registrado";
                 } else {
                     // Si hay doc_id, se asume edición; se actualiza el contenido del archivo
                     $resultadoSubida = uploadFileToDrive($parentFolderId, $sol_identificacion, $fileName, $fileContent);
-                    $rspta = $documentosol->editar($doc_id, $fileName, $resultadoSubida);
+                    $rspta = $doc_catastros->editar($doc_id, $fileName, $resultadoSubida);
                     echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
                 }
             } else {
@@ -46,7 +46,7 @@ switch ($_GET["op"]) {
 
 
     case 'documentos':
-        $rspta = $documentosol->documentos();
+        $rspta = $doc_catastros->documentos();
         while ($reg = $rspta->fetch_object()) {
             echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
         }
@@ -54,7 +54,7 @@ switch ($_GET["op"]) {
 
 
     case 'listar':
-        $rspta = $documentosol->listar($sol_identificacion);
+        $rspta = $doc_catastros->listar($sol_identificacion);
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $doc_id = $reg->doc_id;
@@ -77,7 +77,7 @@ switch ($_GET["op"]) {
 
     case 'mostrar':
         //echo $_POST["cat_id"];
-        $rspta = $documentosol->mostrar($doc_id);
+        $rspta = $doc_catastros->mostrar($doc_id);
         echo json_encode($rspta);
         break;
 

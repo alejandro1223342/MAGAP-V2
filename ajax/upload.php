@@ -1,6 +1,6 @@
 <?php
 
-include '../upload-php/api-google/vendor/autoload.php';
+require_once '../upload-php/api-google/vendor/autoload.php';
 
 function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPath)
 {
@@ -11,7 +11,6 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
         $client->setScopes(['https://www.googleapis.com/auth/drive.file']);
         $service = new Google_Service_Drive($client);
 
-        // Obtener el año y mes actual en español
         $currentYear = date('Y');
         setlocale(LC_TIME, 'es_ES');
         $currentMonth = strftime('%B');
@@ -25,7 +24,6 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
         $results = $service->files->listFiles($optParams);
 
         if (count($results->getFiles()) == 0) {
-            // La carpeta del año actual no existe, crear una nueva
             $fileMetadata = new Google_Service_Drive_DriveFile([
                 'name' => $currentYear,
                 'mimeType' => 'application/vnd.google-apps.folder',
@@ -34,7 +32,6 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
             $yearFolder = $service->files->create($fileMetadata, ['fields' => 'id']);
             $yearFolderId = $yearFolder->id;
         } else {
-            // La carpeta del año actual ya existe, usar su ID
             $yearFolderId = $results->getFiles()[0]->getId();
         }
 
@@ -47,7 +44,6 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
         $results = $service->files->listFiles($optParams);
 
         if (count($results->getFiles()) == 0) {
-            // La subcarpeta del mes actual no existe, crear una nueva
             $fileMetadata = new Google_Service_Drive_DriveFile([
                 'name' => $currentMonth,
                 'mimeType' => 'application/vnd.google-apps.folder',
@@ -56,7 +52,6 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
             $monthFolder = $service->files->create($fileMetadata, ['fields' => 'id']);
             $monthFolderId = $monthFolder->id;
         } else {
-            // La subcarpeta del mes actual ya existe, usar su ID
             $monthFolderId = $results->getFiles()[0]->getId();
         }
 
@@ -69,7 +64,6 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
         $results = $service->files->listFiles($optParams);
 
         if (count($results->getFiles()) == 0) {
-            // La última subcarpeta no existe, crear una nueva
             $fileMetadata = new Google_Service_Drive_DriveFile([
                 'name' => $folderName,
                 'mimeType' => 'application/vnd.google-apps.folder',
@@ -78,40 +72,57 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
             $lastFolder = $service->files->create($fileMetadata, ['fields' => 'id']);
             $lastFolderId = $lastFolder->id;
         } else {
-            // La última subcarpeta existe, usar su ID
             $lastFolderId = $results->getFiles()[0]->getId();
         }
 
-        // Subir archivo a la última subcarpeta
-        $fileMetadata = new Google_Service_Drive_DriveFile([
-            'name' => $fileName,
-            'parents' => [$lastFolderId],
-        ]);
+        // Verificar si el archivo ya existe en la última carpeta
+        $fileId = null;
+        $optParams = [
+            'q' => "mimeType='application/pdf' and name='$fileName' and '$lastFolderId' in parents",
+            'spaces' => 'drive',
+        ];
+        $results = $service->files->listFiles($optParams);
 
-        // Subir archivo a la carpeta
-        $fileMetadata = new Google_Service_Drive_DriveFile([
-            'name' => $fileName,
-            'parents' => [$lastFolderId], // Establecer la carpeta como padre
-        ]);
+        if (count($results->getFiles()) == 0) {
+            // El archivo no existe, crear uno nuevo en la última carpeta
+            $fileMetadata = new Google_Service_Drive_DriveFile([
+                'name' => $fileName,
+                'parents' => [$lastFolderId],
+            ]);
 
-        // Subir archivo a la carpeta
-        $file = $service->files->create(
-            $fileMetadata,
-            array(
-                'data' =>  file_get_contents($fileTempPath, FILE_BINARY),
-                'mimeType' => 'application/pdf',
-                'uploadType' => 'media'
-            )
-        );
+            $file = $service->files->create(
+                $fileMetadata,
+                array(
+                    'data' => file_get_contents($fileTempPath, FILE_BINARY),
+                    'mimeType' => 'application/pdf',
+                    'uploadType' => 'media'
+                )
+            );
 
-        return 'https://drive.google.com/file/d/' . $file->id . '/preview';
+            return 'https://drive.google.com/file/d/' . $file->id . '/preview';
+        } else {
+            // El archivo ya existe, obtener su ID
+            // El archivo ya existe, obtener su ID
+            $fileId = $results->getFiles()[0]->getId();
+
+            // Actualizar el contenido del archivo existente en la última carpeta
+            $fileMetadata = new Google_Service_Drive_DriveFile([
+                'name' => $fileName,
+            ]);
+
+            $updatedFile = $service->files->update(
+                $fileId,
+                $fileMetadata,
+                array(
+                    'data' => file_get_contents($fileTempPath, FILE_BINARY),
+                    'mimeType' => 'application/pdf',
+                    'uploadType' => 'media'
+                )
+            );
+
+            return 'https://drive.google.com/file/d/' . $updatedFile->id . '/preview';
+        }
     } catch (Exception $e) {
         return $e->getMessage();
     }
 }
-
-
-
-
-
-

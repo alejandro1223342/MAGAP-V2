@@ -15,36 +15,18 @@ if (!isset($_SESSION['sol_nombre'])) {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Documentos
-                                <button class="btn btn-success" onclick="mostrarform(true)"><i
-                                            class="fa fa-plus-circle"></i>Agregar
-                                </button>
+                            <h3 class="card-title">Suba sus Documentos según los requisitos solicitados
                             </h3>
                         </div>
                         <!-- /.card-header -->
 
-                        <div class="card-body">
-                            <input type="hidden" name="nombre_tipodoc" id="nombre_tipodoc">
-                            <table id="tbllistado" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Tipo de Documento</th>
-                                    <th>Documento</th>
-                                </tr>
-                                </thead>
-
-                            </table>
-                        </div>
-
                         <!-- Main content -->
                         <form action="" name="formulario" id="formulario" method="POST" enctype="multipart/form-data">
-
                             <section class="content" id="formularioregistros">
                                 <div class="container-fluid">
                                     <div class="card card-default">
                                         <div class="card-header">
-                                            <h3 class="card-title">Subida de Documentos</h3>
+                                            <h3 class="card-title">Solo se admite formato PDF</h3>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -72,11 +54,9 @@ if (!isset($_SESSION['sol_nombre'])) {
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -97,18 +77,15 @@ if (!isset($_SESSION['sol_nombre'])) {
                             </section>
                         </form>
 
-
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                 </div>
-                <!-- /.col -->
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- /.row -->
-        </div>
-        </section>
-
-        </div>
+        <!-- /.content-wrapper -->
 
         <?php
     } else {

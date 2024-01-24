@@ -1,4 +1,5 @@
 var tabla;
+var tabla_pdf;
 
 //funcion que se ejecuta al inicio
 function init() {
@@ -25,7 +26,6 @@ $(document).ready(function () {
 function limpiar() {
     $("#cat_id").val("");
     $("#cat_nombre").val("");
-    $("#cat_descripcion").val("");
     $("#cat_padre").val("");
 }
 
@@ -66,12 +66,28 @@ function cancelarform() {
     mostrarform(false);
 }
 
-//funcion para guardaryeditar
 function guardaryeditar(e) {
-    e.preventDefault(); // Detiene la acción por defecto del formulario
+    e.preventDefault();
 
     $("#btnGuardar").prop("disabled", true);
-    var formData = new FormData($("#formulario")[0]);
+
+    // Obtener datos de la tabla y agregarlos a formData
+    var tableData = [];
+    $("#tabla_pdf tbody tr").each(function (index, row) {
+        // Obtener valor de la columna 01
+        var cellValue = $(row).find("td:eq(1)").text();
+
+        var rowData = {
+            tra_id: cellValue
+        };
+
+        tableData.push(rowData);
+    });
+
+    // Empaquetar los datos en un objeto FormData
+    var formData = new FormData();
+    formData.append('tabla_pdf', JSON.stringify(tableData));
+
 
     $.ajax({
         url: "../ajax/ventanilla.php?op=guardaryeditar",
@@ -79,16 +95,23 @@ function guardaryeditar(e) {
         data: formData,
         contentType: false,
         processData: false,
-
         success: function (datos) {
             bootbox.alert(datos);
             mostrarform(false);
             tabla.ajax.reload();
         },
+        error: function (xhr, status, error) {
+            console.error("Error en la solicitud AJAX:", error);
+        }
     });
 
     limpiar();
 }
+
+
+
+
+
 
 /*function mostrar(tra_id) {
     $.post(
@@ -108,7 +131,7 @@ function guardaryeditar(e) {
 
 function mostrarTabla(s_ident) {
     mostrarform(true);
-    let tabla_pdf = $('#tabla_pdf').DataTable({
+    tabla_pdf = $('#tabla_pdf').DataTable({
         "serverSide": true,
         "ajax": {
             url: '../ajax/ventanilla.php?op=tabla&s_ident=' + s_ident,
@@ -123,30 +146,21 @@ function mostrarTabla(s_ident) {
         "order": [[0, "desc"]],
         "columnDefs": [
             {"targets": [0], "visible": true, "searchable": true, "orderable": false},
-            {"targets": [6], "visible": false, "searchable": false},
-        ],
-        "createdRow": function (row, data) {
-            //Renderizar CheckBox en la columna 5
-            $('td', row).eq(5).html(data[1]);
-            // Renderizar TextBox en la columna 5
-            $('td', row).eq(5).html(data[5]);
-        }
+            {"targets": [4], "visible": false, "searchable": false},
+            {"targets": [5], "visible": false, "searchable": false},
+        ]
     });
 
-    // Evento cuando DataTables termina de dibujar la tabla
-    tabla_pdf.on('draw.dt', function () {
-        cargarDatosGuardados(s_ident);
-    });
-
-    // Evento click para los botones .btn-modal dentro de la tabla
     $('#tabla_pdf tbody').on('click', '.btn.btn-secondary.btn-xs', function (event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
 
         let data = tabla_pdf.row($(this).parents('tr')).data();
-        let url = data[6]; // Utiliza el nombre correcto del campo que contiene la URL
+        let url = data[4]; // Utiliza el nombre correcto del campo que contiene la URL
         openModal(url); // Abrir modal
     });
+
 }
+
 
 function openModal(url) {
     let modal = document.querySelector('#my-modal');
@@ -177,148 +191,5 @@ function outsideClick(e) {
         closeModal();
     }
 }
-
-function guardar() {
-    event.preventDefault();
-    let fila = $(event.target).closest('tr');
-    // Obtener el texto de la columna 3
-    let textoCedula = fila.find('td:eq(3)').text().trim();
-    // Buscar la posición del guion ("-") en el texto
-    let posicionGuion = textoCedula.indexOf('-');
-    // Extraer la cédula si se encuentra el guion
-    let sol_identificacion = posicionGuion !== -1 ? textoCedula.substr(posicionGuion + 1) : '';
-    let datosFila = {
-        cat_id_estado: fila.find('input[type="checkbox"]').is(':checked') ? 18 : 28,
-        tra_id: fila.find('td:eq(2)').text(),
-        pro_observacion: fila.find('input[type="text"]').val(),
-        sol_identificacion: sol_identificacion
-    };
-
-    $.ajax({
-        url: '../ajax/ventanilla.php?op=guardardocumento',
-        type: 'POST',
-        data: datosFila,
-        success: function (response) {
-            bootbox.alert("Documento guardado correctamente");
-
-            // Manejar la respuesta del servidor
-            let estado = response.cat_id_estado;
-            let observacion = response.pro_observacion;
-
-            // Modificar la tabla y almacenar los cambios en localStorage
-            let estadoTexto = estado === '18' ? 'Aprobado' : 'No Aprobado';
-            fila.find('td:eq(1)').text(estadoTexto);
-            fila.find('td:eq(5)').text(observacion).prop('readonly', true);
-            fila.find('td:last').html('<button class="btn btn-editar">Editar</button>');
-
-            // Almacenar los cambios en localStorage
-            guardarCambiosEnLocalStorage(fila.index(), estado, observacion, sol_identificacion);
-
-            // Manejador de eventos para el botón Editar
-            $('.btn-editar').on('click', function () {
-                event.preventDefault();
-                let originalHtml = $(this).parent().html();
-                let originalEstado = fila.find('td:eq(1)').text();
-                let originalObservacion = fila.find('td:eq(5)').text();
-
-                fila.find('td:eq(1)').html('<input type="checkbox" checked="' + (estado === '18') + '">');
-                fila.find('td:eq(5)').html('<input type="text" value="' + observacion + '">');
-                fila.find('td:last').html('<button class="btn btn-guardar">Guardar</button><button class="btn btn-cancelar">Cancelar</button>');
-
-                // Manejadores de eventos para los nuevos botones
-                $('.btn-guardar').on('click', function () {
-                    event.preventDefault();
-
-                    // Restaurar el botón Editar al guardar
-                    fila.find('td:last').html(originalHtml);
-                });
-
-                $('.btn-cancelar').on('click', function () {
-                    event.preventDefault();
-                    // Restaurar valores originales al cancelar
-                    fila.find('td:eq(1)').text(originalEstado);
-                    fila.find('td:eq(5)').text(originalObservacion).prop('readonly', true);
-
-                    // Restaurar el botón Editar al cancelar
-                    fila.find('td:last').html(originalHtml);
-                });
-            });
-
-        },
-        error: function (error) {
-            console.log("Algo salió mal: " + error);
-        }
-    });
-}
-
-// Función para almacenar los cambios en localStorage
-function guardarCambiosEnLocalStorage(index, estado, observacion, sol_identificacion) {
-    let cambios = {
-        cat_id_estado: estado,
-        pro_observacion: observacion,
-        sol_identificacion: sol_identificacion
-    };
-    localStorage.setItem(sol_identificacion + '_fila_' + index, JSON.stringify(cambios));
-}
-
-function cargarDatosGuardados(s_ident) {
-    let sol_identificacion = s_ident;
-    console.log(sol_identificacion);
-    if (sol_identificacion) {
-        $('#tabla_pdf tbody tr').each((index, element) => {
-            let localStorageKey = sol_identificacion + '_fila_' + index;
-            let cambios = localStorage.getItem(localStorageKey);
-
-            if (cambios) {
-                let datos = JSON.parse(cambios);
-                let estado = datos.cat_id_estado;
-                let estadoTexto = estado === '18' ? 'Aprobado' : 'No Aprobado';
-                $(element).find('td:eq(1)').text(estadoTexto).data('estado', estado);
-                $(element).find('td:eq(5)').html('<input type="text" value="' + datos.pro_observacion + '" readonly>');
-                $(element).find('td:last').html('<button class="btn btn-editar">Editar</button>');
-            }
-        });
-    }
-    $('body').on('click', '.btn-editar', function (event) {
-        event.preventDefault();
-        let fila = $(this).closest('tr');
-        let estado = fila.find('td:eq(1)').data('estado');
-
-        if (estado === '18') {
-            fila.find('td:eq(1)').html('<input type="checkbox" checked>');
-        } else {
-            fila.find('td:eq(1)').html('<input type="checkbox">');
-        }
-
-        fila.find('td:eq(5) input[type="text"]').prop('readonly', false);
-        $(this).hide();
-        fila.find('.btn-aceptar, .btn-cancelar').remove();
-        fila.find('td:last').append('<button class="btn btn-aceptar">Aceptar</button><button class="btn btn-cancelar">Cancelar</button>');
-    });
-
-    $('body').on('click', '.btn-cancelar', function (event) {
-        event.preventDefault();
-        let fila = $(this).closest('tr');
-        let estado = fila.find('td:eq(1)').data('estado');
-        let estadoTexto = estado === '18' ? 'Aprobado' : 'No Aprobado';
-
-        fila.find('td:eq(1)').text(estadoTexto);
-        fila.find('td:eq(5) input[type="text"]').prop('readonly', true);
-        fila.find('.btn-aceptar, .btn-cancelar').remove();
-        fila.find('.btn-editar').show();
-    });
-
-    $('body').on('click', '.btn-aceptar', function (event) {
-        event.preventDefault();
-        guardar();
-        let fila = $(this).closest('tr');
-        fila.find('td:eq(1)').data('estado', fila.find('td:eq(1) input[type="checkbox"]').prop('checked') ? '18' : '28');
-        fila.find('td:eq(5) input[type="text"]').prop('readonly', true);
-        fila.find('.btn-aceptar, .btn-cancelar').remove();
-        fila.find('.btn-editar').show();
-    });
-
-}
-
 
 init();

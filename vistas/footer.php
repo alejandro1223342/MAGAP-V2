@@ -50,8 +50,8 @@
 <script src="../public/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../public/datatables/js/dataTables.bootstrap4.min.js"></script>
 <script src="../public/datatables/js/dataTables.responsive.min.js"></script>
-<!-- <script src="../public/datatablese/js/responsive.bootstrap4.min.js"></script>
- --><script src="../public/datatables/js/dataTables.buttons.min.js"></script>
+<!-- <script src="../public/datatablese/js/responsive.bootstrap4.min.js"></script>-->
+<script src="../public/datatables/js/dataTables.buttons.min.js"></script>
 <script src="../public/datatables/js/buttons.bootstrap4.min.js"></script>
 <script src="../public/datatables/js/jszip.min.js"></script>
 <script src="../public/datatables/js/pdfmake.min.js"></script>

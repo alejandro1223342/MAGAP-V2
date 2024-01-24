@@ -122,13 +122,13 @@ if (strlen(session_id())<1)
                         <p>Subir Documentos</p>
                       </a>
                     </li>
-                    <!--<li class="nav-item">
-                      <a href="pages/tables/data.html" class="nav-link">
+                    <li class="nav-item">
+                      <a href="doc_sol.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>DataTables</p>
+                        <p>Ver Documentos</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                       <a href="pages/tables/jsgrid.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>jsGrid</p>

@@ -49,8 +49,8 @@ switch ($_GET["op"]) {
     
             //determinamos lo accesos al usuario
                 in_array(1, $valores)?$_SESSION['Escritorio']=1:$_SESSION['Escritorio']=0;
-                in_array(2, $valores)?$_SESSION['Actas']=1:$_SESSION['Actas']=0;
-                in_array(3, $valores)?$_SESSION['Activos']=1:$_SESSION['Activos']=0;
+                in_array(2, $valores)?$_SESSION['Inspección']=1:$_SESSION['Inspección']=0;
+                in_array(3, $valores)?$_SESSION['Providencia']=1:$_SESSION['Providencia']=0;
                 in_array(4, $valores)?$_SESSION['Generación']=1:$_SESSION['Generación']=0;
                 in_array(5, $valores)?$_SESSION['Acceso']=1:$_SESSION['Acceso']=0;
                 in_array(6, $valores)?$_SESSION['Reportes']=1:$_SESSION['Reportes']=0;
@@ -58,10 +58,7 @@ switch ($_GET["op"]) {
                 in_array(8, $valores)?$_SESSION['Ventanilla']=1:$_SESSION['Ventanilla']=0;
                 in_array(9, $valores)?$_SESSION['Catastros']=1:$_SESSION['Catastros']=0;
     
-    
-                
-                
-            
+
           }
         echo json_encode($fetch);
         

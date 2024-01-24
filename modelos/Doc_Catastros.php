@@ -4,7 +4,7 @@ require "../config/Conexion.php";
 
 require "../ajax/solicitante.php";
 
-class Documentosol
+class Doc_Catastros
 {
 
 
@@ -45,48 +45,6 @@ class Documentosol
     }
 
 
-
-
-    /*
-    public function insertar($cat_id_tipodoc,$doc_nombre,$doc_url){
-        $sql="call sp_documentosol('ing', 0, '$cat_id_tipodoc', '$doc_nombre', '$doc_url')";
-        //return ejecutarConsulta($sql);
-        $iddoc = ejecutarConsultaSP($sql)->fetch_row()[0];
-
-        // Verificamos si el session tiene valor
-
-        if (empty($_SESSION['sol_id'])) {
-            echo "El session no tiene valor";
-            return false;
-        }
-
-        // Verificamos si el iddoc tiene valor
-
-        if (is_null($iddoc)) {
-            echo "El iddoc no tiene valor";
-            return false;
-        }
-
-        // Si llegamos a este punto, el session y el iddoc tienen valor
-
-        if (empty($_SESSION['sol_id'])) {
-            echo "El array sol_id esta vacio";
-            return false;
-        }
-
-        foreach($_SESSION['sol_id'] as $current_sol_id){
-
-            echo "El valor de current_sol_id es nulo o vacio";
-            $sql2="call sp_tramites('ing','$current_sol_id', '$iddoc')";
-            ejecutarConsultaSP($sql2);
-
-        }
-
-        return true;
-
-    }
-    */
-
     public function editar($doc_id, $doc_nombre, $doc_url)
     {
         $sql = "call sp_documentosol('edit','$doc_id','0','$doc_nombre','$doc_url')";
@@ -96,7 +54,7 @@ class Documentosol
 //metodo para mostrar registros
     public function documentos()
     {
-        $sql = "CALL sp_catalgo('spa','0','', '',13)";
+        $sql = "CALL sp_catalgo('spa','0','', '',32)";
         return ejecutarConsultaSP($sql);
     }
 
