@@ -59,10 +59,8 @@
 <script src="../public/datatables/js/buttons.html5.min.js"></script>
 <script src="../public/datatables/js/buttons.print.min.js"></script>
 <script src="../public/datatables/js/buttons.colVis.min.js"></script>
-
 <!-- BS-Stepper -->
 <script src="../public/js/bs-stepper.min.js"></script>
-
 
 <!-- <script src="../public/js/dashboard.js"></script> -->
 

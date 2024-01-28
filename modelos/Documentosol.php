@@ -17,7 +17,7 @@ class Documentosol
 //metodo insertar regiustro
 
 
-    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url)
+    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url, $proceso)
     {
         $sql_check = "Call sp_documentosol('compDoc', '0', 0, '$fileName', '0')";
         $result_check = ejecutarConsultaSP($sql_check);
@@ -34,7 +34,8 @@ class Documentosol
             if ($result !== false) {
                 $iddoc = $result->fetch_row()[0];
                 $current_sol_id = $_SESSION['sol_id'];
-                $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
+                $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc', '$proceso');";
+                echo $sql_detalle;
                 ejecutarConsultaSP($sql_detalle);
 
                 return true;
@@ -112,9 +113,22 @@ class Documentosol
     }
 
 //listar registros
-    public function listar($sol_identificacion)
+    public function listar($sol_identificacion, $nombre)
     {
-        $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'','')";
+        $doc_nombre = $nombre . '-' . $sol_identificacion;
+        $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'$doc_nombre','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function notificaciones($sol_identificacion)
+    {
+        $sql = "CALL sp_documentosol('notify',$sol_identificacion, 0,'','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function procesoSol($sol_id)
+    {
+        $sql = "CALL sp_documentosol('prosol',$sol_id, 0,'','');";
         return ejecutarConsultaSP($sql);
     }
 

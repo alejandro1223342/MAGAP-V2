@@ -50,11 +50,13 @@ require 'header.php';
     </section>
     <!-- /.content -->
   </div>
+  
+      <script src="../vistas/scripts/escritoriosol.js"></script>
   <!-- /.content-wrapper -->
 <?php
 
 }else{
-  require 'noacceso.php'; 
+  require 'noacceso.php';
  }
  
  require 'footer.php';

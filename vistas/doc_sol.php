@@ -23,31 +23,38 @@ if (!isset($_SESSION['sol_nombre'])) {
                         <div id="my-modal" class="modal">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h2 id ="modal-title"></h2>
                                     <span class="close">&times;</span>
-                                    <h2>Modal Header</h2>
                                 </div>
                                 <div class="modal-body">
-                                    <iframe id="modal-iframe" width="100%" height="480"
+                                    <iframe id="modal-iframe" width="100%" height="600"
                                             allow="autoplay"></iframe>
-                                </div>
-                                <div class="modal-footer">
-                                    <h3>Modal Footer</h3>
                                 </div>
                             </div>
                         </div>
 
+                        <div id="loading-indicator" style="display: none;">
+                            Subiendo archivo...
+                        </div>
+
+
                         <div class="card-body">
-                            <table id="tbllistado" class="table table-responsive-xl table-striped">
+                            <table id="tbllistado" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Editar</th>
+                                    <th>Cargar</th>
+                                    <th></th>
                                     <th>Tipo de Documento</th>
                                     <th>Fecha de Registro</th>
                                     <th></th>
-                                    <th>Visualizar</th>
+                                    <th>Estado</th>
+                                    <th>Observación</th>
+                                    <th>Gestor</th>
+                                    <th>Acción</th>
                                 </tr>
                                 </thead>
                             </table>
+
                         </div>
 
                         <form action="" name="editar" id="editar" method="POST" enctype="multipart/form-data">

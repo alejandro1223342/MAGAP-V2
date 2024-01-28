@@ -85,39 +85,51 @@ function mostrar(doc_id) {
     );
 }
 
-
 function listar() {
+
     tabla = $("#tbllistado")
         .dataTable({
-            responsive: true,
             ajax: {
-                url: "../ajax/documentosol.php?op=listar",
-                type: "get",
+                url: "../ajax/documentosol.php?op=listar_predefinido",
+                type: "GET",
                 dataType: "json",
                 error: function (e) {
                     console.log(e.responseText);
                 }
             },
             "columnDefs": [
-                {"targets": [3], "visible": false, "searchable": false}
-            ]
-        })
-        .DataTable();
-    tabla.on('click', '.btn.btn-info', function (event) {
+                {"targets": [1], "visible": false, "searchable": false},
+                {"targets": [4], "visible": false, "searchable": false},
+            ],
+            "responsive": {
+                "breakpoints": [
+                    {name: 'xl', width: Infinity},
+                    {name: 'lg', width: 1200},
+                    {name: 'md', width: 992},
+                    {name: 'sm', width: 770},
+                    {name: 'xs', width: 576}
+                ]
+            },
+        }).DataTable();
+        tabla.on('click', '.btn.btn-info', function (event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
         let rowData = tabla.row($(this).parents('tr')).data(); // Obtener los datos de la fila
-        let url = rowData[3];
-        openModal(url);
+        let url = rowData[4];
+        let nombreDinamico = rowData[2];
+        openModal(url, nombreDinamico);
     });
 
 }
 
-function openModal(url) {
+function openModal(url, nombreDinamico) {
     let modal = document.querySelector('#my-modal');
     modal.style.display = 'block';
 
     let iframe = document.querySelector('#modal-iframe');
     iframe.src = url;
+
+    let modalTitle = document.querySelector('#modal-title');
+    modalTitle.textContent = nombreDinamico;
 
     let closeBtn = document.querySelector('.close');
     closeBtn.addEventListener('click', closeModal);
@@ -146,6 +158,76 @@ function cancelarform() {
     limpiar();
     mostrarform(false, formulario = "");
     mostrarform(false, formulario = "#editar_documento");
+}
+
+function guardar(event) {
+    event.preventDefault();
+    let fila = $(event.target).closest("tr");
+    // Obtener el objeto de fila de DataTables
+    let rowData = tabla.row(fila).data();
+
+    if (rowData) {
+        let docID = rowData[1];
+        let docNombre = rowData[2];
+        let cat_id_tipodoc;
+        if (docNombre === 'COPIA DE CEDULA') {
+            cat_id_tipodoc = 14;
+        } else if (docNombre === 'PLANIMETRICO') {
+            cat_id_tipodoc = 17;
+        } else if (docNombre === 'ADJUDICACION DE TIERRAS') {
+            cat_id_tipodoc = 21;
+        }
+
+        let fileInput = fila.find('#pdf')[0];
+        let file = fileInput.files[0];
+
+        // Verificar si el archivo es de tipo PDF
+        if (file && file.type === 'application/pdf') {
+            // Crear un elemento HTML para el mensaje de carga
+            let loadingMessage = $('<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Subiendo archivo...</div>');
+
+            // Mostrar el bootbox dialog con el mensaje de carga
+            let dialog = bootbox.dialog({
+                title: 'Procesando',
+                message: loadingMessage,
+                closeButton: false,
+                backdrop: true
+            });
+
+            let formData = new FormData();
+            formData.append('pdf', file);
+            formData.append('doc_nombre', docNombre);
+            formData.append('doc_id', docID);
+            formData.append('cat_id_tipodoc', cat_id_tipodoc);
+
+            // Realizar la petición AJAX
+            $.ajax({
+                url: '../ajax/documentosol.php?op=guardaryeditar',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // Cerrar el dialogo al finalizar la carga
+                    dialog.modal('hide');
+                    bootbox.alert(response);
+                    tabla.ajax.reload();
+                },
+                error: function(error) {
+                    // Cerrar el dialogo al finalizar la carga
+                    dialog.modal('hide');
+                    // Manejar errores
+                    console.error(error);
+                }
+            });
+        } else {
+            bootbox.alert('Por favor, selecciona un archivo PDF antes de guardar.');
+            // Limpiar el input file para permitir seleccionar un nuevo archivo
+            fileInput.value = '';
+        }
+    } else {
+        console.error('No se pudo obtener la información de la fila.');
+    }
 }
 
 function guardaryeditar(e) {
