@@ -7,16 +7,29 @@ class PDF extends FPDF
     function Header()
     {
         // Selecciona la fuente y establece el tamaño
-        $this->SetFont('Arial', 'B', 12);
+        $this->SetLeftMargin(10);
+        $this->SetRightMargin(10);
 
-        // Mueve a la derecha
-        $this->Cell(80);
+        // Seleccionar la fuente y establecer el tamaño
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(35, 5, 'DISPUESTO POR:', 1, 0, 'L', false, '', 2);
+        $this->Cell(155, 5, '', 1, 0, 'L', false, '', 2); //POST
 
-        // Agrega el título
-        $this->Cell(30, 10, 'Encabezado del PDF', 1, 0, 'C');
+        $this->Ln(5);
+        $this->Cell(35, 5, 'MEDIANTE:', 1, 0, 'L', false, '', 2);
+        $this->Cell(155, 5, '', 1, 0, 'L', false, '', 2); //POST
 
-        // Salto de línea
-        $this->Ln(20);
+        $this->Ln(5);
+        $this->Cell(90, 10, 'APELLIDOS Y NOMBRES DE LAS (LOS) SOLICITANTE (S):', 1, 0, 'L', false, '', 2);
+        $this->Cell(100, 10, '', 1, 0, 'L', false, '', 2); //POST
+
+        $this->Ln(10);
+        $this->Cell(70, 5, ' CÉDULA (S) DE CIUDADANÍA No (S):', 1, 0, 'L', false, '', 2);
+        $this->Cell(30, 5, '1050518594', 1, 0, 'C', false, '', 2); //POST
+        $this->Cell(30, 5, '', 1, 0, 'C', false, '', 2); //POST
+        $this->Cell(30, 5, '', 1, 0, 'C', false, '', 2); //POST
+        $this->Cell(30, 5, '', 1, 0, 'C', false, '', 2); //POST
+
     }
 
     // Pie de página

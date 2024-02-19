@@ -44,9 +44,15 @@ class Inspeccion
         return ejecutarConsultaSP($sql);
     }
     /* Fin metodo listar construcciones */
-    public function listar_construcciones($pro_id)
+    public function listar_construcciones()
     {
-        $sql = "CALL sp_inspeccion('list_const',$pro_id, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+        $sql = "CALL sp_inspeccion('list_const',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function listar_coordenadas()
+    {
+        $sql = "CALL sp_inspeccion('list_coor',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
     }
 

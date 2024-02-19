@@ -20,7 +20,7 @@ define("DB_USERNAME", "root");
 //conraseña del usuario de base de datos
 //define("DB_PASSWORD", "tesis.2023");
 //define("DB_PASSWORD", "Anderson241@");
-define("DB_PASSWORD", "Helado.12");
+define("DB_PASSWORD", "root");
 
 
 

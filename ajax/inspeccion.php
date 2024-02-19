@@ -6,6 +6,7 @@ $inspeccion = new Inspeccion();
 /*Construcciones*/
 $ins_id = isset($_POST["ins_id"]) ? limpiarCadena($_POST["ins_id"]) : "";
 $pro_id = isset($_POST["pro_id"]) ? limpiarCadena($_POST["pro_id"]) : "";
+$pro_id_cons = isset($_POST["pro_id_cons"]) ? limpiarCadena($_POST["pro_id_cons"]) : "";
 $cat_construccion = isset($_POST["cat_construccion"]) ? limpiarCadena($_POST["cat_construccion"]) : "";
 $cat_materiales = isset($_POST["cat_materiales"]) ? limpiarCadena($_POST["cat_materiales"]) : "";
 $cat_estado_construccion = isset($_POST["cat_estado_construccion"]) ? limpiarCadena($_POST["cat_estado_construccion"]) : "";
@@ -53,20 +54,41 @@ switch ($_GET["op"]) {
         break;
         /* Listar construcciones */
     case 'listar_construcciones':
-        $rspta = $inspeccion->listar_construcciones($_GET["pro"]);
+        $rspta = $inspeccion->listar_construcciones();
         $data = array();
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
                 "0" => '<center><button class="btn btn-danger btn-xs" id="btn_eliminar" onclick=" eliminar_construcciones(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                "1" => $reg->pro_id,
-                "2" => $reg->construccion,
-                "3" => $reg->materiales,
-                "4" => $reg->estado,
-                "5" => $reg->ins_dato1,
-                "6" => $reg->ins_dato2,
-                "7" => $reg->ins_dato3
+                "1" => $reg->construccion,
+                "2" => $reg->materiales,
+                "3" => $reg->estado,
+                "4" => $reg->ins_dato1,
+                "5" => $reg->ins_dato2,
+                "6" => $reg->ins_dato3
 
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //info para datatables
+            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
+
+        /* Listar coordenadas */
+
+    case 'listar_coordenadas':
+        $rspta = $inspeccion->listar_coordenadas();
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => '<center><button class="btn btn-danger btn-xs" id="btn_eliminarcoor" onclick=" eliminar_coor(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
+                "1" => $reg->latitud,
+                "2" => $reg->longitud,
             );
         }
         $results = array(
