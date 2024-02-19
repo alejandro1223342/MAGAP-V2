@@ -56,9 +56,21 @@ class Inspeccion
         return ejecutarConsultaSP($sql);
     }
 
-    public function listar_infraestructura()
+    public function listar_agropecuaria()
     {
         $sql = "CALL sp_inspeccion('list_agro',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function listar_usosuelos()
+    {
+        $sql = "CALL `sp_inspeccion`('list_suelo', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function listar_apoyo()
+    {
+        $sql = "CALL `sp_inspeccion`('list_apoyo', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
     }
 

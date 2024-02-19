@@ -100,8 +100,8 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
         /* Listar infraestructuras */
-    case 'listar_infraestructura':
-        $rspta = $inspeccion->listar_infraestructura();
+    case 'listar_agropecuaria':
+        $rspta = $inspeccion->listar_agropecuaria();
         $data = array();
 
         while ($reg = $rspta->fetch_object()) {
@@ -121,6 +121,49 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
+
+    case 'listar_usosuelos':
+        $rspta = $inspeccion->listar_usosuelos();
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
+                "1" => $reg->concepto,
+                "2" => $reg->superficie,
+                "3" => $reg->estado,
+                "4" => $reg->edad,
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //info para datatables
+            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
+
+        case 'listar_apoyo':
+            $rspta = $inspeccion->listar_apoyo();
+            $data = array();
+    
+            while ($reg = $rspta->fetch_object()) {
+                $data[] = array(
+                    "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
+                    "1" => $reg->asistente,
+                    "2" => $reg->tipo,
+                    "3" => $reg->testigo
+                );
+            }
+            $results = array(
+                "sEcho" => 1, //info para datatables
+                "iTotalRecords" => count($data), //enviamos el total de registros al datatable
+                "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+                "aaData" => $data
+            );
+            echo json_encode($results);
+            break;
 
 
         /* Selects */

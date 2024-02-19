@@ -58,7 +58,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                 <span class="bs-stepper-circle">1</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
 
                                                         <!-- Coordenadas -->
                                                         <div class="step" data-target="#coordenadas-part">
@@ -66,7 +66,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                 <span class="bs-stepper-circle">2</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
 
                                                         <!-- Infraestructura -->
 
@@ -75,7 +75,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                 <span class="bs-stepper-circle">3</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
 
                                                         <!-- Estado de Tenencia -->
 
@@ -84,7 +84,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                 <span class="bs-stepper-circle">4</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
 
 
 
@@ -94,7 +94,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                 <span class="bs-stepper-circle">5</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
 
                                                         <!-- Infraestructura Agropecuaria -->
                                                         <div class="step" data-target="#agropecuaria-part">
@@ -102,14 +102,39 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                 <span class="bs-stepper-circle">6</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
                                                         <!-- Características Afrologicas -->
                                                         <div class="step" data-target="#caracterreno-part">
                                                             <button type="button" class="step-trigger" role="tab" aria-controls="coordenadas-part" id="coordenadas-part-trigger">
                                                                 <span class="bs-stepper-circle">7</span>
                                                             </button>
                                                         </div>
-                                                        <div class="line"></div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
+
+                                                        <!-- Uso Actual del Suelo -->
+                                                        <div class="step" data-target="#usosuelo-part">
+                                                            <button type="button" class="step-trigger" role="tab" aria-controls="coordenadas-part" id="coordenadas-part-trigger">
+                                                                <span class="bs-stepper-circle">8</span>
+                                                            </button>
+                                                        </div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
+
+                                                        <!-- Semovientes -->
+                                                        <div class="step" data-target="#semovientes-part">
+                                                            <button type="button" class="step-trigger" role="tab" aria-controls="coordenadas-part" id="coordenadas-part-trigger">
+                                                                <span class="bs-stepper-circle">9</span>
+                                                            </button>
+                                                        </div>
+                                                        <hr style="width: calc(100% / 11); margin: 0;">
+
+                                                        <!-- Acciones de Apoyo -->
+                                                        <div class="step" data-target="#apoyo-part">
+                                                            <button type="button" class="step-trigger" role="tab" aria-controls="coordenadas-part" id="coordenadas-part-trigger">
+                                                                <span class="bs-stepper-circle">10</span>
+                                                            </button>
+                                                        </div>
+
+
 
 
                                                     </div>
@@ -750,8 +775,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
 
-                                                                                        <label>Características del Suelo:</label>
-                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+                                                                                        <label>Fertilidad:</label>
+                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_fertilidad" id="cat_id_provincia">
 
                                                                                             <!-- Resto de opciones -->
                                                                                         </select>
@@ -761,8 +786,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
 
-                                                                                        <label>Características del Suelo:</label>
-                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+                                                                                        <label>Textura:</label>
+                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_textura" id="cat_id_textura">
 
                                                                                             <!-- Resto de opciones -->
                                                                                         </select>
@@ -772,8 +797,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
 
-                                                                                        <label>Características del Suelo:</label>
-                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+                                                                                        <label>Profunidad:</label>
+                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_profundidad" id="cat_id_profunidad">
 
                                                                                             <!-- Resto de opciones -->
                                                                                         </select>
@@ -783,20 +808,15 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
 
-                                                                                        <label>Características del Suelo:</label>
-                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_provincia" id="cat_id_provincia">
+                                                                                        <label>Clase:</label>
+                                                                                        <select class="form-control select2" style="width: 100%;" name="cat_id_clase" id="cat_id_clase">
 
                                                                                             <!-- Resto de opciones -->
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-md-4">
-                                                                                    <div class="form-group">
-                                                                                        <label for="">Pluviosidad:</label>
-                                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                                    </div>
-                                                                                </div>
+
 
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
@@ -807,31 +827,19 @@ if (!isset($_SESSION['usu_nombre'])) {
 
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
-                                                                                        <label for="">Pluviosidad:</label>
+                                                                                        <label for="">TEMP. MEDIA (ºC):</label>
                                                                                         <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
                                                                                     </div>
                                                                                 </div>
 
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
-                                                                                        <label for="">Pluviosidad:</label>
+                                                                                        <label for="">ALTITUD (m.s.n.m.):</label>
                                                                                         <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-md-4">
-                                                                                    <div class="form-group">
-                                                                                        <label for="">Pluviosidad:</label>
-                                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                                    </div>
-                                                                                </div>
 
-                                                                                <div class="col-md-4">
-                                                                                    <div class="form-group">
-                                                                                        <label for="">Pluviosidad:</label>
-                                                                                        <input type="number" class="form-control" name="cat_descripcion" id="cat_descripcion" placeholder="Descripción">
-                                                                                    </div>
-                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </form>
@@ -848,6 +856,230 @@ if (!isset($_SESSION['usu_nombre'])) {
 
                                                             <button class="btn btn-primary" onclick="stepper.next()">Next</button>
                                                         </div>
+
+                                                        <!-- Uso Actual del Suelo -->
+                                                        <div id="usosuelo-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                                            <div class="form-group">
+
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title">Uso Actual del Suelo <button class="btn btn-success" onclick="mostrarform_suelos(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
+                                                                            <button class="btn btn-danger" id="btnRegresar_suelos" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
+                                                                        </h3>
+                                                                    </div>
+                                                                    <form action="" name="form_usosuelo" id="form_usosuelo" method="POST">
+
+                                                                        <section class="content" id="formulariousosuelo">
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+                                                                                    <!-- Contenido del primer formulario -->
+
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+
+                                                                                            <label>Concepto:</label>
+                                                                                            <select class="form-control select2" style="width: 100%;" name="cat_concepto_suelo" id="cat_concepto_suelo">
+
+                                                                                                <!-- Resto de opciones -->
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label for="">Superficie (.ha)</label>
+                                                                                            <input type="number" class="form-control" name="sueperficie" id="sueperficie" placeholder="Descripción">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+
+                                                                                            <label>Estado:</label>
+                                                                                            <select class="form-control select2" style="width: 100%;" name="cat_estado_suelo" id="cat_estado_suelo">
+
+                                                                                                <!-- Resto de opciones -->
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label for="">Edad de Cultivos</label>
+                                                                                            <input type="number" class="form-control" name="edad_cultivos" id="edad_cultivos" placeholder="Descripción">
+                                                                                        </div>
+                                                                                    </div>
+
+
+
+
+
+                                                                                    <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                                                </div>
+                                                                                <!-- Botones de Acción -->
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <button class="btn btn-primary" type="submit" id="btnGuardar_suelo">
+                                                                                                <i class="fa fa-save"></i> Guardar
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Botones de Acción -->
+
+                                                                            </div>
+
+
+                                                                        </section>
+
+                                                                        <div class="card-body">
+
+                                                                            <div class="table-responsive">
+
+                                                                                <table id="tblusosuelo" class="table table-bordered table-striped" style="width: 100%; ">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th>Concepto</th>
+                                                                                            <th>Superficie</th>
+                                                                                            <th>Estado</th>
+                                                                                            <th>Edad de Cultivos</th>
+                                                                                        </tr>
+                                                                                    </thead>
+
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <button class="btn btn-secondary" onclick="stepper.previous()">Previous</button>
+
+                                                            <button class="btn btn-primary" onclick="stepper.next()">Next</button>
+                                                        </div>
+
+                                                        <!-- Semovientes -->
+
+                                                        <div id="semovientes-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-success" onclick="mostrarform_suelos(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
+                                                                <button class="btn btn-danger" id="btnRegresar_suelos" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
+                                                            </div>
+
+                                                            <button class="btn btn-secondary" onclick="stepper.previous()">Previous</button>
+
+                                                            <button class="btn btn-primary" onclick="stepper.next()">Next</button>
+                                                        </div>
+
+                                                        <!-- Acciones de apoyo -->
+                                                        <div id="apoyo-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                                            <div class="form-group">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title">Acciones de Apoyo <button class="btn btn-success" onclick="mostrarform_apoyo(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
+                                                                            <button class="btn btn-danger" id="btnRegresar_apoyo" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
+                                                                        </h3>
+                                                                    </div>
+                                                                    <form action="" name="form_accionesapoyo" id="form_accionesapoyo" method="POST">
+
+                                                                        <section class="content" id="formularioapoyo">
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+                                                                                    <!-- Contenido del primer formulario -->
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="form-group">
+
+                                                                                            <label for="">Apellido y Nombres de Asistentes a la Inspección</label>
+                                                                                            <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Descripción">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>En Calidad de:(*)</label>
+                                                                                            <select class="form-control select2" style="width: 100%;" name="cat_asistentes" id="cat_colindantes">
+
+                                                                                                <!-- Resto de opciones -->
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="form-group">
+
+                                                                                            <label for="">Apellidos y Nombres de Testigos o Colindantes</label>
+                                                                                            <input type="text" class="form-control" name="colindates" id="colindates" placeholder="Descripción">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Conclusiones y Recomendaciones:(*)</label>
+                                                                                            <select class="form-control select2" style="width: 100%;" name="cat_conclusiones" id="cat_coclusiones">
+
+                                                                                                <!-- Resto de opciones -->
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                    <!-- Agregar sobre este comentario si se agrega nuevo contenido -->
+
+                                                                                </div>
+                                                                                <!-- Botones de Acción -->
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <button class="btn btn-primary" type="submit" id="btnGuardar_apoyo">
+                                                                                                <i class="fa fa-save"></i> Guardar
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Botones de Acción -->
+
+                                                                            </div>
+
+
+                                                                        </section>
+                                                                    </form>
+                                                                    <div class="card-body">
+
+                                                                        <div class="table-responsive">
+
+                                                                            <table id="tblaccionesapoyo" class="table table-bordered table-striped" style="width: 100%; ">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th></th>
+                                                                                        <th>Asistentes</th>
+                                                                                        <th>En calidad de:</th>
+                                                                                        <th>Colindantes</th>
+                                                                                    </tr>
+                                                                                </thead>
+
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <button class="btn btn-secondary" onclick="stepper.previous()">Previous</button>
+
+                                                            <button class="btn btn-primary" onclick="stepper.next()">Next</button>
+                                                        </div>
+
+
 
 
 

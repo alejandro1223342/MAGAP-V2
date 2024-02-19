@@ -2,6 +2,8 @@ var tabla;
 var tablaConstrucciones;
 var tablaCoordenadas;
 var tablaAgropecuaria;
+var tablaSueloUsos;
+var tablaApoyo;
 
 //funcion que se ejecuta al inicio
 function init() {
@@ -9,10 +11,14 @@ function init() {
   mostrarform_const(false);
   mostrarform_coor(false);
   mostrarform_agro(false);
+  mostrarform_suelos(false);
+  mostrarform_apoyo(false);
   listar();
   listar_construcciones();
   listar_coordenadas();
   listar_agro();
+  listar_suelousos();
+  listar_apoyo();
 
   $("#form_construccion").on("submit", function (e) {
     guardar_const(e);
@@ -63,6 +69,17 @@ function init() {
   $.post("../ajax/inspeccion.php?op=tipo_posesion", function (r) {
     $("#cat_tipo_posesion").html(r); // Actualiza el contenido del select con la respuesta del servidor
     $("#cat_tipo_posesion").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
+  });
+  /* select concepto */
+  $.post("../ajax/inspeccion.php?op=concepto", function (r) {
+    $("#cat_concepto").html(r); // Actualiza el contenido del select con la respuesta del servidor
+    $("#cat_concepto").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
+  });
+
+  /* select infraestructura agropecuaria*/
+  $.post("../ajax/inspeccion.php?op=estado_infraestructura", function (r) {
+    $("#cat_estado_infraestructura").html(r); // Actualiza el contenido del select con la respuesta del servidor
+    $("#cat_estado_infraestructura").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
   });
 }
 
@@ -192,6 +209,41 @@ function mostrarform_agro(flag4) {
   }
 }
 
+function mostrarform_suelos(flag5) {
+  limpiar();
+  if (flag5) {
+    $("#tblusosuelo").hide();
+    $("#tblusosuelo_wrapper").hide();
+    $("#btnGuardar_suelo").prop("disabled", false);
+    $("#btnAgregar_suelo").hide();
+    $("#btnRegresar_suelos").show();
+    $("#formulariousosuelo").show();
+  } else {
+    $("#tblusosuelo").show();
+    $("#tblusosuelo_wrapper").show();
+    $("#btnAgregar_suelo").show();
+    $("#btnRegresar_suelos").hide();
+    $("#formulariousosuelo").hide();
+  }
+}
+
+function mostrarform_apoyo(flag6) {
+  limpiar();
+  if (flag6) {
+    $("#tblaccionesapoyo").hide();
+    $("#tblaccionesapoyo_wrapper").hide();
+    $("#btnGuardar_apoyo").prop("disabled", false);
+    $("#btnAgregar_apoyo").hide();
+    $("#btnRegresar_apoyo").show();
+    $("#formularioapoyo").show();
+  } else {
+    $("#tblaccionesapoyo").show();
+    $("#tblaccionesapoyo_wrapper").show();
+    $("#btnAgregar_apoyo").show();
+    $("#btnRegresar_apoyo").hide();
+    $("#formularioapoyo").hide();
+  }
+}
 function mostrar(pro_id) {
   $.ajax({
     url: "../ajax/inspeccion.php?op=mostrar&pro=" + pro_id,
@@ -278,6 +330,32 @@ function listar_agro() {
   });
 }
 
+function listar_suelousos() {
+  tablaSueloUsos = $("#tblusosuelo").dataTable({
+    ajax: {
+      url: "../ajax/inspeccion.php?op=listar_usosuelos",
+      type: "get",
+      dataType: "json",
+      error: function (e) {
+        console.log(e.responseText);
+      },
+    },
+  });
+}
+
+function listar_apoyo() {
+  tablaApoyo = $("#tblaccionesapoyo").dataTable({
+    ajax: {
+      url: "../ajax/inspeccion.php?op=listar_apoyo",
+      type: "get",
+      dataType: "json",
+      error: function (e) {
+        console.log(e.responseText);
+      },
+    },
+  });
+}
+
 function guardar_const(e) {
   e.preventDefault(); //no se activara la accion predeterminada
   $("#btnGuardar_const").prop("disabled", false);
@@ -312,6 +390,14 @@ $("#btnRegresar_agro").on("click", function () {
   mostrarform_agro(false); // Puedes ajustar esto según tu lógica
 });
 
+$("#btnRegresar_suelos").on("click", function () {
+  mostrarform_suelos(false); // Puedes ajustar esto según tu lógica
+});
+
+$("#btnRegresar_apoyo").on("click", function () {
+  mostrarform_apoyo(false); // Puedes ajustar esto según tu lógica
+});
+
 $(document).ready(function () {
   var stepper = new Stepper(document.querySelector(".bs-stepper"));
 
@@ -323,5 +409,31 @@ $(document).ready(function () {
     stepper.previous();
   });
 });
+
+/*API MAPS*/
+
+// Función para cargar automáticamente la latitud y longitud
+function cargarCoordenadas() {
+  // Verificar si el navegador soporta la geolocalización
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      // Obtener la latitud y longitud de la posición actual
+      var latitud = position.coords.latitude;
+      var longitud = position.coords.longitude;
+
+      // Asignar los valores a los campos de entrada correspondientes
+      document.getElementById("latitud").value = latitud;
+      document.getElementById("longitud").value = longitud;
+    });
+  } else {
+    // El navegador no soporta la geolocalización
+    console.log("Geolocalización no está disponible en este navegador.");
+  }
+}
+
+// Llamar a la función para cargar las coordenadas al cargar la página
+window.onload = function () {
+  cargarCoordenadas();
+};
 
 init();
