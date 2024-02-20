@@ -51,26 +51,25 @@ switch ($_GET["op"]) {
         break;*/
 
     case 'tabla':
-
         $s_ident = isset($_GET['s_ident']) ? $_GET['s_ident'] : '';
-
         $rspta = $ventanilla->tabla($s_ident);
         $data = array();
-
         if ($rspta) {
             while ($row = $rspta->fetch_object()) {
                 $data[] = array(
-                    "0" => '<button class="btn btn-secondary btn-xs">Ver</button>',
-                    "1" => $row->tra_id,
-                    "2" => $row->doc_nombre,
-                    "3" => $row->doc_fechareg,
-                    "4" => $row->doc_url,
-                    "5" => $s_ident,
+                    "0" => '<button class="btn btn-secondary btn-xs"><i class="fa fa-eye"></i> Ver</button>',
+                    "1" => '',
+                    "2" => $row->tra_iden,
+                    "3" => $row->doc_nombre,
+                    "4" => $row->doc_fechareg,
+                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
+                    "6" => $row->doc_url,
+                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
+                    "8" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
+
                 );
             }
-
         }
-
         $results = array(
             "sEcho" => 1,
             "iTotalRecords" => count($data),
@@ -78,7 +77,6 @@ switch ($_GET["op"]) {
             "aaData" => $data
         );
         echo json_encode($results);
-
         break;
 
     case 'estado':
@@ -88,30 +86,23 @@ switch ($_GET["op"]) {
         }
         break;
 
-    case 'guardaryeditar':
+    case 'guardardocumento':
+        $cat_id_estado = $_POST['cat_id_estado'];
+        $tra_id = $_POST['tra_id'];
+        $pro_observacion = $_POST['pro_observacion'];
+        $rspta = $ventanilla->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
+        break;
+
+    case 'aprobardocumento':
         $datosTabla = json_decode($_POST['tabla_pdf'], true);
-
-        $exito = true; // Variable para indicar si todo fue exitoso
-
-        foreach ($datosTabla as $fila) {
-            $tra_id = $fila['tra_id'];
-
-            // Llama a la función para guardar el documento
-            $rspta = $ventanilla->guardardocumento($usu_id, $tra_id);
-
-            // Si hay un fallo, actualiza la variable $exito
-            if (!$rspta) {
-                $exito = false;
-            }
-        }
-
-        // Muestra un solo mensaje después de procesar todos los elementos
-        if ($exito) {
-            echo "Todos los documentos se registraron correctamente";
+        // Toma solo el primer tra_id del array
+        $primerTraId = reset($datosTabla)['tra_id'];
+        $rspta = $ventanilla->aprobardocumento($usu_id, $primerTraId);
+        if ($rspta) {
+            echo "El documento se registró correctamente";
         } else {
-            echo "Hubo un problema al registrar algunos documentos";
+            echo "Hubo un problema al registrar el documento";
         }
-
         break;
 
 }

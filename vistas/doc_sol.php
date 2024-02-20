@@ -51,48 +51,12 @@ if (!isset($_SESSION['sol_nombre'])) {
                                     <th>Observación</th>
                                     <th>Gestor</th>
                                     <th>Acción</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                             </table>
 
                         </div>
-
-                        <form action="" name="editar" id="editar" method="POST" enctype="multipart/form-data">
-                            <section class="content" id="editar_documento">
-                                <div class="container-fluid">
-                                    <div class="card card-default">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Subida de Documentos</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">Documento:</label>
-                                                        <input type="text" name="nombre_tipodoc" id="nombre_tipodoc">
-                                                        <input type="text" name="doc_id" id="doc_id"/>
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="editInputFile" accept="application/pdf">
-                                                            <label class="custom-file-label" for="exampleInputFile"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-primary" type="submit" id="btnEditar"><i class="fa fa-save"></i> Guardar</button>
-                                                        <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </form>
-
-
 
                         <!-- /.card-body -->
                     </div>

@@ -42,8 +42,8 @@ case 'verificar':
 		//determinamos lo accesos al usuario
         $_SESSION['Escritorio'] = 1;
         $_SESSION['Documentos'] = 1;
-        /*$_SESSION['Activos'] = 1;
-        $_SESSION['Generación'] = 1;
+        $_SESSION['tra_pro'] = $fetch->tra_pro;
+        /*$_SESSION['Generación'] = 1;
         $_SESSION['Acceso'] = 1;
         $_SESSION['Reportes'] = 1;
         $_SESSION['Custodios'] = 1;*/

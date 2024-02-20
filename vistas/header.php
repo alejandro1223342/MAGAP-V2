@@ -43,6 +43,7 @@ if (strlen(session_id()) < 1)
 
     <!-- BS Stepper -->
     <link rel="stylesheet" href="../public/css/bs-stepper.min.css">
+    <link rel="stylesheet" href="../public/css/modal-iframe.css">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

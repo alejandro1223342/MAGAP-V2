@@ -4,7 +4,9 @@ var tabla;
 function init() {
     mostrarform(true, formulario = "");
     mostrarform(false, formulario = "#editar_documento");
+    $("#formulariofin").hide();
     listar();
+    listafin();
 
     $("#formulario").on("submit", function (e) {
         guardaryeditar(e);
@@ -12,7 +14,7 @@ function init() {
     $("#editar").on("submit", function (e) {
         editarDocumento(e);
     });
-    //cargamos los items al celect categoria
+    //cargamos los items al select categoria
     $.post("../ajax/documentosol.php?op=documentos", function (r) {
         $("#cat_id_tipodoc").html(r);
         $("#cat_id_tipodoc").select2();
@@ -45,11 +47,13 @@ function mostrarform(flag, formulario = "") {
         if (flag) {
             $("#tbllistado").hide();
             $("#tbllistado_wrapper").hide();
-            $(formulario).show();
+            $("#tbproceso").hide();
             $("#btnEditar").prop("disabled", false);
             $("#btnagregar").hide();
-        } else {
+            // Ocultar el formulario de edición
             $(formulario).hide();
+        } else {
+            $(formulario).show();
             $("#tbllistado").show();
             $("#tbllistado_wrapper").show();
             $("#btnagregar").show();
@@ -70,23 +74,19 @@ function mostrarform(flag, formulario = "") {
     }
 }
 
+
 function mostrar(doc_id) {
-    $.post(
-        "../ajax/documentosol.php?op=mostrar",
-        {doc_id: doc_id},
-        function (data, status) {
-            data = JSON.parse(data);
-            mostrarform(true, "#editar_documento");
-            $("#cat_id_tipodoc").val(data.cat_id_tipodoc);
-            $("#doc_nombre").val(data.doc_nombre);
-            $("#doc_url").val(data.doc_url);
-            $("#doc_id").val(data.doc_id);
-        }
-    );
+    $.post("../ajax/documentosol.php?op=mostrar", {doc_id: doc_id}, function (data, status) {
+        data = JSON.parse(data);
+        mostrarform(true, "#editar_documento");
+        $("#cat_id_tipodoc").val(data.cat_id_tipodoc);
+        $("#doc_nombre").val(data.doc_nombre);
+        $("#doc_url").val(data.doc_url);
+        $("#doc_id").val(data.doc_id);
+    });
 }
 
 function listar() {
-
     tabla = $("#tbllistado")
         .dataTable({
             ajax: {
@@ -97,26 +97,33 @@ function listar() {
                     console.log(e.responseText);
                 }
             },
-            "columnDefs": [
-                {"targets": [1], "visible": false, "searchable": false},
-                {"targets": [4], "visible": false, "searchable": false},
-            ],
+            "columnDefs": [{"targets": [1], "visible": false, "searchable": false}, {
+                "targets": [4],
+                "visible": false,
+                "searchable": false
+            }, {"targets": [9], "visible": false, "searchable": false},],
             "responsive": {
-                "breakpoints": [
-                    {name: 'xl', width: Infinity},
-                    {name: 'lg', width: 1200},
-                    {name: 'md', width: 992},
-                    {name: 'sm', width: 770},
-                    {name: 'xs', width: 576}
-                ]
+                "breakpoints": [{name: 'xl', width: Infinity}, {name: 'lg', width: 1200}, {
+                    name: 'md',
+                    width: 992
+                }, {name: 'sm', width: 770}, {name: 'xs', width: 576}]
             },
         }).DataTable();
-        tabla.on('click', '.btn.btn-info', function (event) {
+    tabla.on('click', '.btn.btn-info', function (event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
-        let rowData = tabla.row($(this).parents('tr')).data(); // Obtener los datos de la fila
-        let url = rowData[4];
-        let nombreDinamico = rowData[2];
-        openModal(url, nombreDinamico);
+        let tr = $(this).closest('tr');
+        if (tabla.row(tr).length > 0) {
+            let rowData = tabla.row(tr).data(); // Obtener los datos de la fila
+            if (rowData && rowData.length > 4) {
+                let url = rowData[4];
+                let nombreDinamico = rowData[2];
+                openModal(url, nombreDinamico);
+            } else {
+                console.error("No se pudieron obtener datos válidos de la fila.");
+            }
+        } else {
+            console.error("La fila no existe en la tabla.");
+        }
     });
 
 }
@@ -160,12 +167,17 @@ function cancelarform() {
     mostrarform(false, formulario = "#editar_documento");
 }
 
+function cancelar() {
+    limpiar();
+    $("#formulariofin").hide();
+    $('#tablafin').show();
+}
+
 function guardar(event) {
     event.preventDefault();
     let fila = $(event.target).closest("tr");
     // Obtener el objeto de fila de DataTables
     let rowData = tabla.row(fila).data();
-
     if (rowData) {
         let docID = rowData[1];
         let docNombre = rowData[2];
@@ -177,58 +189,77 @@ function guardar(event) {
         } else if (docNombre === 'ADJUDICACION DE TIERRAS') {
             cat_id_tipodoc = 21;
         }
-
         let fileInput = fila.find('#pdf')[0];
         let file = fileInput.files[0];
+        console.log('Tamaño del archivo:', file.size);
+        console.log('Condición de tamaño:', file.size <= 2 * 1024 * 1024);
+
 
         // Verificar si el archivo es de tipo PDF
-        if (file && file.type === 'application/pdf') {
-            // Crear un elemento HTML para el mensaje de carga
-            let loadingMessage = $('<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Subiendo archivo...</div>');
-
-            // Mostrar el bootbox dialog con el mensaje de carga
-            let dialog = bootbox.dialog({
-                title: 'Procesando',
-                message: loadingMessage,
-                closeButton: false,
-                backdrop: true
-            });
-
-            let formData = new FormData();
-            formData.append('pdf', file);
-            formData.append('doc_nombre', docNombre);
-            formData.append('doc_id', docID);
-            formData.append('cat_id_tipodoc', cat_id_tipodoc);
-
-            // Realizar la petición AJAX
-            $.ajax({
-                url: '../ajax/documentosol.php?op=guardaryeditar',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    // Cerrar el dialogo al finalizar la carga
-                    dialog.modal('hide');
-                    bootbox.alert(response);
-                    tabla.ajax.reload();
+        if (file && file.type === 'application/pdf' && file.size <= 2 * 1024 * 1024) {
+        // Mostrar confirmación con bootbox y personalizar el color del botón "Cancelar"
+            bootbox.confirm({
+                message: "¿Desear continuar con la subida del archivo?",
+                buttons: {
+                    confirm: {
+                        label: 'Aceptar',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Cancelar',
+                        className: 'btn-danger' // Color rojo
+                    }
                 },
-                error: function(error) {
-                    // Cerrar el dialogo al finalizar la carga
-                    dialog.modal('hide');
-                    // Manejar errores
-                    console.error(error);
+                callback: function (result) {
+                    if (result) {
+                        let loadingMessage = $('<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Subiendo archivo...</div>');
+                        // Mostrar el bootbox dialog con el mensaje de carga
+                        let dialog = bootbox.dialog({
+                            title: 'Procesando', message: loadingMessage, closeButton: false, backdrop: true
+                        });
+                        let formData = new FormData();
+                        formData.append('pdf', file);
+                        formData.append('doc_nombre', docNombre);
+                        formData.append('doc_id', docID);
+                        formData.append('cat_id_tipodoc', cat_id_tipodoc);
+                        // Realizar la petición AJAX
+                        $.ajax({
+                            url: '../ajax/documentosol.php?op=guardaryeditar',
+                            type: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                // Cerrar el dialogo al finalizar la carga
+                                dialog.modal('hide');
+                                bootbox.alert(response);
+                                tabla.ajax.reload();
+                            },
+                            error: function (error) {
+                                // Cerrar el dialogo al finalizar la carga
+                                dialog.modal('hide');
+                                // Manejar errores
+                                console.error(error);
+                            }
+                        });
+                    } else {
+                        fileInput.value = '';
+                    }
                 }
             });
+        } else if (file.size > 2 * 1024 * 1024) {
+            bootbox.alert('El límite de tamaño permitido (2 MB). Por favor, selecciona un archivo más pequeño.');
+            fileInput.value = '';
+
         } else {
             bootbox.alert('Por favor, selecciona un archivo PDF antes de guardar.');
-            // Limpiar el input file para permitir seleccionar un nuevo archivo
             fileInput.value = '';
         }
     } else {
         console.error('No se pudo obtener la información de la fila.');
     }
 }
+
 
 function guardaryeditar(e) {
     e.preventDefault();
@@ -282,10 +313,23 @@ function editarDocumento(e) {
 }
 
 
-function mostrar(doc_id) {
+function listafin() {
+    $('#tbproceso').dataTable({
+        "aProcessing": true, "aServerSide": true, "ajax": {
+            url: '../ajax/documentosol.php?op=listafin', type: "POST", dataType: "json", error: function (e) {
+                console.log(e.responseText);
+            }
+        }, "bDestroy": true, "iDisplayLength": 15, "order": [[0, "desc"]],
+    }).DataTable();
+}
+
+
+/*function mostrar(tra_pro) {
+
     $.post(
-        "../ajax/documentosol.php?op=mostrar",
-        {doc_id: doc_id},
+        "../ajax/documentosol.php?op=profin",
+        {tra_pro: tra_pro},
+        {tra_pro: tra_pro},
         function (data, status) {
             data = JSON.parse(data);
             mostrarform(true, "#editar_documento");
@@ -293,8 +337,47 @@ function mostrar(doc_id) {
             $("#nombre_tipodoc").val(data.doc_nombre);
             $("#doc_url").val(data.doc_url);
             $("#doc_id").val(data.doc_id);
-        }
+
     );
+}*/
+
+function mostrar(tra_pro) {
+    $("#formulariofin").show();
+    $('#tablafin').hide();
+
+    // Verificar si la DataTable ya ha sido inicializada
+    if (!$.fn.DataTable.isDataTable('#tabla_docs')) {
+        $('#tabla_docs').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: '../ajax/documentosol.php?op=profin',
+                type: "POST",
+                data: {tra_pro: tra_pro},
+                dataType: "json",
+                error: function (e) {
+                    console.log(e.responseText);
+                }
+            },
+            "columnDefs": [{"targets": [3], "visible": false, "searchable": false},],
+            "pageLength": 15,
+            "order": [[0, "desc"]],
+        });
+    }
+
+    // Manejar el evento clic dentro de la tabla
+    $('#tabla_docs').on('click', 'tbody tr .btn.btn-info', function (event) {
+        event.preventDefault();
+        let data = $('#tabla_docs').DataTable().row($(this).closest('tr')).data();
+        if (data) {
+            let url = data[3];
+            let nombreDinamico = data[1];
+            openModal(url, nombreDinamico);
+        } else {
+            console.error("La variable 'data' es undefined o null.");
+        }
+    });
 }
+
 
 init();

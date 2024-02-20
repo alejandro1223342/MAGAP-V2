@@ -25,7 +25,6 @@ class Catastro
         return ejecutarConsultaSP($sql);
     }
 
-
     public function mostrar($tra_id)
     {
         $sql = "call sp_catastro('mos','$tra_id',0,0,0,0)";
@@ -95,7 +94,7 @@ class Catastro
         $row = $result->fetch_assoc();
 
         // Verificar si la columna existe en el resultado
-        $jsonColumn = 'JSON_OBJECT(\'cat_id_estado\', @cat_id_estado, \'pro_observacion\', @pro_observacion)';
+        $jsonColumn = 'JSON_OBJECT(\'cat_id_estado\', cat_id_estado, \'pro_observacion\', pro_observacion)';
         if (array_key_exists($jsonColumn, $row)) {
             // Decodificar el objeto JSON
             $jsonData = json_decode($row[$jsonColumn], true);
@@ -113,7 +112,6 @@ class Catastro
             }
         }
 
-        // Manejar el caso donde la columna o el JSON no son válidos
         // Devolver un JSON indicando un error o un valor predeterminado según sea necesario
         header('Content-Type: application/json');
         echo json_encode(['error' => 'No se pudo decodificar el JSON']);

@@ -6,8 +6,6 @@ require "../ajax/solicitante.php";
 
 class Documentosol
 {
-
-
     //implementamos nuestro constructor
     public function __construct()
     {
@@ -15,11 +13,9 @@ class Documentosol
     }
 
 //metodo insertar regiustro
-
-
-    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url, $proceso)
+    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url, $tra_pro)
     {
-        $sql_check = "Call sp_documentosol('compDoc', '0', 0, '$fileName', '0')";
+        $sql_check = "Call sp_documentosol('compDoc', $tra_pro + 2, 0, '$fileName', '0')";
         $result_check = ejecutarConsultaSP($sql_check);
         $row_check = $result_check->fetch_assoc();
 
@@ -34,8 +30,7 @@ class Documentosol
             if ($result !== false) {
                 $iddoc = $result->fetch_row()[0];
                 $current_sol_id = $_SESSION['sol_id'];
-                $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc', '$proceso');";
-                echo $sql_detalle;
+                $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
                 ejecutarConsultaSP($sql_detalle);
 
                 return true;
@@ -44,8 +39,6 @@ class Documentosol
             }
         }
     }
-
-
 
 
     /*
@@ -117,6 +110,18 @@ class Documentosol
     {
         $doc_nombre = $nombre . '-' . $sol_identificacion;
         $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'$doc_nombre','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function procesosFinalizados($sol_identificacion, $tra_pro)
+    {
+        $sql = "CALL sp_procesos('profin',0, 0,$tra_pro,0,'$sol_identificacion');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function listafin($sol_id)
+    {
+        $sql = "CALL sp_procesos('listafin',$sol_id, 0,0,0,0);";
         return ejecutarConsultaSP($sql);
     }
 

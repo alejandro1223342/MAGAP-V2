@@ -1,8 +1,11 @@
-<?php 
-if (strlen(session_id())<1) 
-  session_start();
+<?php
+if (strlen(session_id()) < 1) {
+    session_start();
+}
 
-  ?>
+// Configuración de la cabecera Permissions-Policy
+header("Permissions-Policy: geolocation=(); notifications=(self 'http://localhost'); fullscreen=()");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

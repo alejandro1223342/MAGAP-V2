@@ -60,7 +60,7 @@ switch ($_GET["op"]) {
                 break;
     
         case 'parroquia':
-            $rspta=$registro->parroquia();
+            $rspta=$registro->parroquia($cat_id_canton);
             while ($reg=$rspta->fetch_object()) {
                     echo '<option value=' . $reg->cat_id.'>'.$reg->cat_nombre.'</option>';
             }		
@@ -76,4 +76,3 @@ switch ($_GET["op"]) {
 
 
 }
-?>

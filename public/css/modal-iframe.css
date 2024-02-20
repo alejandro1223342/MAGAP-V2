@@ -29,8 +29,6 @@
     background: #fff;
 }
 
-
-
 .close {
     color: #ccc;
     float: right;
@@ -53,3 +51,13 @@
         opacity: 1;
     }
 }
+
+.modal-footer {
+    background: var(--modal-color);
+    display: flex;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+

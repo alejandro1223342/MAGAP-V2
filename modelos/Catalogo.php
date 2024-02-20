@@ -18,7 +18,7 @@ public function insertar($cat_nombre,$cat_descripcion,$cat_padre){
 
 
 public function mostrar(){
-	$sql="CALL sp_catalgo('spa','0','', '',0)";
+	$sql="CALL sp_catalgo('spa2','0','', '',0)";
 	return ejecutarConsultaSP($sql);
 }
 
