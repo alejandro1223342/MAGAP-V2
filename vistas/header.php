@@ -361,7 +361,7 @@ if (strlen(session_id()) < 1)
                     <p>Solicitantes</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="doc_catastros.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Cargar Documento</p>

@@ -20,7 +20,7 @@ if (!isset($_SESSION['usu_nombre'])) {
               <!-- /.card-header -->
 
                 <div class="card-body">
-                        <table id="tbllistado" class="table table-bordered table-striped">
+                        <table id="tbllistado" class="table table-bordered table-striped" style="width: 100%">
                         <thead>
                         <tr>
                             <th></th>

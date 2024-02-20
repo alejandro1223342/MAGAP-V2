@@ -122,13 +122,13 @@ header("Permissions-Policy: geolocation=(); notifications=(self 'http://localhos
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="documentosol.php" class="nav-link">
+                      <a href="doc_sol.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Subir Documentos</p>
                       </a>
-                    </li>
+                    </li> 
                     <li class="nav-item">
-                      <a href="doc_sol.php" class="nav-link">
+                      <a href="documentosol.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Documentos</p>
                       </a>

@@ -1,16 +1,11 @@
 <?php 
 //incluir la conexion de base de datos
 require "../config/Conexion.php";
-
 class Usuario{
-
-
-	//implementamos nuestro constructor
+    //implementamos nuestro constructor
 public function __construct(){
 
 }
-
-
 public function verificar($usu_login,$usu_clave){
 	$sql="call sp_logeo('usu','$usu_login','$usu_clave');";
    // return $sql;
@@ -71,23 +66,24 @@ public function insertar($usu_nombre,$usu_cedula,$usu_telefono,$usu_correo,$usu_
 	}
 }
 
-public function editar($usu_id,$usu_nombre,$usu_cedula,$usu_telefono,$usu_correo,$usu_cargo,$usu_login,$usu_clave,$permisos){
-	$sql="call  sp_insertausuario($usu_id,'$usu_nombre','$usu_cedula','$usu_telefono','$usu_correo','$usu_cargo','$usu_login','$usu_clave','1')";
-	$row=ejecutarConsultaSP($sql);
-	 $num_elementos=0;
-	 $sw=true;
-	 $sql_detalle="CALL sp_insertapermisos(0,$usu_id,$permisos[$num_elementos])";
-     //borro permisos 
-	 $g=ejecutarConsulta($sql_detalle);
-	 while ($num_elementos < count($permisos)) {
-        //echo $permisos[$num_elementos];
-	 	$sql_detalle="CALL  sp_insertapermisos(1,$usu_id,$permisos[$num_elementos])";
-        ejecutarConsulta($sql_detalle) or $sw=false;
-	 	$num_elementos=$num_elementos+1;
-	 }
-	 return $sw;
+    public function editar($usu_id, $usu_nombre, $usu_cedula, $usu_telefono, $usu_correo, $usu_cargo, $usu_login, $usu_clave, $permisos)
+    {
+        $sql = "CALL sp_insertausuario($usu_id,'$usu_nombre','$usu_cedula','$usu_telefono','$usu_correo','$usu_cargo','$usu_login','$usu_clave')";
+        $row = ejecutarConsultaSP($sql);
+        $sw = true;
+
+        // Eliminar todos los permisos del usuario
+        $sql_eliminar_permisos = "CALL sp_insertapermisos(2, $usu_id, 0)";
+        ejecutarConsulta($sql_eliminar_permisos); // Se pasa un tercer argumento ficticio '0' para cumplir con la firma del procedimiento
+
+        if (!empty($permisos)) {
+            // Agregar los nuevos permisos
+            foreach ($permisos as $permiso) {
+                $sql_agregar_permiso = "CALL sp_insertapermisos(1, $usu_id, $permiso)";
+                ejecutarConsulta($sql_agregar_permiso) or $sw = false;
+            }
+        }
+        return $sw;
+    }
 
 }
-
-}
-?>
