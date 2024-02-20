@@ -4,7 +4,7 @@ if (strlen(session_id()) < 1)
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">

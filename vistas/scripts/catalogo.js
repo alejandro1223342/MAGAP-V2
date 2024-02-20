@@ -13,13 +13,22 @@ function init() {
     $("#cat_padre").html(r); // Actualiza el contenido del select con la respuesta del servidor
     $("#cat_padre").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
   });
-}
 
-$(document).ready(function () {
-  // Inicializar Select2
-  $(".select2").select2();
-  $(".select2bs4").select2({ theme: "bootstrap4" });
-});
+  // Obtener el campo de entrada por su ID
+  var cat_nombre = document.getElementById("cat_nombre");
+  var cat_descripcion = document.getElementById("cat_descripcion");
+
+  // Agregar un listener para el evento "input"
+  cat_nombre.addEventListener("input", function () {
+    // Convertir el texto ingresado a mayúsculas y asignarlo de nuevo al campo de entrada
+    this.value = this.value.toUpperCase();
+  });
+
+  cat_descripcion.addEventListener("input", function () {
+    // Convertir el texto ingresado a mayúsculas y asignarlo de nuevo al campo de entrada
+    this.value = this.value.toUpperCase();
+  });
+}
 
 //funcion limpiar
 function limpiar() {

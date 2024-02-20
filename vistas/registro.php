@@ -81,7 +81,6 @@
                   <div class="form-group">
                     <label>Identificación(*)</label>
                     <select class="form-control select2" style="width: 100%;" name="cat_id_identificacion" id="cat_id_identificacion">
-
                     </select>
                   </div>
                   <div class="form-group">

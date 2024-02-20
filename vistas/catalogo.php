@@ -51,7 +51,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for="">Nombre</label>
-                            <input type="text" class="form-control" name="cat_nombre" id="cat_nombre" placeholder="Nombre">
+                            <input type="text" class="form-control" name="cat_nombre" id="cat_nombre" placeholder="Nombre" required>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -66,7 +66,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Categoría</label>
-                            <select class="form-control select2" style="width: 100%; height: 40px;" name="cat_padre" id="cat_padre">
+                            <select class="form-control select2" style="width: 100%; height: 40px;" name="cat_padre" id="cat_padre" required>
                             </select>
                           </div>
                         </div>
@@ -88,7 +88,12 @@ if (!isset($_SESSION['usu_nombre'])) {
                 </div>
               </section>
             </form>
-
+            <!-- NO BORRAR IMPORTANTE -->
+            <style>
+              .selection span {
+                height: 38px !important;
+              }
+            </style>
 
 
             <!-- /.card-body -->
