@@ -10,8 +10,6 @@ $cat_padre = isset($_POST["cat_padre"]) ? limpiarCadena($_POST["cat_padre"]) : "
 $cat_estado = isset($_POST["cat_estado"]) ? limpiarCadena($_POST["cat_estado"]) : "";
 
 
-
-
 switch ($_GET["op"]) {
 
 
@@ -39,14 +37,12 @@ switch ($_GET["op"]) {
             );
         }
         $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
+            "sEcho" => 1,//info para datatables
+            "iTotalRecords" => count($data),//enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data),//enviamos el total de registros a visualizar
+            "aaData" => $data);
         echo json_encode($results);
         break;
-
 
 
     case 'desactivar':
@@ -67,8 +63,10 @@ switch ($_GET["op"]) {
         } else {
             echo "Valor de cat_id: " . $cat_id; // Imprime el valor de cat_id
 
-            /* $rspta = $catalogo->editar($cat_id, $cat_nombre, $cat_descripcion, $cat_padre);
-            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; */
+            $rspta = $catalogo->editar($cat_id, $cat_nombre, $cat_descripcion, $cat_padre);
+            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
         }
         break;
+
+
 }

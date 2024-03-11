@@ -8,7 +8,7 @@ define("DB_HOST", "localhost");
 // nombre de la base de datos
 //define("DB_NAME", "systemag");
 //define("DB_NAME", "tesis");
-define("DB_NAME", "mag_ist17j2");
+define("DB_NAME", "mag_ist17j3");
 
 
 
@@ -19,8 +19,8 @@ define("DB_USERNAME", "root");
 
 //conraseña del usuario de base de datos
 //define("DB_PASSWORD", "tesis.2023");
-//define("DB_PASSWORD", "Anderson241@");
 define("DB_PASSWORD", "root");
+//define("DB_PASSWORD", "Helado.12");
 
 
 

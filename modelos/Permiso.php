@@ -1,21 +1,21 @@
-<?php
+<?php 
 //incluir la conexion de base de datos
 require "../config/Conexion.php";
-class Permiso
-{
+class Permiso{ 
 
 
 	//implementamos nuestro constructor
-	public function __construct()
-	{
-	}
+public function __construct(){
 
-
-
-	//listar registros
-	public function listar()
-	{
-		$sql = "SELECT * FROM permisos";
-		return ejecutarConsulta($sql);
-	}
 }
+
+
+
+//listar registros
+public function listar(){
+	$sql="SELECT * FROM permisos";
+	return ejecutarConsulta($sql);
+}
+}
+
+ ?>

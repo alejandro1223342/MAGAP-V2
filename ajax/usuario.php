@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "../config/session.php";
 require_once "../modelos/Usuario.php";
 
 $usuario = new Usuario();
@@ -25,7 +25,7 @@ switch ($_GET["op"]) {
         $clavehash = hash("SHA256", $clavea);
         $rspta = $usuario->verificar($logina, $clavehash);
         $fetch = $rspta->fetch_object();
-        //	echo $rspta; 
+        //	echo $rspta;
         if (isset($fetch)) {
             # Declaramos la variables de sesion
             $_SESSION['usu_id'] = $fetch->usu_id;
@@ -49,15 +49,16 @@ switch ($_GET["op"]) {
 
             //determinamos lo accesos al usuario
             in_array(1, $valores) ? $_SESSION['Escritorio'] = 1 : $_SESSION['Escritorio'] = 0;
-            in_array(2, $valores) ? $_SESSION['Actas'] = 1 : $_SESSION['Actas'] = 0;
-            in_array(3, $valores) ? $_SESSION['Activos'] = 1 : $_SESSION['Activos'] = 0;
-            in_array(4, $valores) ? $_SESSION['Generación'] = 1 : $_SESSION['Generación'] = 0;
+            in_array(2, $valores) ? $_SESSION['Inspección'] = 1 : $_SESSION['Inspección'] = 0;
+            in_array(3, $valores) ? $_SESSION['Providencia'] = 1 : $_SESSION['Providencia'] = 0;
+            in_array(4, $valores) ? $_SESSION['Perfeccionamiento Providencia'] = 1 : $_SESSION['Perfeccionamiento Providencia'] = 0;
             in_array(5, $valores) ? $_SESSION['Acceso'] = 1 : $_SESSION['Acceso'] = 0;
             in_array(6, $valores) ? $_SESSION['Reportes'] = 1 : $_SESSION['Reportes'] = 0;
             in_array(7, $valores) ? $_SESSION['Custodios'] = 1 : $_SESSION['Custodios'] = 0;
             in_array(8, $valores) ? $_SESSION['Ventanilla'] = 1 : $_SESSION['Ventanilla'] = 0;
             in_array(9, $valores) ? $_SESSION['Catastros'] = 1 : $_SESSION['Catastros'] = 0;
-            in_array(10, $valores) ? $_SESSION['Inspeccion'] = 1 : $_SESSION['Inspeccion'] = 0;
+
+
         }
         echo json_encode($fetch);
 
@@ -97,11 +98,10 @@ switch ($_GET["op"]) {
         }
 
         $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
+            "sEcho" => 1,//info para datatables
+            "iTotalRecords" => count($data),//enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data),//enviamos el total de registros a visualizar
+            "aaData" => $data);
         echo json_encode($results);
         break;
 
@@ -140,6 +140,8 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $sw = in_array($reg->per_id, $valores) ? 'checked' : '';
             echo '<li><input type="checkbox" ' . $sw . ' name="permiso[]" value="' . $reg->per_id . '">' . $reg->per_nombre . '</li>';
+
+
         }
         break;
 
@@ -160,4 +162,8 @@ switch ($_GET["op"]) {
             echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar Login existente";
         }
         break;
+
+
 }
+
+?>

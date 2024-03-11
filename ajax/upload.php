@@ -2,8 +2,10 @@
 
 require_once '../upload-php/api-google/vendor/autoload.php';
 
-function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPath)
+function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPath,$proceso)
 {
+
+
     try {
         putenv('GOOGLE_APPLICATION_CREDENTIALS=../upload-php/upload-pdf-405104-69c69d6b9a4a.json');
         $client = new Google_Client();
@@ -75,10 +77,30 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
             $lastFolderId = $results->getFiles()[0]->getId();
         }
 
+        // Verificar si la última subcarpeta existe en la carpeta del solicitante actual
+        $procesoFolderId = null;
+        $optParams = [
+            'q' => "mimeType='application/vnd.google-apps.folder' and name='$proceso' and '$lastFolderId' in parents",
+            'spaces' => 'drive',
+        ];
+        $results = $service->files->listFiles($optParams);
+
+        if (count($results->getFiles()) == 0) {
+            $fileMetadata = new Google_Service_Drive_DriveFile([
+                'name' => $proceso,
+                'mimeType' => 'application/vnd.google-apps.folder',
+                'parents' => [$lastFolderId],
+            ]);
+            $procesoFolder = $service->files->create($fileMetadata, ['fields' => 'id']);
+            $procesoFolderId = $procesoFolder->id;
+        } else {
+            $procesoFolderId = $results->getFiles()[0]->getId();
+        }
+
         // Verificar si el archivo ya existe en la última carpeta
         $fileId = null;
         $optParams = [
-            'q' => "mimeType='application/pdf' and name='$fileName' and '$lastFolderId' in parents",
+            'q' => "mimeType='application/pdf' and name='$fileName' and '$procesoFolderId' in parents",
             'spaces' => 'drive',
         ];
         $results = $service->files->listFiles($optParams);
@@ -87,7 +109,7 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
             // El archivo no existe, crear uno nuevo en la última carpeta
             $fileMetadata = new Google_Service_Drive_DriveFile([
                 'name' => $fileName,
-                'parents' => [$lastFolderId],
+                'parents' => [$procesoFolderId],
             ]);
 
             $file = $service->files->create(
@@ -102,10 +124,9 @@ function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPat
             return 'https://drive.google.com/file/d/' . $file->id . '/preview';
         } else {
             // El archivo ya existe, obtener su ID
-            // El archivo ya existe, obtener su ID
             $fileId = $results->getFiles()[0]->getId();
 
-// Actualizar el contenido del archivo existente en la última carpeta
+            // Actualizar el contenido del archivo existente en la última carpeta
             $fileMetadata = new Google_Service_Drive_DriveFile([
                 'name' => $fileName,
             ]);

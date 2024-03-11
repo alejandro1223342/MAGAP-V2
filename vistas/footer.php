@@ -1,11 +1,11 @@
 <html>
 </body>
-<footer class="main-footer">
-  <strong>Copyright &copy; 2023-2025 <a href="https://web.ist17dejulio.edu.ec/">IST17J</a>.</strong>
-  Todos los derechos reservados.
-  <div class="float-right d-none d-sm-inline-block">
-    <b>Version</b> 1.0.0
-  </div>
+<footer class="main-footer bg-dark" >
+    <strong>Copyright &copy; 2023-2025 <a href="https://web.ist17dejulio.edu.ec/">IST17J</a>.</strong>
+    Todos los derechos reservados.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
+    </div>
 </footer>
 
 <!-- jQuery -->
@@ -59,13 +59,12 @@
 <script src="../public/datatables/js/buttons.html5.min.js"></script>
 <script src="../public/datatables/js/buttons.print.min.js"></script>
 <script src="../public/datatables/js/buttons.colVis.min.js"></script>
-
+<!-- Idioma DataTables - Español -->
+<script src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
 <!-- BS-Stepper -->
 <script src="../public/js/bs-stepper.min.js"></script>
-
 
 <!-- <script src="../public/js/dashboard.js"></script> -->
 
 </body>
-
 </html>

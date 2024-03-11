@@ -5,72 +5,89 @@ require "../config/Conexion.php";
 
 class Ventanilla
 {
+    //implementamos nuestro constructor
+    public function __construct()
+    {
+
+    }
+
+    public function listar()
+    {
+        $sql = "call sp_ventanilla ('list', 0, 0, 0, 0, 0)";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function estado()
+    {
+        $sql = "CALL sp_catalgo('spa','0','', '',15)";
+        return ejecutarConsultaSP($sql);
+    }
 
 
-	//implementamos nuestro constructor
-	public function __construct()
-	{
-	}
+    public function mostrar($tra_id)
+    {
+        $sql = "call sp_ventanilla('mos','$tra_id',0,0,0,0)";
+        $result = ejecutarConsultaSP($sql);
+        return $result->fetch_assoc();
 
-	public function listar()
-	{
-		$sql = "call sp_ventanilla ('list', 0, 0, 0, 0, 0)";
-		return ejecutarConsultaSP($sql);
-	}
+        //$row=ejecutarConsultaSP($sql);
+        //$sql="SELECT * FROM usuario where usu_id=usu_id";
+        //return $row->fetch_row();
+        //ejecutarConsultaSimpleFila($sql));
+    }
 
-	public function estado()
-	{
-		$sql = "CALL sp_catalgo('spa','0','', '',15)";
-		return ejecutarConsultaSP($sql);
-	}
-
-
-	public function mostrar($tra_id)
-	{
-		$sql = "call sp_ventanilla('mos','$tra_id',0,0,0,0)";
-		$result = ejecutarConsultaSP($sql);
-		return $result->fetch_assoc();
-
-		//$row=ejecutarConsultaSP($sql);
-		//$sql="SELECT * FROM usuario where usu_id=usu_id";
-		//return $row->fetch_row();
-		//ejecutarConsultaSimpleFila($sql));
-	}
-
-	public function tabla($id)
-	{
-		$sql = "call sp_documentosol('listedi',0,0,'$id',0)";
-		return ejecutarConsulta($sql);
-	}
+    public function tabla($id)
+    {
+        $sql = "call sp_ventanilla('listedi',0,0,'$id',0,0)";
+        return ejecutarConsulta($sql);
+    }
 
 
-	public function insertar($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
-	{
+    public function insertar($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
+    {
 
-		$sql = "call sp_ventanilla('ing',0, '$usu_id', '$tra_id', '$cat_id_estado','$pro_observacion')";
+        $sql = "call sp_ventanilla('ing',0, '$usu_id', '$tra_id', '$cat_id_estado','$pro_observacion')";
 
-		return ejecutarConsulta($sql);
-	}
+        return ejecutarConsulta($sql);
+    }
 
-	public function guardardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
-	{
-		$sql = "CALL sp_procesos('ven', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
-		ejecutarConsulta($sql);
+    public function guardardocumento($tra_id, $cat_id_estado, $pro_observacion)
+    {
+        // Ejecutar la consulta y obtener el resultado
+        $sql = "CALL sp_procesos('docVen', 0, 0, $tra_id, $cat_id_estado, '$pro_observacion')";
+        $result = ejecutarConsulta($sql);
+        $row = $result->fetch_assoc();
 
-		// Obtener el ID del último registro insertado
-		$sql_last_id = "SELECT LAST_INSERT_ID() as last_id";
-		$result = ejecutarConsulta($sql_last_id);
-		$row = $result->fetch_assoc();
-		$last_id = $row['last_id'];
+        // Verificar si la columna existe en el resultado
+        $jsonColumn = 'JSON_OBJECT(\'cat_id_estado\', cat_id_estado, \'pro_observacion\', pro_observacion)';
+        if (array_key_exists($jsonColumn, $row)) {
+            // Decodificar el objeto JSON
+            $jsonData = json_decode($row[$jsonColumn], true);
 
-		// Obtener los datos de la fila recién insertada
-		$sql_select = "SELECT cat_id_estado, pro_observacion FROM proceso WHERE pro_id = $last_id";
-		$result_select = ejecutarConsulta($sql_select);
-		$data = $result_select->fetch_assoc();
+            // Verificar si el JSON se decodificó correctamente
+            if ($jsonData !== null) {
+                // Acceder a los datos
+                $cat_id_estado = $jsonData['cat_id_estado'];
+                $pro_observacion = $jsonData['pro_observacion'];
 
-		// Devolver los datos como un JSON
-		header('Content-Type: application/json');
-		echo json_encode($data);
-		exit; // Importante: terminar la ejecución del script después de enviar la respuesta JSON
-	}
+                // Devolver los datos como un JSON
+                header('Content-Type: application/json');
+                echo json_encode(['cat_id_estado' => $cat_id_estado, 'pro_observacion' => $pro_observacion]);
+                exit;
+            }
+        }
+
+        // Devolver un JSON indicando un error o un valor predeterminado según sea necesario
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'No se pudo decodificar el JSON']);
+        exit;
+    }
+
+    public function aprobardocumento($usu_id, $tra_id)
+    {
+        $sql = "CALL sp_procesos('ven', 0, $usu_id, $tra_id, 0, 0)";
+        return ejecutarConsulta($sql);
+    }
+
 }
+

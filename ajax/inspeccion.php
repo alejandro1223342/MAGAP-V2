@@ -1,336 +1,116 @@
 <?php
+session_start();
+
 require_once "../modelos/Inspeccion.php";
+
 
 $inspeccion = new Inspeccion();
 
-/*Construcciones*/
-$ins_id = isset($_POST["ins_id"]) ? limpiarCadena($_POST["ins_id"]) : "";
+$tra_id = isset($_POST["tra_id"]) ? limpiarCadena($_POST["tra_id"]) : "";
+$sol_id = isset($_POST["sol_id"]) ? limpiarCadena($_POST["sol_id"]) : "";
+$doc_id = isset($_POST["doc_id"]) ? limpiarCadena($_POST["doc_id"]) : "";
 $pro_id = isset($_POST["pro_id"]) ? limpiarCadena($_POST["pro_id"]) : "";
-$pro_id_cons = isset($_POST["pro_id_cons"]) ? limpiarCadena($_POST["pro_id_cons"]) : "";
-$cat_construccion = isset($_POST["cat_construccion"]) ? limpiarCadena($_POST["cat_construccion"]) : "";
-$cat_materiales = isset($_POST["cat_materiales"]) ? limpiarCadena($_POST["cat_materiales"]) : "";
-$cat_estado_construccion = isset($_POST["cat_estado_construccion"]) ? limpiarCadena($_POST["cat_estado_construccion"]) : "";
-$superficie = isset($_POST["superficie"]) ? limpiarCadena($_POST["superficie"]) : "";
-$edad_const = isset($_POST["edad_const"]) ? limpiarCadena($_POST["edad_const"]) : "";
-$tiempo_ocupacion = isset($_POST["tiempo_ocupacion"]) ? limpiarCadena($_POST["tiempo_ocupacion"]) : "";
-/*Fin*/
+$usu_id = isset($_POST["usu_id"]) ? limpiarCadena($_POST["usu_id"]) : "";
+$cat_id_estado = isset($_POST["cat_id_estado"]) ? limpiarCadena($_POST["cat_id_estado"]) : "";
+$cat_id_proceso = isset($_POST["cat_id_proceso"]) ? limpiarCadena($_POST["cat_id_proceso"]) : "";
+$pro_observacion = isset($_POST["pro_observacion"]) ? limpiarCadena($_POST["pro_observacion"]) : "";
+$pro_fecha = isset($_POST["pro_fecha"]) ? limpiarCadena($_POST["pro_fecha"]) : "";
+$pro_fechafin = isset($_POST["pro_fechafin"]) ? limpiarCadena($_POST["pro_fechafin"]) : "";
+$pro_trasabilidad = isset($_POST["pro_trasabilidad"]) ? limpiarCadena($_POST["pro_trasabilidad"]) : "";
+$usu_id = isset($_SESSION['usu_id']) ? $_SESSION['usu_id'] : '';
 
-/*Estado de Tenencia*/
-$pro_id_tenencia = isset($_POST["pro_id_tenencia"]) ? limpiarCadena($_POST["pro_id_tenencia"]) : "";
-$cat_tenencia = isset($_POST["cat_tenencia"]) ? limpiarCadena($_POST["cat_tenencia"]) : "";
-$cat_historia = isset($_POST["cat_historia"]) ? limpiarCadena($_POST["cat_historia"]) : "";
-$cat_tipo_posesion = isset($_POST["cat_tipo_posesion"]) ? limpiarCadena($_POST["cat_tipo_posesion"]) : "";
-$tiempo_posesion = isset($_POST["tiempo_posesion"]) ? limpiarCadena($_POST["tiempo_posesion"]) : "";
-$tenencia_observaciones = isset($_POST["tenencia_observaciones"]) ? limpiarCadena($_POST["tenencia_observaciones"]) : "";
-$ins_tenencia = isset($_POST["ins_tenencia"]) ? limpiarCadena($_POST["ins_tenencia"]) : "";
-
-
-
-/*Fin*/
 
 switch ($_GET["op"]) {
 
-        /* Listar solicitantes */
     case 'listar':
         $rspta = $inspeccion->listar();
         $data = array();
-
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<center><button class="btn btn-primary btn-xs" onclick=" mostrar(' . $reg->pro_id . '); mostrar2(' . $reg->pro_id . ')"><i class="fa fa-eye"></i></button></center>',
+                "0" => '<button class="btn btn-primary btn-xs" onclick="mostrarTabla(' . $reg->s_ident . ')"><i class="fa fa-eye"></i></button>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
-                "4" => $reg->sol_direccion
+                "4" => $reg->sol_direccion,
             );
         }
+
         $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
+            "sEcho" => 1,//info para datatables
+            "iTotalRecords" => count($data),//enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data),//enviamos el total de registros a visualizar
+            "aaData" => $data);
         echo json_encode($results);
         break;
-        /* Listar construcciones */
-    case 'listar_construcciones':
-        $rspta = $inspeccion->listar_construcciones();
-        $data = array();
 
+    /*case 'mostrar':
+        $rspta = $ventanilla->mostrar($tra_id);
+        echo json_encode($rspta);
+        break;*/
+    case 'documentos':
+        $rspta = $inspeccion->estado();
         while ($reg = $rspta->fetch_object()) {
-            $data[] = array(
-                "0" => '<center><button class="btn btn-danger btn-xs" id="btn_eliminar" onclick=" eliminar_construcciones(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                "1" => $reg->construccion,
-                "2" => $reg->materiales,
-                "3" => $reg->estado,
-                "4" => $reg->ins_dato1,
-                "5" => $reg->ins_dato2,
-                "6" => $reg->ins_dato3
-
-            );
+            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
         }
-        $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
-        echo json_encode($results);
         break;
 
-        /* Listar coordenadas */
-
-    case 'listar_coordenadas':
-        $rspta = $inspeccion->listar_coordenadas();
+    case 'tabla':
+        $s_ident = isset($_GET['s_ident']) ? $_GET['s_ident'] : '';
+        $rspta = $inspeccion->tabla($s_ident);
         $data = array();
-
-        while ($reg = $rspta->fetch_object()) {
-            $data[] = array(
-                "0" => '<center><button class="btn btn-danger btn-xs" id="btn_eliminarcoor" onclick=" eliminar_coor(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                "1" => $reg->latitud,
-                "2" => $reg->longitud,
-            );
-        }
-        $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
-        echo json_encode($results);
-        break;
-        /* Listar infraestructuras */
-    case 'listar_agropecuaria':
-        $rspta = $inspeccion->listar_agropecuaria();
-        $data = array();
-
-        while ($reg = $rspta->fetch_object()) {
-            $data[] = array(
-                "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                "1" => $reg->concepto,
-                "2" => $reg->unidad_medida,
-                "3" => $reg->cantidad,
-                "4" => $reg->estado
-            );
-        }
-        $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
-        echo json_encode($results);
-        break;
-
-    case 'listar_usosuelos':
-        $rspta = $inspeccion->listar_usosuelos();
-        $data = array();
-
-        while ($reg = $rspta->fetch_object()) {
-            $data[] = array(
-                "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                "1" => $reg->concepto,
-                "2" => $reg->superficie,
-                "3" => $reg->estado,
-                "4" => $reg->edad,
-            );
-        }
-        $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
-        echo json_encode($results);
-        break;
-
-        case 'listar_apoyo':
-            $rspta = $inspeccion->listar_apoyo();
-            $data = array();
-    
-            while ($reg = $rspta->fetch_object()) {
+        if ($rspta) {
+            while ($row = $rspta->fetch_object()) {
                 $data[] = array(
-                    "0" => '<center><button class="btn btn-danger btn-xs" onclick=" eliminar(' . $reg->ins_id . ')"><i class="fa fa-times"></i></button></center>',
-                    "1" => $reg->asistente,
-                    "2" => $reg->tipo,
-                    "3" => $reg->testigo
+                    "0" => '<button class="btn btn-secondary btn-xs">Ver</button>',
+                    "1" => '',
+                    "2" => $row->tra_iden,
+                    "3" => $row->doc_nombre,
+                    "4" => $row->doc_fechareg,
+                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
+                    "6" => $row->doc_url,
+                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
+                    "8" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
+
                 );
             }
-            $results = array(
-                "sEcho" => 1, //info para datatables
-                "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-                "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-                "aaData" => $data
-            );
-            echo json_encode($results);
-            break;
-
-
-        /* Selects */
-    case 'explicacion':
-        $rspta = $inspeccion->explicacion();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
         }
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
         break;
 
-    case 'vias':
-        $rspta = $inspeccion->vias();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
+    case 'aprobardocumento':
+        $datosTabla = json_decode($_POST['tabla_pdf'], true);
+        // Obtener el primer elemento del array
+        $primerRegistro = reset($datosTabla);
 
-    case 'infraestructura':
-        $rspta = $inspeccion->infraestructura();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
+        if ($primerRegistro !== false) {
+            $tra_id = $primerRegistro['tra_id'];
+            $estado = $primerRegistro['estado'];
+            $observacion = $primerRegistro['observacion'];
 
-    case 'historia':
-        $rspta = $inspeccion->historia();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
+            // Llama a la función para guardar el documento
+            $rspta = $inspeccion->aprobardocumento($usu_id, $tra_id, $estado, $observacion);
 
-    case 'obtencion':
-        $rspta = $inspeccion->obtencion();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'construccion':
-        $rspta = $inspeccion->construccion();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'materiales':
-        $rspta = $inspeccion->materiales();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'estado_construccion':
-        $rspta = $inspeccion->estado_construccion();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'concepto':
-        $rspta = $inspeccion->concepto();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'concepto_suelo':
-        $rspta = $inspeccion->concepto_suelo();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'estado_suelo':
-        $rspta = $inspeccion->estado_suelo();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'destino_economico':
-        $rspta = $inspeccion->destino_economico();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'estado_infraestructura':
-        $rspta = $inspeccion->estado_infraestructura();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-    case 'tipo_posesion':
-        $rspta = $inspeccion->tipo_posesion();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
-
-        /* Fin selects */
-
-    case 'mostrar':
-
-        $rspta = $inspeccion->mostrar($_GET["pro"]);
-
-        echo json_encode($rspta);
-        break;
-
-    case 'mostrar_ten':
-
-        $rspta = $inspeccion->mostrar_ten($_GET["pro"]);
-
-        echo json_encode($rspta);
-        break;
-
-        /* Eliminar informacion de las tablas */
-    case 'eliminar':
-        $rspta = $inspeccion->eliminar($ins_id);
-        echo "Valor de ins_id: " . $ins_id;
-
-        echo $rspta ? "Datos eliminados correctamente" : "No se pudo eliminar los datos";
-        break;
-        /* Fin  */
-
-        /* Guardar Construcciones*/
-    case 'guardar_construccion':
-
-
-        if (empty($ins_id)) {
-            $rspta = $inspeccion->guardar_construccion(
-                $pro_id_cons,
-                $cat_construccion,
-                $cat_materiales,
-                $cat_estado_construccion,
-                $superficie,
-                $edad_const,
-                $tiempo_ocupacion,
-
-            );
-            echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
-        }
-        break;
-        /* Guardar Estado de tenencias */
-    case 'guardaryeditar_tenencia':
-
-
-        if (empty($ins_tenencia)) {
-
-            $rspta = $inspeccion->guardaryeditar_tenencia(
-                $pro_id_tenencia,
-                $cat_tenencia,
-                $cat_historia,
-                $cat_tipo_posesion,
-                $tiempo_posesion,
-                $tenencia_observaciones
-            );
-            echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
+            if ($rspta) {
+                echo "El primer documento se registró correctamente";
+            } else {
+                echo "Hubo un problema al registrar el primer documento";
+            }
         } else {
-            echo "Entró en el bloque else";
-
-            $rspta = $inspeccion->editar_tenencia($ins_tenencia, $cat_tenencia, $cat_historia, $cat_tipo_posesion, $tiempo_posesion, $tenencia_observaciones);
-
-            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar Login existente";
+            echo "No se encontraron elementos en el array";
         }
         break;
 
-        /*Fin*/
+
+    case 'guardardocumento':
+        $cat_id_estado = $_POST['cat_id_estado'];
+        $tra_id = $_POST['tra_id'];
+        $pro_observacion = $_POST['pro_observacion'];
+        $rspta = $inspeccion->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
+        break;
 }

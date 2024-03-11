@@ -1,439 +1,437 @@
 var tabla;
-var tablaConstrucciones;
-var tablaCoordenadas;
-var tablaAgropecuaria;
-var tablaSueloUsos;
-var tablaApoyo;
+var tabla_pdf;
+var cedula;
+var index;
 
 //funcion que se ejecuta al inicio
 function init() {
-  mostrarform(false);
-  mostrarform_const(false);
-  mostrarform_coor(false);
-  mostrarform_agro(false);
-  mostrarform_suelos(false);
-  mostrarform_apoyo(false);
-  listar();
-  listar_construcciones();
-  listar_coordenadas();
-  listar_agro();
-  listar_suelousos();
-  listar_apoyo();
+    mostrarform(false);
+    listar();
 
-  $("#form_construccion").on("submit", function (e) {
-    guardar_const(e);
-  });
+    $("#formulario").on("submit", function (e) {
+        guardaryeditar(e);
+    });
+    //cargamos los items al celect categoria
+    $.post("../ajax/catastro.php?op=documentos", function (r) {
+        $("#doc_estado").html(r);
+    });
 
-  /* select construccion */
-
-  $.post("../ajax/inspeccion.php?op=construccion", function (r) {
-    $("#cat_construccion").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_construccion").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-
-  /* select materiales */
-
-  $.post("../ajax/inspeccion.php?op=materiales", function (r) {
-    $("#cat_materiales").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_materiales").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-
-  /* select estado construccion */
-
-  $.post("../ajax/inspeccion.php?op=estado_construccion", function (r) {
-    $("#cat_estado_construccion").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_estado_construccion").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-
-  /* select vias de acceso */
-  $.post("../ajax/inspeccion.php?op=vias", function (r) {
-    $("#cat_vias").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_vias").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-  /* select infraestructura */
-  $.post("../ajax/inspeccion.php?op=infraestructura", function (r) {
-    $("#cat_infraestructura").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_infraestructura").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-  /* select historia */
-  $.post("../ajax/inspeccion.php?op=historia", function (r) {
-    $("#cat_historia").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_historia").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-  /* select obtencion */
-  $.post("../ajax/inspeccion.php?op=obtencion", function (r) {
-    $("#cat_tenencia").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_tenencia").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-  /* select tipo_posesion */
-  $.post("../ajax/inspeccion.php?op=tipo_posesion", function (r) {
-    $("#cat_tipo_posesion").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_tipo_posesion").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-  /* select concepto */
-  $.post("../ajax/inspeccion.php?op=concepto", function (r) {
-    $("#cat_concepto").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_concepto").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
-
-  /* select infraestructura agropecuaria*/
-  $.post("../ajax/inspeccion.php?op=estado_infraestructura", function (r) {
-    $("#cat_estado_infraestructura").html(r); // Actualiza el contenido del select con la respuesta del servidor
-    $("#cat_estado_infraestructura").select2(); // Vuelve a inicializar select2 después de cambiar su contenido
-  });
 }
 
 //funcion limpiar
 function limpiar() {
-  $("#cat_id").val("");
-  $("#cat_nombre").val("");
-  $("#cat_descripcion").val("");
-  $("#cat_padre").val("");
-}
-
-function mostrar(pro_id) {
-  $.ajax({
-    url: "../ajax/inspeccion.php?op=mostrar&pro=" + pro_id,
-    type: "POST",
-    contentType: false,
-    processData: false,
-    success: function (datos) {
-      data = JSON.parse(datos);
-
-      // Asigna el valor al input con id 'provincia'
-      $("#pro_id").val(data.pro_id);
-      $("#provincia").val(data.provincia);
-      // Asigna el valor al label con id 'provi'
-      // Resto de tu código...
-      $("#canton").val(data.canton);
-      $("#parroquia").val(data.parroquia);
-      $("#sector").val(data.sector);
-      $("#pro_id_cons").val(data.pro_id);
-      $("#pro_id_tenencia").val(data.pro_id);
-
-      mostrarform(true);
-    },
-  });
-}
-
-function mostrar2(pro_id) {
-  $.ajax({
-    url: "../ajax/inspeccion.php?op=mostrar_ten&pro=" + pro_id,
-    type: "POST",
-    contentType: false,
-    processData: false,
-    success: function (datos) {
-      data = JSON.parse(datos);
-      $("#ins_tenencia").val(data.ins_id);
-      $("#cat_tenencia").val(data.forma_tenencia);
-      $("#cat_historia").val(data.historia_tenencia);
-      $("#cat_tipo_posesion").val(data.obtencion_predio);
-      $("#tiempo_posesion").val(data.tiempo_posesion);
-      $("#tenencia_observaciones").val(data.observaciones);
-    },
-  });
+    $("#cat_id").val("");
+    $("#cat_nombre").val("");
+    $("#cat_descripcion").val("");
+    $("#cat_padre").val("");
+    $("#doc_estado").val("");
+    $("#doc_descripcion").val("");
 }
 
 //funcion mostrar formulario
 function mostrarform(flag) {
-  limpiar();
-  if (flag) {
-    $("#tblsolicitantes").hide();
-    $("#tblsolicitantes_wrapper").hide();
-    $("#informe_tecnico").show();
-    $("#plan_manejo").show();
-    $("#informe_rural").show();
-    $("#btnGuardar").prop("disabled", false);
-    $("#btnagregar").hide();
-  } else {
-    $("#tblsolicitantes").show();
-    $("#tblsolicitantes_wrapper").show();
-    $("#informe_tecnico").hide();
-    $("#plan_manejo").hide();
-    $("#informe_rural").hide();
-    $("#btnagregar").show();
-  }
-}
-
-function mostrarform_const(flag2) {
-  limpiar();
-  if (flag2) {
-    $("#tblconstruccion").hide();
-    $("#tblconstruccion_wrapper").hide();
-    $("#btnGuardar_const").prop("disabled", false);
-    $("#btnAgregar_const").hide();
-    $("#btnRegresar").show();
-    $("#formulariocons").show();
-  } else {
-    $("#tblconstruccion").show();
-    $("#tblconstruccion_wrapper").show();
-    $("#btnAgregar_const").show();
-    $("#btnRegresar").hide();
-    $("#formulariocons").hide();
-  }
-}
-
-function mostrarform_coor(flag3) {
-  limpiar();
-  if (flag3) {
-    $("#tblcoordenadas").hide();
-    $("#tblcoordenadas_wrapper").hide();
-    $("#btnGuardar_coor").prop("disabled", false);
-    $("#btnAgregar_coor").hide();
-    $("#btnRegresar_coor").show();
-    $("#formulariocoor").show();
-  } else {
-    $("#tblcoordenadas").show();
-    $("#tblcoordenadas_wrapper").show();
-    $("#btnAgregar_coor").show();
-    $("#btnRegresar_coor").hide();
-    $("#formulariocoor").hide();
-  }
-}
-
-function mostrarform_agro(flag4) {
-  limpiar();
-  if (flag4) {
-    $("#tblagropecuario").hide();
-    $("#tblagropecuario_wrapper").hide();
-    $("#btnGuardar_agro").prop("disabled", false);
-    $("#btnAgregar_agro").hide();
-    $("#btnRegresar_agro").show();
-    $("#formularioagro").show();
-  } else {
-    $("#tblagropecuario").show();
-    $("#tblagropecuario_wrapper").show();
-    $("#btnAgregar_agro").show();
-    $("#btnRegresar_agro").hide();
-    $("#formularioagro").hide();
-  }
-}
-
-function mostrarform_suelos(flag5) {
-  limpiar();
-  if (flag5) {
-    $("#tblusosuelo").hide();
-    $("#tblusosuelo_wrapper").hide();
-    $("#btnGuardar_suelo").prop("disabled", false);
-    $("#btnAgregar_suelo").hide();
-    $("#btnRegresar_suelos").show();
-    $("#formulariousosuelo").show();
-  } else {
-    $("#tblusosuelo").show();
-    $("#tblusosuelo_wrapper").show();
-    $("#btnAgregar_suelo").show();
-    $("#btnRegresar_suelos").hide();
-    $("#formulariousosuelo").hide();
-  }
-}
-
-function mostrarform_apoyo(flag6) {
-  limpiar();
-  if (flag6) {
-    $("#tblaccionesapoyo").hide();
-    $("#tblaccionesapoyo_wrapper").hide();
-    $("#btnGuardar_apoyo").prop("disabled", false);
-    $("#btnAgregar_apoyo").hide();
-    $("#btnRegresar_apoyo").show();
-    $("#formularioapoyo").show();
-  } else {
-    $("#tblaccionesapoyo").show();
-    $("#tblaccionesapoyo_wrapper").show();
-    $("#btnAgregar_apoyo").show();
-    $("#btnRegresar_apoyo").hide();
-    $("#formularioapoyo").hide();
-  }
-}
-function mostrar(pro_id) {
-  $.ajax({
-    url: "../ajax/inspeccion.php?op=mostrar&pro=" + pro_id,
-    type: "POST",
-    contentType: false,
-    processData: false,
-    success: function (datos) {
-      data = JSON.parse(datos);
-
-      // Asigna el valor al input con id 'provincia'
-      $("#pro_id").val(data.pro_id);
-      $("#nombres").val(data.sol_nombre);
-      $("#identificacion").val(data.sol_identificacion);
-
-      $("#provincia").val(data.provincia);
-      // Asigna el valor al label con id 'provi'
-      // Resto de tu código...
-      $("#canton").val(data.canton);
-      $("#parroquia").val(data.parroquia);
-      $("#sector").val(data.sector);
-      $("#pro_id_cons").val(data.pro_id);
-      $("#pro_id_tenencia").val(data.pro_id);
-      $("#pro_id_coor").val(data.pro_id);
-
-      mostrarform(true);
-    },
-  });
+    limpiar();
+    if (flag) {
+        $("#tbllistado").hide();
+        $("#tbllistado_wrapper").hide();
+        $("#formularioregistros").show();
+        $("#btnGuardar").prop("disabled", false);
+        $("#btnagregar").hide();
+    } else {
+        $("#tbllistado").show();
+        $("#tbllistado_wrapper").show();
+        $("#formularioregistros").hide();
+        $("#btnagregar").show();
+    }
 }
 
 function listar() {
-  tabla = $("#tblsolicitantes")
-    .dataTable({
-      ajax: {
-        url: "../ajax/inspeccion.php?op=listar",
-        type: "get",
-        dataType: "json",
-        error: function (e) {
-          console.log(e.responseText);
-        },
-      },
-    })
-    .DataTable();
+    tabla = $("#tbllistado")
+        .dataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+            },
+            ajax: {
+                url: "../ajax/inspeccion.php?op=listar",
+                type: "get",
+                dataType: "json",
+                error: function (e) {
+                    console.log(e.responseText);
+                },
+            },
+        })
+        .DataTable();
 }
 
-/* Listar construcciones */
-function listar_construcciones() {
-  tablaConstrucciones = $("#tblconstruccion").DataTable({
-    ajax: {
-      url: "../ajax/inspeccion.php?op=listar_construcciones",
-      type: "get",
-      dataType: "json",
-      error: function (e) {
-        console.log(e.responseText);
-      },
-    },
-  });
+function cancelarform() {
+    limpiar();
+    mostrarform(false);
+    location.reload();
 }
 
-/* Listar construcciones */
-function listar_coordenadas() {
-  tablaCoordenadas = $("#tblcoordenadas").DataTable({
-    ajax: {
-      url: "../ajax/inspeccion.php?op=listar_coordenadas",
-      type: "get",
-      dataType: "json",
-      error: function (e) {
-        console.log(e.responseText);
-      },
-    },
-  });
-}
+function guardaryeditar(e) {
+    e.preventDefault();
+    $("#btnGuardar").prop("disabled", true);
 
-/* Listar infraestructura agropecuaria */
-function listar_agro() {
-  tablaAgropecuaria = $("#tblagropecuario").DataTable({
-    ajax: {
-      url: "../ajax/inspeccion.php?op=listar_agropecuaria",
-      type: "get",
-      dataType: "json",
-      error: function (e) {
-        console.log(e.responseText);
-      },
-    },
-  });
-}
-
-function listar_suelousos() {
-  tablaSueloUsos = $("#tblusosuelo").dataTable({
-    ajax: {
-      url: "../ajax/inspeccion.php?op=listar_usosuelos",
-      type: "get",
-      dataType: "json",
-      error: function (e) {
-        console.log(e.responseText);
-      },
-    },
-  });
-}
-
-function listar_apoyo() {
-  tablaApoyo = $("#tblaccionesapoyo").dataTable({
-    ajax: {
-      url: "../ajax/inspeccion.php?op=listar_apoyo",
-      type: "get",
-      dataType: "json",
-      error: function (e) {
-        console.log(e.responseText);
-      },
-    },
-  });
-}
-
-function guardar_const(e) {
-  e.preventDefault(); //no se activara la accion predeterminada
-  $("#btnGuardar_const").prop("disabled", false);
-  var formData = new FormData($("#form_construccion")[0]);
-
-  $.ajax({
-    url: "../ajax/inspeccion.php?op=guardar_construccion",
-    type: "POST",
-    data: formData,
-    contentType: false,
-    processData: false,
-
-    success: function (datos) {
-      bootbox.alert(datos);
-      tablaConstrucciones.ajax.reload();
-    },
-  });
-
-  limpiar_construcciones();
-}
-
-//Funcion regresar
-$("#btnRegresar").on("click", function () {
-  mostrarform_const(false); // Puedes ajustar esto según tu lógica
-});
-
-$("#btnRegresar_coor").on("click", function () {
-  mostrarform_coor(false); // Puedes ajustar esto según tu lógica
-});
-
-$("#btnRegresar_agro").on("click", function () {
-  mostrarform_agro(false); // Puedes ajustar esto según tu lógica
-});
-
-$("#btnRegresar_suelos").on("click", function () {
-  mostrarform_suelos(false); // Puedes ajustar esto según tu lógica
-});
-
-$("#btnRegresar_apoyo").on("click", function () {
-  mostrarform_apoyo(false); // Puedes ajustar esto según tu lógica
-});
-
-$(document).ready(function () {
-  var stepper = new Stepper(document.querySelector(".bs-stepper"));
-
-  $(".btn-primary").on("click", function () {
-    stepper.next();
-  });
-
-  $(".btn-secondary").on("click", function () {
-    stepper.previous();
-  });
-});
-
-/*API MAPS*/
-
-// Función para cargar automáticamente la latitud y longitud
-function cargarCoordenadas() {
-  // Verificar si el navegador soporta la geolocalización
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      // Obtener la latitud y longitud de la posición actual
-      var latitud = position.coords.latitude;
-      var longitud = position.coords.longitude;
-
-      // Asignar los valores a los campos de entrada correspondientes
-      document.getElementById("latitud").value = latitud;
-      document.getElementById("longitud").value = longitud;
+    // Verificar si todos los registros de la última columna son "Registrado"
+    let todosRegistrados = true;
+    $("#tabla_pdf tbody tr").each(function (index, row) {
+        let textoUltimaColumna = $(row).find("td:last").text().trim();
+        if (textoUltimaColumna !== "Registrado") {
+            todosRegistrados = false;
+            return false;  // Detener el bucle si encontramos un registro no "Registrado"
+        }
     });
-  } else {
-    // El navegador no soporta la geolocalización
-    console.log("Geolocalización no está disponible en este navegador.");
-  }
+    // Mostrar el cuadro de diálogo de confirmación solo si todos están "Registrado"
+    if (todosRegistrados) {
+        bootbox.confirm({
+            message: "¿Estás seguro de Continuar? No se podrá revertir esta acción",
+            buttons: {
+                confirm: {
+                    label: 'Sí',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    if (result) {
+                        // Obtener datos de la tabla y agregarlos a formData
+                        let tableData = [];
+                        $("#tabla_pdf tbody tr").each(function (index, row) {
+                            // Obtener valor de la columna 01
+                            let tra_id = $(row).find("td:eq(2)").text();
+                            let estado = $(row).find("td:eq(1)").text();
+                            // Convertir el estado a un valor específico
+                            let estadoValue = (estado === "Aprobado") ? 18 : (estado === "No Aprobado") ? 28 : null;
+                            let observacion = $(row).find("td:eq(5)").text();
+
+                            let rowData = {
+                                tra_id: tra_id,
+                                estado: estadoValue,
+                                observacion: observacion
+                            };
+
+                            tableData.push(rowData);
+                        });
+
+                        // Empaquetar los datos en un objeto FormData
+                        let formData = new FormData();
+                        formData.append('tabla_pdf', JSON.stringify(tableData));
+                        $.ajax({
+                            url: "../ajax/inspeccion.php?op=aprobardocumento",
+                            type: "POST",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function (datos) {
+                                bootbox.alert(datos);
+                                mostrarform(false);
+                                tabla.ajax.reload();
+
+                                // Utilizar setTimeout para ejecutar el bloque después de 1 segundo
+                                setTimeout(function () {
+                                    for (let [clave, valor] of Object.entries(localStorage)) {
+                                        if (clave.startsWith(`${cedula}_fila_`)) {
+                                            localStorage.removeItem(clave);
+                                        }
+                                    }
+                                }, 1000); // 1000 milisegundos = 1 segundo
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("Error en la solicitud AJAX:", error);
+                            }
+                        });
+
+                        limpiar();
+                    }
+                } else {
+                    $("#btnGuardar").prop("disabled", false);
+                }
+            }
+        });
+    } else {
+
+        bootbox.alert("No se puede guardar. Algunos documentos no están 'Registrados'.");
+        $("#btnGuardar").prop("disabled", false);
+    }
 }
 
-// Llamar a la función para cargar las coordenadas al cargar la página
-window.onload = function () {
-  cargarCoordenadas();
-};
+
+/*function mostrar(tra_id) {
+    $.post(
+        "../ajax/ventanilla.php?op=mostrar",
+        { tra_id: tra_id },
+        function (data, status) {
+            data = JSON.parse(data);
+            mostrarform(true);
+            $("#tra_id").val(data.tra_id);
+            $("#sol_nombre").val(data.sol_nombre);
+            $("#doc_url").val(data.doc_url);
+            $("#sol_iden").val(data.sol_identificacion);
+            $("#tra_id").val(data.tra_id);
+        }
+    );
+}*/
+
+function mostrarTabla(s_ident) {
+    mostrarform(true);
+    tabla_pdf = $('#tabla_pdf').DataTable({
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+        },
+        "serverSide": true,
+        "ajax": {
+            url: '../ajax/inspeccion.php?op=tabla&s_ident=' + s_ident,
+            type: "GET",
+            dataType: "json",
+            error: function (e) {
+                console.log(e.responseText);
+            },
+        },
+        "destroy": true,
+        "pageLength": 15,
+        "order": [[0, "desc"]],
+        "columnDefs": [
+            {"targets": [0], "visible": true, "searchable": true, "orderable": false},
+            {"targets": [6], "visible": false, "searchable": false},
+            {"targets": [8], "visible": false, "searchable": false},
+        ],
+        "createdRow": function (row, data) {
+            // Renderizar CheckBox en la columna 5
+            $('td', row).eq(5).html(data[1]);
+            // Renderizar TextBox en la columna 5
+            $('td', row).eq(5).html(data[5]);
+        },
+        "responsive": {
+            "breakpoints": [
+                {name: 'xl', width: Infinity},
+                {name: 'lg', width: 1200},
+                {name: 'md', width: 992},
+                {name: 'sm', width: 770},
+                {name: 'xs', width: 576}
+            ]
+        }
+    });
+
+    function padLeftWithZeros(input, length) {
+        let str = input.toString();
+        while (str.length < length) {
+            str = '0' + str;
+        }
+        return str;
+    }
+
+    tabla_pdf.on('draw.dt', function () {
+        cedula = padLeftWithZeros(s_ident, 10);
+        cargarDatosGuardados(cedula);
+    });
+
+    $('#tabla_pdf tbody').on('click', '.btn.btn-secondary.btn-xs', function (event) {
+        event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
+        index = tabla_pdf.row($(event.target).closest('tr')).node();
+        let data = tabla_pdf.row($(this).parents('tr')).data();
+        let url = data[6];
+        let nombreDinamico = data[3];
+        openModal(url, nombreDinamico);
+    });
+}
+
+function openModal(url, nombreDinamico) {
+    let modal = document.querySelector('#my-modal');
+    modal.style.display = 'block';
+
+    let iframe = document.querySelector('#modal-iframe');
+    iframe.src = url;
+
+    let modalTitle = document.querySelector('#modal-title');
+    modalTitle.textContent = nombreDinamico;
+
+    let closeBtn = document.querySelector('.close');
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', outsideClick);
+}
+
+function closeModal() {
+    let modal = document.querySelector('#my-modal');
+    modal.style.display = 'none';
+
+    let closeBtn = document.querySelector('.close');
+    closeBtn.removeEventListener('click', closeModal);
+
+    window.removeEventListener('click', outsideClick);
+}
+
+function outsideClick(e) {
+    let modal = document.querySelector('#my-modal');
+    if (e.target === modal) {
+        closeModal();
+    }
+}
+
+function capitalizeEachWord(text) {
+    return text.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
+        return a.toUpperCase();
+    });
+}
+
+function guardarModal() {
+    event.preventDefault();
+    let filaActual = index;
+    let catNombre = $('#doc_estado option:selected').text();
+    let docDescripcion = $('#doc_descripcion').val();
+    let formattedCatNombre = capitalizeEachWord(catNombre);
+    let badgeClass = (formattedCatNombre === 'Aprobado') ? 'badge-success' : 'badge-danger';
+    filaActual.cells[1].innerHTML = `<span class="badge ${badgeClass}">${formattedCatNombre}</span>`;
+    let textColorClass = (formattedCatNombre === 'Aprobado') ? 'text-green' : 'text-red';
+    filaActual.cells[1].classList.add(textColorClass);
+    let proObservacionInput = filaActual.querySelector('input[name="pro_observacion"]');
+    proObservacionInput.value = docDescripcion;
+    proObservacionInput.readOnly = true;
+    closeModal();
+}
+
+function guardar(event) {
+    event.preventDefault();
+    let fila = $(event.target).closest("tr");
+    // Verificar si la celda en la posición 1 está vacía
+    if (fila.find("td:eq(1)").text().trim() === "") {
+        bootbox.alert("Debes llenar los datos del documento antes de guardar.");
+        return;
+    }
+    bootbox.confirm({
+        message: "¿Estás seguro de continuar?",
+        buttons: {
+            confirm: {
+                label: 'Sí',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            // Si el usuario hace clic en "Sí", continúa con la función guardar
+            if (result) {
+                // Obtener el texto de la columna 3
+                let textoCedula = fila.find("td:eq(3)").text().trim();
+                // Buscar la posición del guion ("-") en el texto
+                let posicionGuion = textoCedula.indexOf("-");
+                // Extraer la cédula si se encuentra el guion
+                let sol_identificacion =
+                    posicionGuion !== -1 ? textoCedula.substr(posicionGuion + 1) : "";
+                let datosFila = {
+                    cat_id_estado: $('#doc_estado').val(),
+                    tra_id: fila.find("td:eq(2)").text(),
+                    pro_observacion: $('#doc_descripcion').val(),
+                    sol_identificacion: sol_identificacion,
+                };
+
+                $.ajax({
+                    url: "../ajax/inspeccion.php?op=guardardocumento",
+                    type: "POST",
+                    data: datosFila,
+                    success: function (response) {
+                        bootbox.alert("Documento guardado correctamente");
+
+                        // Manejar la respuesta del servidor
+                        let estado = response.cat_id_estado;
+                        let observacion = response.pro_observacion;
+
+                        // Modificar la tabla y almacenar los cambios en localStorage
+                        let estadoTexto = estado === 18 ? "Aprobado" : "No Aprobado";
+                        fila.find("td:eq(1)").text(estadoTexto);
+                        fila.find("td:eq(5)").text(observacion).prop("readonly", true);
+                        fila
+                            .find("td:last")
+                            .html('<button class="btn btn-editar">Editar</button>');
+
+                        // Almacenar los cambios en localStorage
+                        guardarCambiosEnLocalStorage(
+                            fila.index(),
+                            estado,
+                            observacion,
+                            sol_identificacion
+                        );
+                        cargarDatosGuardados(sol_identificacion);
+                        limpiar();
+                    },
+                    error: function (error) {
+                        fila.find("td:eq(1)").text("");
+                    },
+                });
+            }
+        }
+    });
+}
+
+
+// Función para almacenar los cambios en localStorage
+function guardarCambiosEnLocalStorage(
+    index,
+    estado,
+    observacion,
+    sol_identificacion
+) {
+    let cambios = {
+        cat_id_estado: estado,
+        pro_observacion: observacion,
+        sol_identificacion: sol_identificacion,
+    };
+    localStorage.setItem(
+        sol_identificacion + "_fila_" + index,
+        JSON.stringify(cambios)
+    );
+}
+
+function cargarDatosGuardados(s_ident) {
+    let sol_identificacion = s_ident;
+    if (sol_identificacion) {
+        $("#tabla_pdf tbody tr").each((index, element) => {
+            let localStorageKey = sol_identificacion + "_fila_" + index;
+            let cambios = localStorage.getItem(localStorageKey);
+
+            if (cambios) {
+                let datos = JSON.parse(cambios);
+                let estado = datos.cat_id_estado;
+                let estadoTexto = estado === 18 ? "Aprobado" : "No Aprobado";
+                let badgeClass = (estado === 18) ? 'badge-success' : 'badge-danger';
+
+                $(element).find("td:eq(1)")
+                    .html(`<span class="badge ${badgeClass}">${estadoTexto}</span>`)
+                    .data("estado", estado);
+
+                // Verificar si está aprobado para mostrar "Registrado"
+                if (estado === 18) {
+                    $(element)
+                        .find("td:last")
+                        .html('<span class="badge badge-primary">Registrado</span>');
+                } else {
+                    $(element)
+                        .find("td:last")
+                        .html(
+                            '<button class="btn btn-editar btn-primary btn-xs">Cambiar<i class="fa fa-pen" style="margin-left: 5px;"></i></button>'
+                        );
+                }
+                $(element)
+                    .find("td:eq(5)")
+                    .html(
+                        '<input type="text" id="pro_observacion" name="pro_observacion" value="' +
+                        datos.pro_observacion +
+                        '" readonly class="form-control">'
+                    );
+            }
+        });
+    }
+    $("body").off("click", ".btn-editar").on("click", ".btn-editar", function (event) {
+        event.preventDefault();
+        guardar(event);
+    });
+}
+
 
 init();

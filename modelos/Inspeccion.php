@@ -1,6 +1,8 @@
 <?php
 //incluir la conexion de base de datos
 require "../config/Conexion.php";
+
+
 class Inspeccion
 {
 
@@ -8,179 +10,65 @@ class Inspeccion
     //implementamos nuestro constructor
     public function __construct()
     {
+
     }
 
-    //metodo insertar registro
-
-    public function guardar_construccion($pro_id, $ins_dato1, $ins_dato2, $ins_dato3, $cat_id_1, $cat_id_2, $cat_id_3)
-    {
-        $sql = "call sp_inspeccion('ins_const',0,0,'$pro_id','$ins_dato1','$ins_dato2','$ins_dato3','$cat_id_1','$cat_id_2','$cat_id_3',0)";
-
-        return ejecutarConsulta($sql);
-    }
-
-    public function guardaryeditar_tenencia($pro_id, $ins_dato1, $cat_id_1, $cat_id_2, $cat_id_3, $observaciones)
-    {
-        $sql = "call sp_inspeccion('ins_ten',0,0,'$pro_id','$ins_dato1',0,0,'$cat_id_1','$cat_id_2','$cat_id_3','$observaciones')";
-
-        return ejecutarConsulta($sql);
-    }
-
-    public function editar_tenencia($ins_id, $ins_dato1, $cat_id_1, $cat_id_2, $cat_id_3, $observaciones)
-    {
-        $sql = "call sp_inspeccion('edit_ten',0,$ins_id,0,'$ins_dato1',0,0,'$cat_id_1','$cat_id_2','$cat_id_3','$observaciones')";
-
-        return ejecutarConsulta($sql);
-    }
-
-
-    /* Metodo listar solicitantes*/
     public function listar()
     {
-        $sql = "CALL sp_inspeccion('list',0, 0, 
-        0, 0, 0, 
-        0, 0, 0,
-        0, 0)";
-        return ejecutarConsultaSP($sql);
-    }
-    /* Fin metodo listar construcciones */
-    public function listar_construcciones()
-    {
-        $sql = "CALL sp_inspeccion('list_const',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+        $sql = "call sp_inspeccion ('list', 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
     }
 
-    public function listar_coordenadas()
+    public function mostrar($tra_id)
     {
-        $sql = "CALL sp_inspeccion('list_coor',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function listar_agropecuaria()
-    {
-        $sql = "CALL sp_inspeccion('list_agro',0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function listar_usosuelos()
-    {
-        $sql = "CALL `sp_inspeccion`('list_suelo', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function listar_apoyo()
-    {
-        $sql = "CALL `sp_inspeccion`('list_apoyo', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-
-    /* Fin */
-    /* Metodos llenar combobox */
-    public function explicacion()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function vias()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function infraestructura()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function historia()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function obtencion()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function construccion()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function materiales()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function estado_construccion()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function concepto()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function concepto_suelo()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function estado_suelo()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function destino_economico()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function estado_infraestructura()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-
-    public function tipo_posesion()
-    {
-        $sql = "CALL sp_catalgo('spa','0','', '',0)";
-        return ejecutarConsultaSP($sql);
-    }
-    /* Fin metodos llenar combobox */
-
-    public function mostrar($pro_id)
-    {
-        $sql = "call sp_inspeccion('mos',$pro_id,0,0,0,0,0,0,0,0,0)";
+        $sql = "call sp_inspeccion('mos','$tra_id',0,0,0,0)";
         $result = ejecutarConsultaSP($sql);
         return $result->fetch_assoc();
     }
-
-    public function mostrar_ten($pro_id)
+    public function tabla($id)
     {
-        $sql = "call sp_inspeccion('mos_ten',$pro_id,0,0,0,0,0,0,0,0,0)";
-        $result = ejecutarConsultaSP($sql);
-        return $result->fetch_assoc();
-    }
-
-    /* Metodos para eiminar información de las tablas */
-
-    public function eliminar($ins_id)
-    {
-        $sql = "CALL sp_inspeccion('elim_const',0,$ins_id,0,0,0,0,0,0,0,0)";
+        $sql = "call sp_inspeccion('listedi',0,0,'$id',0,0)";
         return ejecutarConsulta($sql);
     }
+
+    public function guardardocumento($tra_id, $cat_id_estado, $pro_observacion)
+    {
+        // Ejecutar la consulta y obtener el resultado
+        $sql = "CALL sp_procesos('doc', 0, 0, $tra_id, $cat_id_estado, '$pro_observacion')";
+        $result = ejecutarConsulta($sql);
+        $row = $result->fetch_assoc();
+
+        // Verificar si la columna existe en el resultado
+        $jsonColumn = 'JSON_OBJECT(\'cat_id_estado\', cat_id_estado, \'pro_observacion\', pro_observacion)';
+        if (array_key_exists($jsonColumn, $row)) {
+            // Decodificar el objeto JSON
+            $jsonData = json_decode($row[$jsonColumn], true);
+
+            // Verificar si el JSON se decodificó correctamente
+            if ($jsonData !== null) {
+                // Acceder a los datos
+                $cat_id_estado = $jsonData['cat_id_estado'];
+                $pro_observacion = $jsonData['pro_observacion'];
+
+                // Devolver los datos como un JSON
+                header('Content-Type: application/json');
+                echo json_encode(['cat_id_estado' => $cat_id_estado, 'pro_observacion' => $pro_observacion]);
+                exit;
+            }
+        }
+
+        // Devolver un JSON indicando un error o un valor predeterminado según sea necesario
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'No se pudo decodificar el JSON']);
+        exit;
+    }
+
+    public function aprobardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
+    {
+        // Ejecutar la consulta y obtener el resultado
+        $sql = "CALL sp_procesos('insp', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
+        return ejecutarConsulta($sql);
+    }
+
 }
+

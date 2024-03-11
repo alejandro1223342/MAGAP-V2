@@ -1,10 +1,10 @@
 <?php
 if (strlen(session_id()) < 1)
-  session_start();
+  require_once "../config/session.php";
 
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -44,6 +44,7 @@ if (strlen(session_id()) < 1)
 
   <!-- BS Stepper -->
   <link rel="stylesheet" href="../public/css/bs-stepper.min.css">
+  <link rel="stylesheet" href="../public/css/modal-iframe.css">
 
 </head>
 
@@ -56,14 +57,14 @@ if (strlen(session_id()) < 1)
 
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-light ">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="nav-link">ADJUDICACION</a>
+          <a class="nav-link text-white">SISTEMA SEGUIMIENTO DE ADJUDICACIÓN DE TIERRAS</a>
         </li>
 
       </ul>
@@ -98,110 +99,108 @@ if (strlen(session_id()) < 1)
 
       <!-- Sidebar -->
       <div class="sidebar">
-
-
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                         with font-awesome or any other icon font library -->
 
 
             <?php
 
-            if ($_SESSION['Actas'] == 0) {
+            if ($_SESSION['Inspección'] == 1) {
               echo '<li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
-                      Tables
+                      Inspección
                       <i class="fas fa-angle-left right"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="pages/tables/simple.html" class="nav-link">
+                      <a href="inspeccion.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Simple Tables</p>
+                        <p>Documentos</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="pages/tables/data.html" class="nav-link">
+                      <a href="doc_inspeccion.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>DataTables</p>
+                        <p>Cargar Documentos</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                       <a href="pages/tables/jsgrid.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>jsGrid</p>
                       </a>
-                    </li>
+                    </li>-->
                   </ul>
                 </li>';
             }
             ?>
 
             <?php
-            if ($_SESSION['Activos'] == 0) {
+            if ($_SESSION['Providencia'] == 1) {
               echo ' <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Tables
+                  Providencia
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
+                  <a href="providencia.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
+                    <p>Documentos</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
+                  <a href="doc_providencia.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
+                    <p>Perfeccionamiento</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="pages/tables/jsgrid.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>jsGrid</p>
                   </a>
-                </li>
+                </li>-->
               </ul>
             </li>';
             }
             ?>
 
             <?php
-            if ($_SESSION['Generación'] == 0) {
+            if ($_SESSION['Perfeccionamiento Providencia'] == 1) {
               echo '<li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Tables
+                  Documentos
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
+                  <a href="../vistas/perfeccionamiento.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
+                    <p>Solicitante</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="pages/tables/data.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
+                    <p>Gestores</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="pages/tables/jsgrid.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>jsGrid</p>
+                    <p>Finalización</p>
                   </a>
                 </li>
               </ul>
@@ -237,24 +236,21 @@ if (strlen(session_id()) < 1)
             </li>';
             }
             ?>
-
-
-
             <?php
-            if ($_SESSION['Reportes'] == 0) {
+            if ($_SESSION['Reportes'] == 1) {
               echo '<li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Tables
+                  Reportes
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
+                  <a href="../vistas/reportes.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
+                    <p>Trámites</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -275,7 +271,7 @@ if (strlen(session_id()) < 1)
             ?>
 
             <?php
-            if ($_SESSION['Custodios'] == 0) {
+            if ($_SESSION['Custodios'] == 1) {
               echo '<li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -360,65 +356,28 @@ if (strlen(session_id()) < 1)
                     <p>Solicitantes</p>
                   </a>
                 </li>
-                <!--<li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
+                <li class="nav-item">
+                  <a href="doc_catastros.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
+                    <p>Cargar Documento</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/tables/jsgrid.html" class="nav-link">
+                  <a href="cat_ins.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>jsGrid</p>
+                    <p>Documento Inspección</p>
                   </a>
                 </li>-->
               </ul>
             </li>';
             }
             ?>
-            <!-- Revisar porque no funciona el session de inspeccion -->
-            <?php
-            if ($_SESSION['Inspeccion'] == 0) {
-              echo '<li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>
-                  Inspección
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="inspeccion.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Solicitantes</p>
-                  </a>
-                </li>
-                <!--<li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/tables/jsgrid.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>jsGrid</p>
-                  </a>
-                </li>-->
-              </ul>
-            </li>';
-            }
-            ?>
-
-
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
     </aside>
-
 
 
   </div>

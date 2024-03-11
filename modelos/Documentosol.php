@@ -6,19 +6,16 @@ require "../ajax/solicitante.php";
 
 class Documentosol
 {
-
-
     //implementamos nuestro constructor
     public function __construct()
     {
+
     }
 
-    //metodo insertar regiustro
-
-
-    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url)
+//metodo insertar regiustro
+    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url, $tra_pro)
     {
-        $sql_check = "Call sp_documentosol('compDoc', '0', 0, '$fileName', '0')";
+        $sql_check = "Call sp_documentosol('compDoc', $tra_pro + 2, 0, '$fileName', '0')";
         $result_check = ejecutarConsultaSP($sql_check);
         $row_check = $result_check->fetch_assoc();
 
@@ -42,8 +39,6 @@ class Documentosol
             }
         }
     }
-
-
 
 
     /*
@@ -92,7 +87,7 @@ class Documentosol
         return ejecutarConsulta($sql);
     }
 
-    //metodo para mostrar registros
+//metodo para mostrar registros
     public function documentos()
     {
         $sql = "CALL sp_catalgo('spa','0','', '',13)";
@@ -107,19 +102,53 @@ class Documentosol
 
         $result = ejecutarConsultaSP($sql);
         return $result->fetch_assoc();
+
     }
 
-    //listar registros
-    public function listar($sol_identificacion)
+    public function procesoActual($sol_id)
     {
-        $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'','')";
+        $sql = "CALL sp_tramite_actual($sol_id);";
         return ejecutarConsultaSP($sql);
     }
 
-    //listar y mostrar en selct
+//listar registros
+    public function listar($sol_identificacion, $nombre)
+    {
+        $doc_nombre = $nombre . '-' . $sol_identificacion;
+        $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'$doc_nombre','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function procesosFinalizados($sol_identificacion, $tra_pro)
+    {
+        $sql = "CALL sp_procesos('profin',0, 0,$tra_pro,0,'$sol_identificacion');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function listafin($sol_id)
+    {
+        $sql = "CALL sp_procesos('listafin',$sol_id, 0,0,0,0);";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function notificaciones($sol_identificacion)
+    {
+        $sql = "CALL sp_documentosol('notify',$sol_identificacion, 0,'','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function procesoSol($sol_id)
+    {
+        $sql = "CALL sp_documentosol('prosol',$sol_id, 0,'','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+//listar y mostrar en selct
     public function select()
     {
         $sql = "SELECT * FROM categoria WHERE condicion=1";
         return ejecutarConsulta($sql);
     }
 }
+
+?>

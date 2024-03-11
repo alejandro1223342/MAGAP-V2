@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once "../modelos/Ventanilla.php";
 
 
@@ -29,7 +28,7 @@ switch ($_GET["op"]) {
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => '<button class="btn btn-warning btn-xs" onclick="mostrarTabla(' . $reg->s_ident . ')"><i class="fa fa-pen"></i></button>',
+                "0" => '<button class="btn btn-primary btn-xs" onclick="mostrarTabla(' . $reg->s_ident . ')"><i class="fa fa-eye"></i></button>',
                 "1" => $reg->sol_identificacion,
                 "2" => $reg->sol_nombre,
                 "3" => $reg->sol_telefono,
@@ -38,42 +37,38 @@ switch ($_GET["op"]) {
         }
 
         $results = array(
-            "sEcho" => 1, //info para datatables
-            "iTotalRecords" => count($data), //enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
+            "sEcho" => 1,//info para datatables
+            "iTotalRecords" => count($data),//enviamos el total de registros al datatable
+            "iTotalDisplayRecords" => count($data),//enviamos el total de registros a visualizar
+            "aaData" => $data);
         echo json_encode($results);
         break;
 
-        /*case 'mostrar':
+    /*case 'mostrar':
         $rspta = $ventanilla->mostrar($tra_id);
         echo json_encode($rspta);
         break;*/
 
     case 'tabla':
-
         $s_ident = isset($_GET['s_ident']) ? $_GET['s_ident'] : '';
-
         $rspta = $ventanilla->tabla($s_ident);
         $data = array();
-
         if ($rspta) {
             while ($row = $rspta->fetch_object()) {
                 $data[] = array(
-                    "0" => '<button class="btn btn-secondary btn-xs">Ver</button>',
-                    "1" => '<input type="checkbox" name="cat_id_estado" id="cat_id_estado">',
-                    "2" => $row->tra_id,
+                    "0" => '<button class="btn btn-secondary btn-xs"><i class="fa fa-eye"></i> Ver</button>',
+                    "1" => '',
+                    "2" => $row->tra_iden,
                     "3" => $row->doc_nombre,
                     "4" => $row->doc_fechareg,
-                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación">',
+                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
                     "6" => $row->doc_url,
-                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
-                    "8" => $s_ident,
+                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
+                    "8" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
+
                 );
             }
         }
-
         $results = array(
             "sEcho" => 1,
             "iTotalRecords" => count($data),
@@ -81,7 +76,6 @@ switch ($_GET["op"]) {
             "aaData" => $data
         );
         echo json_encode($results);
-
         break;
 
     case 'estado':
@@ -91,27 +85,23 @@ switch ($_GET["op"]) {
         }
         break;
 
-
-    case 'guardaryeditar':
-        if (empty(!$tra_id)) {
-            $rspta = $ventanilla->insertar($usu_id, $tra_id, $cat_id_estado, $pro_observacion);
-            echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
-
-            echo "Valor de cat_id: " . $usu_id;
-            echo "Valor de cat_id: " . $tra_id;
-            echo "Valor de cat_id: " . $cat_id_estado;
-            echo "Valor de cat_id: " . $pro_observacion; // Imprime el valor de cat_id
-        } else {
-
-            $rspta = $ventanilla->editar($cat_id, $cat_nombre, $cat_descripcion, $cat_padre);
-            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
-        }
-        break;
-
     case 'guardardocumento':
         $cat_id_estado = $_POST['cat_id_estado'];
         $tra_id = $_POST['tra_id'];
         $pro_observacion = $_POST['pro_observacion'];
-        $rspta = $ventanilla->guardardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion);
+        $rspta = $ventanilla->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
         break;
+
+    case 'aprobardocumento':
+        $datosTabla = json_decode($_POST['tabla_pdf'], true);
+        // Toma solo el primer tra_id del array
+        $primerTraId = reset($datosTabla)['tra_id'];
+        $rspta = $ventanilla->aprobardocumento($usu_id, $primerTraId);
+        if ($rspta) {
+            echo "El documento se registró correctamente";
+        } else {
+            echo "Hubo un problema al registrar el documento";
+        }
+        break;
+
 }
