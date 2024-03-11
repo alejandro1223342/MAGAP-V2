@@ -1,7 +1,7 @@
 <?php
 //activamos almacenamiento en el buffer
 ob_start();
-session_start();
+require_once "../config/session.php";
 if (!isset($_SESSION['usu_nombre'])) {
   header("Location: login.html");
 }else{

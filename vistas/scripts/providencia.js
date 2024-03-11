@@ -7,19 +7,22 @@ var index;
 function init() {
     mostrarform(false);
     listar();
+
     $("#formulario").on("submit", function (e) {
         guardaryeditar(e);
     });
     //cargamos los items al celect categoria
-    $.post("../ajax/ventanilla.php?op=estado", function (r) {
+    $.post("../ajax/catastro.php?op=documentos", function (r) {
         $("#doc_estado").html(r);
     });
+
 }
 
 //funcion limpiar
 function limpiar() {
     $("#cat_id").val("");
     $("#cat_nombre").val("");
+    $("#cat_descripcion").val("");
     $("#cat_padre").val("");
     $("#doc_estado").val("");
     $("#doc_descripcion").val("");
@@ -43,22 +46,22 @@ function mostrarform(flag) {
 }
 
 function listar() {
-    tabla = $("#tbllistado").DataTable({
-        language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
-        },
-        responsive: true,
-        ajax: {
-            url: "../ajax/ventanilla.php?op=listar",
-            type: "get",
-            dataType: "json",
-            error: function (e) {
-                console.log(e.responseText);
+    tabla = $("#tbllistado")
+        .dataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
             },
-        }
-    });
+            ajax: {
+                url: "../ajax/providencia.php?op=listar",
+                type: "get",
+                dataType: "json",
+                error: function (e) {
+                    console.log(e.responseText);
+                },
+            },
+        })
+        .DataTable();
 }
-
 
 function cancelarform() {
     limpiar();
@@ -79,7 +82,6 @@ function guardaryeditar(e) {
             return false;  // Detener el bucle si encontramos un registro no "Registrado"
         }
     });
-
     // Mostrar el cuadro de diálogo de confirmación solo si todos están "Registrado"
     if (todosRegistrados) {
         bootbox.confirm({
@@ -120,7 +122,7 @@ function guardaryeditar(e) {
                         let formData = new FormData();
                         formData.append('tabla_pdf', JSON.stringify(tableData));
                         $.ajax({
-                            url: "../ajax/ventanilla.php?op=aprobardocumento",
+                            url: "../ajax/providencia.php?op=aprobardocumento",
                             type: "POST",
                             data: formData,
                             contentType: false,
@@ -158,6 +160,7 @@ function guardaryeditar(e) {
     }
 }
 
+
 /*function mostrar(tra_id) {
     $.post(
         "../ajax/ventanilla.php?op=mostrar",
@@ -182,7 +185,7 @@ function mostrarTabla(s_ident) {
         },
         "serverSide": true,
         "ajax": {
-            url: '../ajax/ventanilla.php?op=tabla&s_ident=' + s_ident,
+            url: '../ajax/providencia.php?op=tabla&s_ident=' + s_ident,
             type: "GET",
             dataType: "json",
             error: function (e) {
@@ -203,6 +206,15 @@ function mostrarTabla(s_ident) {
             // Renderizar TextBox en la columna 5
             $('td', row).eq(5).html(data[5]);
         },
+        "responsive": {
+            "breakpoints": [
+                {name: 'xl', width: Infinity},
+                {name: 'lg', width: 1200},
+                {name: 'md', width: 992},
+                {name: 'sm', width: 770},
+                {name: 'xs', width: 576}
+            ]
+        }
     });
 
     function padLeftWithZeros(input, length) {
@@ -218,7 +230,6 @@ function mostrarTabla(s_ident) {
         cargarDatosGuardados(cedula);
     });
 
-    // Vincula el evento de clic para los botones .btn-editar una sola vez
     $('#tabla_pdf tbody').on('click', '.btn.btn-secondary.btn-xs', function (event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
         index = tabla_pdf.row($(event.target).closest('tr')).node();
@@ -228,7 +239,6 @@ function mostrarTabla(s_ident) {
         openModal(url, nombreDinamico);
     });
 }
-
 
 function openModal(url, nombreDinamico) {
     let modal = document.querySelector('#my-modal');
@@ -284,7 +294,6 @@ function guardarModal() {
     closeModal();
 }
 
-
 function guardar(event) {
     event.preventDefault();
     let fila = $(event.target).closest("tr");
@@ -323,7 +332,7 @@ function guardar(event) {
                 };
 
                 $.ajax({
-                    url: "../ajax/ventanilla.php?op=guardardocumento",
+                    url: "../ajax/providencia.php?op=guardardocumento",
                     type: "POST",
                     data: datosFila,
                     success: function (response) {
@@ -385,7 +394,8 @@ function cargarDatosGuardados(s_ident) {
         $("#tabla_pdf tbody tr").each((index, element) => {
             let localStorageKey = sol_identificacion + "_fila_" + index;
             let cambios = localStorage.getItem(localStorageKey);
-            if (cambios !== null) {
+
+            if (cambios) {
                 let datos = JSON.parse(cambios);
                 let estado = datos.cat_id_estado;
                 let estadoTexto = estado === 18 ? "Aprobado" : "No Aprobado";
@@ -422,5 +432,6 @@ function cargarDatosGuardados(s_ident) {
         guardar(event);
     });
 }
+
 
 init();

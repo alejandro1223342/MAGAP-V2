@@ -3,7 +3,7 @@
 require "../config/Conexion.php";
 
 
-class Inspeccion
+class Providencia
 {
 
 
@@ -15,19 +15,19 @@ class Inspeccion
 
     public function listar()
     {
-        $sql = "call sp_inspeccion ('list', 0, 0, 0, 0, 0)";
+        $sql = "call sp_providencia ('list', 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
     }
 
     public function mostrar($tra_id)
     {
-        $sql = "call sp_inspeccion('mos','$tra_id',0,0,0,0)";
+        $sql = "call sp_providencia('mos','$tra_id',0,0,0,0)";
         $result = ejecutarConsultaSP($sql);
         return $result->fetch_assoc();
     }
     public function tabla($id)
     {
-        $sql = "call sp_inspeccion('listedi',0,0,'$id',0,0)";
+        $sql = "call sp_providencia('listedi',0,0,'$id',0,0)";
         return ejecutarConsulta($sql);
     }
 
@@ -66,7 +66,7 @@ class Inspeccion
     public function aprobardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
     {
         // Ejecutar la consulta y obtener el resultado
-        $sql = "CALL sp_procesos('insp', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
+        $sql = "CALL sp_procesos('prov', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
         return ejecutarConsulta($sql);
     }
 

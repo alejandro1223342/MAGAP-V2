@@ -4,9 +4,7 @@ require_once '../upload-php/api-google/vendor/autoload.php';
 
 function uploadFileToDrive($parentFolderId, $folderName, $fileName, $fileTempPath,$proceso)
 {
-    if($proceso == 0){
-        $proceso = "Trámite 1" ;
-    }
+
 
     try {
         putenv('GOOGLE_APPLICATION_CREDENTIALS=../upload-php/upload-pdf-405104-69c69d6b9a4a.json');

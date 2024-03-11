@@ -1,6 +1,6 @@
 <?php
 ob_start();
-session_start();
+require_once "../config/session.php";
 
 if (!isset($_SESSION['usu_nombre'])) {
     header("Location: login.html");
@@ -73,8 +73,8 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         </div>
                                                         <div class="form-group">
                                                             <button class="btn btn-success" id="modalG" name="modalG"
-                                                                    onclick="guardarModal()">Guardar <i
-                                                                        class="fa fa-save"
+                                                                    onclick="guardarModal()">Aceptar <i
+                                                                        class="fa fa-check"
                                                                         style="margin-left: 5px;"></i></button>
                                                         </div>
                                                     </div>
@@ -84,7 +84,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <table id="tabla_pdf"
-                                                           class="table table-head-fixed table-bordered table-striped"
+                                                           class="table table-head-fixed table-bordered table-striped display nowrap" cellspacing="0"
                                                            style="width:100%">
                                                         <thead>
                                                         <tr>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['usu_nombre'])) {
         </div>
         <?php
     } else {
-        require 'noacceso.php';
+        header("Location: login.html");
     }
     require 'footer.php';
     ?>

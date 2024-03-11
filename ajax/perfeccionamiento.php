@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-require_once "../modelos/Inspeccion.php";
+require_once "../modelos/Perfeccionamiento.php";
 
 
-$inspeccion = new Inspeccion();
+$perfeccionamiento = new Perfeccionamiento();
 
 $tra_id = isset($_POST["tra_id"]) ? limpiarCadena($_POST["tra_id"]) : "";
 $sol_id = isset($_POST["sol_id"]) ? limpiarCadena($_POST["sol_id"]) : "";
@@ -23,7 +23,7 @@ $usu_id = isset($_SESSION['usu_id']) ? $_SESSION['usu_id'] : '';
 switch ($_GET["op"]) {
 
     case 'listar':
-        $rspta = $inspeccion->listar();
+        $rspta = $perfeccionamiento->listar();
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
@@ -43,20 +43,10 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
 
-    /*case 'mostrar':
-        $rspta = $ventanilla->mostrar($tra_id);
-        echo json_encode($rspta);
-        break;*/
-    case 'documentos':
-        $rspta = $inspeccion->estado();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
-        }
-        break;
 
     case 'tabla':
         $s_ident = isset($_GET['s_ident']) ? $_GET['s_ident'] : '';
-        $rspta = $inspeccion->tabla($s_ident);
+        $rspta = $perfeccionamiento->tabla($s_ident);
         $data = array();
         if ($rspta) {
             while ($row = $rspta->fetch_object()) {
@@ -94,7 +84,7 @@ switch ($_GET["op"]) {
             $observacion = $primerRegistro['observacion'];
 
             // Llama a la función para guardar el documento
-            $rspta = $inspeccion->aprobardocumento($usu_id, $tra_id, $estado, $observacion);
+            $rspta = $perfeccionamiento->aprobardocumento($usu_id, $tra_id, $estado, $observacion);
 
             if ($rspta) {
                 echo "El primer documento se registró correctamente";
@@ -111,6 +101,6 @@ switch ($_GET["op"]) {
         $cat_id_estado = $_POST['cat_id_estado'];
         $tra_id = $_POST['tra_id'];
         $pro_observacion = $_POST['pro_observacion'];
-        $rspta = $inspeccion->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
+        $rspta = $perfeccionamiento->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
         break;
 }

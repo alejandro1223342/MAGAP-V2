@@ -45,7 +45,6 @@ public function mostrar($usu_id){
 //metodo insertar regiustro
 public function insertar($usu_nombre,$usu_cedula,$usu_telefono,$usu_correo,$usu_cargo,$usu_login,$usu_clave,$permisos){
 	$sql="call  sp_insertausuario(0,'$usu_nombre','$usu_cedula','$usu_telefono','$usu_correo','$usu_cargo','$usu_login','$usu_clave')";
-//	return $sql;
     $row=ejecutarConsultaSP($sql);
 	if ($row==false) {
     	return $row;

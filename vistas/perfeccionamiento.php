@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION['usu_nombre'])) {
     header("Location: login.html");
 } else {
-    if ($_SESSION['Catastros'] == 1) {
+    if ($_SESSION['Perfeccionamiento Providencia'] == 1) {
         require 'header.php';
         ?>
         <div class="content-wrapper">
@@ -13,14 +13,14 @@ if (!isset($_SESSION['usu_nombre'])) {
 
             <section class="content">
                 <div class="container-fluid">
-                    <div class="card card-navy mb-0">
+                    <div class="card card-default mb-0">
                         <div class="card-header">
                             <h3 class="card-title">Lista de Solicitantes</h3>
                         </div>
                         <!-- /.card-header -->
 
                         <div class="card-body p-1">
-                            <table id="tbllistado" class="table table-bordered table-striped" style="width:100%">
+                            <table id="tbllistado" class="table table-bordered table-striped" style="width: 100%">
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <form action="" name="formulario" id="formulario" method="POST">
                             <section class="content" id="formularioregistros">
                                 <div class="container-fluid">
-                                    <div class="card card-gray-dark">
+                                    <div class="card card-default">
                                         <div class="card-header">
                                             <h3 class="card-title">Documentos</h3>
                                         </div>
@@ -83,8 +83,6 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                             <th></th>
                                                             <th></th>
                                                             <th>ID</th>
-                                                            <th></th>
-                                                            <th></th>
                                                             <th>Documento</th>
                                                             <th>Fecha</th>
                                                             <th>Observación</th>
@@ -132,7 +130,7 @@ if (!isset($_SESSION['usu_nombre'])) {
     }
     require 'footer.php';
     ?>
-    <script src="scripts/catastro.js"></script>
+    <script src="scripts/perfeccionamiento.js"></script>
     <!--   <script src="../public/js/select2.full.min.js"></script>
      -->
     <?php

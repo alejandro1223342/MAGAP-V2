@@ -14,15 +14,17 @@ $sol_id = isset($_SESSION['sol_id']) ? $_SESSION['sol_id'] : 0;
 $sol_identificacion = $_SESSION['sol_identificacion'];
 $tra_pro = isset($_POST["tra_pro"]) ? limpiarCadena($_POST["tra_pro"]) : "";
 $pro = isset($_SESSION['tra_pro']) ? intval($_SESSION['tra_pro']) : "";
+$procesoAct = intval($_POST["proceso"]);
 $proceso = $pro + 1;
 if (empty($proceso) || $proceso == 0) {
     $proceso = $proceso + 1;
 }
 
-$proceso_drive = !empty($proceso) ? "Trámite " . ($pro-1) : "Trámite 1";
+//$proceso_drive = !empty($proceso) ? "Trámite " . ($pro-1) : "Trámite 1";
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
+        $proceso_drive = !empty($_POST["proA"]) ? "Trámite " . intval($_POST["proA"]) : "Trámite 1";
         $parentFolderId = '1tL4bVET1g382sIaw3uJHiq__kRg10hMc';
         $fileName = $_POST['doc_nombre'] . '-' . $sol_identificacion;
         if (!empty($_FILES['pdf']['name']) && file_exists($_FILES['pdf']['tmp_name'])) {
@@ -66,10 +68,19 @@ switch ($_GET["op"]) {
         echo json_encode($resultados);
         break;
 
-    case 'procesoSol':
+    /*case 'procesoSol':
         $rspta = $documentosol->procesoSol($sol_id);
         $row = $rspta->fetch_assoc();
         echo json_encode($row['tra_pro']);
+        break;*/
+    case 'procesoSol':
+        $rspta = $documentosol->procesoActual($sol_id);
+        if ($rspta) {
+            $row = $rspta->fetch_assoc();
+            echo json_encode(array('tra_pro' => intval($row['tra_pro'])));
+        } else {
+            echo json_encode(array('error' => 'Error al ejecutar la consulta.'));
+        }
         break;
 
 

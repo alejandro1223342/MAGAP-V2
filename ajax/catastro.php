@@ -64,12 +64,14 @@ switch ($_GET["op"]) {
                     "0" => '<button class="btn btn-secondary btn-xs">Ver</button>',
                     "1" => '',
                     "2" => $row->tra_iden,
-                    "3" => $row->doc_nombre,
-                    "4" => $row->doc_fechareg,
-                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
-                    "6" => $row->doc_url,
-                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
-                    "8" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
+                    "3" => $row->tra_pro,
+                    "4" => $row->doc_id,
+                    "5" => $row->doc_nombre,
+                    "6" => $row->doc_fechareg,
+                    "7" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
+                    "8" => $row->doc_url,
+                    "9" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
+                    "10" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
 
                 );
             }
@@ -97,7 +99,7 @@ switch ($_GET["op"]) {
             $rspta = $catastro->aprobardocumento($usu_id, $tra_id, $estado, $observacion);
 
             if ($rspta) {
-                echo "El primer documento se registró correctamente";
+                echo "Todo se registró correctamente";
             } else {
                 echo "Hubo un problema al registrar el primer documento";
             }

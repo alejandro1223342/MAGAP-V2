@@ -1,6 +1,6 @@
 <?php
 if (strlen(session_id()) < 1) {
-    session_start();
+    require_once "../config/session.php";
 }
 
 // Configuración de la cabecera Permissions-Policy

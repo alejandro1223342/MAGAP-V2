@@ -15,6 +15,7 @@ function init() {
     $.post("../ajax/catastro.php?op=documentos", function (r) {
         $("#doc_estado").html(r);
     });
+    $('#pdf').on('change', uploadPDF);
 
 }
 
@@ -107,7 +108,7 @@ function guardaryeditar(e) {
                             let estado = $(row).find("td:eq(1)").text();
                             // Convertir el estado a un valor específico
                             let estadoValue = (estado === "Aprobado") ? 18 : (estado === "No Aprobado") ? 28 : null;
-                            let observacion = $(row).find("td:eq(5)").text();
+                            let observacion = $(row).find("td:eq(6)").text();
 
                             let rowData = {
                                 tra_id: tra_id,
@@ -197,15 +198,11 @@ function mostrarTabla(s_ident) {
         "order": [[0, "desc"]],
         "columnDefs": [
             {"targets": [0], "visible": true, "searchable": true, "orderable": false},
-            {"targets": [6], "visible": false, "searchable": false},
+            {"targets": [3], "visible": false, "searchable": false},
+            {"targets": [4], "visible": false, "searchable": false},
             {"targets": [8], "visible": false, "searchable": false},
+            {"targets": [10], "visible": false, "searchable": false},
         ],
-        "createdRow": function (row, data) {
-            // Renderizar CheckBox en la columna 5
-            $('td', row).eq(5).html(data[1]);
-            // Renderizar TextBox en la columna 5
-            $('td', row).eq(5).html(data[5]);
-        },
         "responsive": {
             "breakpoints": [
                 {name: 'xl', width: Infinity},
@@ -234,8 +231,8 @@ function mostrarTabla(s_ident) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del enlace o botón
         index = tabla_pdf.row($(event.target).closest('tr')).node();
         let data = tabla_pdf.row($(this).parents('tr')).data();
-        let url = data[6];
-        let nombreDinamico = data[3];
+        let url = data[8];
+        let nombreDinamico = data[5];
         openModal(url, nombreDinamico);
     });
 }
@@ -345,7 +342,7 @@ function guardar(event) {
                         // Modificar la tabla y almacenar los cambios en localStorage
                         let estadoTexto = estado === 18 ? "Aprobado" : "No Aprobado";
                         fila.find("td:eq(1)").text(estadoTexto);
-                        fila.find("td:eq(5)").text(observacion).prop("readonly", true);
+                        fila.find("td:eq(6)").text(observacion).prop("readonly", true);
                         fila
                             .find("td:last")
                             .html('<button class="btn btn-editar">Editar</button>');
@@ -387,7 +384,6 @@ function guardarCambiosEnLocalStorage(
         JSON.stringify(cambios)
     );
 }
-
 function cargarDatosGuardados(s_ident) {
     let sol_identificacion = s_ident;
     if (sol_identificacion) {
@@ -405,11 +401,21 @@ function cargarDatosGuardados(s_ident) {
                     .html(`<span class="badge ${badgeClass}">${estadoTexto}</span>`)
                     .data("estado", estado);
 
-                // Verificar si está aprobado para mostrar "Registrado"
+                // Verificar si está aprobado para mostrar "Registrado" o el botón para cambiar
                 if (estado === 18) {
+                    let contenidoHtml = '<span class="badge badge-primary">Registrado</span>';
+                    if (datos.estado && datos.estado === "Registrado") {
+                        contenidoHtml = '<span class="badge badge-primary">Registrado</span>';
+                    } else {
+                        contenidoHtml = '<label class="btn btn-xs btn-file bg-indigo" style="display: inline-block; overflow: hidden; font-weight: normal;">' +
+                            '    <input type="file" class="d-none" name="pdf" id="pdf" accept="application/pdf" onchange="uploadPDF(event)">' +
+                            '    Cargar<i class="fa fa-file-pdf fa-1s text-white" style="margin-left: 5px"></i>' +
+                            '</label>';
+                    }
+
                     $(element)
                         .find("td:last")
-                        .html('<span class="badge badge-primary">Registrado</span>');
+                        .html(contenidoHtml);
                 } else {
                     $(element)
                         .find("td:last")
@@ -432,6 +438,84 @@ function cargarDatosGuardados(s_ident) {
         guardar(event);
     });
 }
+
+
+function uploadPDF(event){
+    event.preventDefault();
+    let fila = $(event.target).closest("tr");
+    let fileInput = fila.find('#pdf')[0];
+    let filePDF = fileInput.files[0];
+    let rowData = tabla_pdf.row(fila).data();
+    let proceso = tabla_pdf.row(fila).data()[3];
+    let docID = tabla_pdf.row(fila).data()[4];
+    let rowIndex = tabla_pdf.row(fila).index();
+    console.log(rowIndex);
+    let docNombre = rowData[5];
+    let numeroExtraido = docNombre.match(/-(\d+)/);
+    let cedula = numeroExtraido[1];
+    // Verificar si el archivo es de tipo PDF y no supera el tamaño máximo
+    if (filePDF.type === 'application/pdf' && filePDF.size <= 2 * 1024 * 1024) {
+        bootbox.confirm({
+            message: "El archivo debe encontrarse aprobado y firmado.¿Desear continuar con la subida del archivo?",
+            buttons: {
+                confirm: {
+                    label: 'Aceptar',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    let loadingMessage = $('<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Subiendo archivo...</div>');
+                    let dialog = bootbox.dialog({
+                        title: 'Procesando', message: loadingMessage, closeButton: false, backdrop: true
+                    });
+                    let formData = new FormData();
+                    formData.append('pdf', filePDF);
+                    formData.append('sol_ident',cedula);
+                    formData.append('tra_pro', proceso);
+                    formData.append('doc_id', docID);
+                    formData.append('doc_nombre', docNombre);
+                    $.ajax({
+                        url: '../ajax/documentosGestores.php?op=guardaryeditar',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            dialog.modal('hide');
+                            bootbox.alert(response);
+
+
+                            // Paso 1: Obtener el objeto almacenado actualmente en localStorage
+                            let datosExistente = JSON.parse(localStorage.getItem(cedula + "_fila_" + rowIndex)) || {};
+                            if (!datosExistente.estado) {
+                                datosExistente.estado = "Registrado";
+                            }
+                            localStorage.setItem(cedula + "_fila_" + rowIndex, JSON.stringify(datosExistente));
+                            cargarDatosGuardados(cedula);
+                            tabla_pdf.ajax.reload();
+
+                        },
+                        error: function (error) {
+                            dialog.modal('hide');
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    fileInput.value = '';
+                }
+            }
+        });
+    } else if (filePDF.size > 2 * 1024 * 1024) {
+        bootbox.alert('El límite de tamaño permitido (2 MB). Por favor, selecciona un archivo más pequeño.');
+        fileInput.value = '';
+    }
+}
+
 
 
 init();

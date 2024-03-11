@@ -1,22 +1,23 @@
 <?php
 ob_start();
-session_start();
+require_once "../config/session.php";
 
 if (!isset($_SESSION['sol_nombre'])) {
-    header("Location: loginsol.html");
+    header("Location: noacceso.php");
 } else {
     if ($_SESSION['Documentos'] == 1) {
         require 'headersol.php';
         ?>
         <div class="content-wrapper">
             <section class="content-header" style="padding: 4px ;"></section>
-
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Documentos Habilitantes
+                            <h3 class="card-title">
+                                Documentos Habilitantes
                             </h3>
+
                         </div>
                         <!-- /.card-header -->
 
@@ -37,7 +38,7 @@ if (!isset($_SESSION['sol_nombre'])) {
                             Subiendo archivo...
                         </div>
 
-
+                        <input type="hidden" name="proA" id="proA">
                         <div class="card-body">
                             <table id="tbllistado" class="table table-striped" style="width:100%">
                                 <thead>
@@ -55,7 +56,6 @@ if (!isset($_SESSION['sol_nombre'])) {
                                 </tr>
                                 </thead>
                             </table>
-
                         </div>
 
                         <!-- /.card-body -->

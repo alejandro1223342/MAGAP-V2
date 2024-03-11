@@ -1,7 +1,7 @@
 <?php
 // Activamos almacenamiento en el buffer
 ob_start();
-session_start();
+require_once "../config/session.php";
 if (!isset($_SESSION['sol_nombre'])) {
     header("Location: loginsol.html");
 } else {

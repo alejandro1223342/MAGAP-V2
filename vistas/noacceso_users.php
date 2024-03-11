@@ -23,10 +23,10 @@ session_destroy();
 
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Su sesión ha finalizado</p>
+            <p class="login-box-msg">Debe Iniciar Sesión para Continuar</p>
 
             <!-- Agregar un botón para volver -->
-            <button type="button" class="btn btn-primary btn-block" onclick="volver()">Volver</button>
+            <button type="button" class="btn btn-primary btn-block" onclick="volver()">Aceptar</button>
         </div>
         <!-- /.login-card-body -->
     </div>
@@ -38,8 +38,6 @@ session_destroy();
     // Función para redirigir al usuario
     function volver() {
         // Redirigir al archivo login.html
-        window.location.href = 'loginsol.html';
+        window.location.href = 'index.php';
     }
 </script>
-</body>
-</html>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "../config/session.php";
 require_once "../modelos/Usuario.php";
 
 $usuario = new Usuario();
@@ -51,7 +51,7 @@ switch ($_GET["op"]) {
             in_array(1, $valores) ? $_SESSION['Escritorio'] = 1 : $_SESSION['Escritorio'] = 0;
             in_array(2, $valores) ? $_SESSION['Inspección'] = 1 : $_SESSION['Inspección'] = 0;
             in_array(3, $valores) ? $_SESSION['Providencia'] = 1 : $_SESSION['Providencia'] = 0;
-            in_array(4, $valores) ? $_SESSION['Generación'] = 1 : $_SESSION['Generación'] = 0;
+            in_array(4, $valores) ? $_SESSION['Perfeccionamiento Providencia'] = 1 : $_SESSION['Perfeccionamiento Providencia'] = 0;
             in_array(5, $valores) ? $_SESSION['Acceso'] = 1 : $_SESSION['Acceso'] = 0;
             in_array(6, $valores) ? $_SESSION['Reportes'] = 1 : $_SESSION['Reportes'] = 0;
             in_array(7, $valores) ? $_SESSION['Custodios'] = 1 : $_SESSION['Custodios'] = 0;

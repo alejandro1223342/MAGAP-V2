@@ -105,6 +105,12 @@ class Documentosol
 
     }
 
+    public function procesoActual($sol_id)
+    {
+        $sql = "CALL sp_tramite_actual($sol_id);";
+        return ejecutarConsultaSP($sql);
+    }
+
 //listar registros
     public function listar($sol_identificacion, $nombre)
     {

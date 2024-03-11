@@ -1,6 +1,6 @@
 <html>
 </body>
-<footer class="main-footer" >
+<footer class="main-footer bg-dark" >
     <strong>Copyright &copy; 2023-2025 <a href="https://web.ist17dejulio.edu.ec/">IST17J</a>.</strong>
     Todos los derechos reservados.
     <div class="float-right d-none d-sm-inline-block">

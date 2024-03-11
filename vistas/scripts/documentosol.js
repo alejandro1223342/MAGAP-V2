@@ -19,6 +19,7 @@ function init() {
         $("#cat_id_tipodoc").html(r);
         $("#cat_id_tipodoc").select2();
     });
+
 // Captura el cambio en el select y guarda el nombre seleccionado en el input
     $("#cat_id_tipodoc").change(function () {
         var nombreSeleccionado = $("#cat_id_tipodoc option:selected").text();
@@ -30,6 +31,7 @@ $(document).ready(function () {
     // Inicializar Select2
     $(".select2").select2();
     $(".select2bs4").select2({theme: "bootstrap4"});
+    procesoActual();
 });
 
 //funcion limpiar
@@ -39,6 +41,16 @@ function limpiar() {
     $("#doc_nombre").val("");
     $("#doc_url").val("");
     $("#doc_id").val("");
+}
+function procesoActual() {
+    $.ajax({
+        url: '../ajax/documentosol.php?op=procesoSol',
+        method: 'POST',
+        dataType: 'json',
+    }).done(function(response) {
+        let procesoInt = parseInt(response.tra_pro);
+        $("#proA").text(procesoInt);
+    });
 }
 
 function mostrarform(flag, formulario = "") {
@@ -176,11 +188,13 @@ function cancelar() {
 function guardar(event) {
     event.preventDefault();
     let fila = $(event.target).closest("tr");
-    // Obtener el objeto de fila de DataTables
     let rowData = tabla.row(fila).data();
+    let procesoAct = $("#proA").text();
+    let proA = parseInt(procesoAct);
+
     if (rowData) {
         let docID = rowData[1];
-        let docNombre = rowData[2];
+        let docNombre = rowData[3];
         let cat_id_tipodoc;
         if (docNombre === 'COPIA DE CEDULA') {
             cat_id_tipodoc = 14;
@@ -191,13 +205,16 @@ function guardar(event) {
         }
         let fileInput = fila.find('#pdf')[0];
         let file = fileInput.files[0];
-        console.log('Tamaño del archivo:', file.size);
-        console.log('Condición de tamaño:', file.size <= 2 * 1024 * 1024);
 
+        // Verificar si el archivo está presente
+        if (!file) {
+            bootbox.alert('Por favor, selecciona un archivo antes de guardar.');
+            fileInput.value = '';
+            return;
+        }
 
-        // Verificar si el archivo es de tipo PDF
-        if (file && file.type === 'application/pdf' && file.size <= 2 * 1024 * 1024) {
-        // Mostrar confirmación con bootbox y personalizar el color del botón "Cancelar"
+        // Verificar si el archivo es de tipo PDF y no supera el tamaño máximo
+        if (file.type === 'application/pdf' && file.size <= 2 * 1024 * 1024) {
             bootbox.confirm({
                 message: "¿Desear continuar con la subida del archivo?",
                 buttons: {
@@ -207,13 +224,12 @@ function guardar(event) {
                     },
                     cancel: {
                         label: 'Cancelar',
-                        className: 'btn-danger' // Color rojo
+                        className: 'btn-danger'
                     }
                 },
                 callback: function (result) {
                     if (result) {
                         let loadingMessage = $('<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Subiendo archivo...</div>');
-                        // Mostrar el bootbox dialog con el mensaje de carga
                         let dialog = bootbox.dialog({
                             title: 'Procesando', message: loadingMessage, closeButton: false, backdrop: true
                         });
@@ -222,7 +238,7 @@ function guardar(event) {
                         formData.append('doc_nombre', docNombre);
                         formData.append('doc_id', docID);
                         formData.append('cat_id_tipodoc', cat_id_tipodoc);
-                        // Realizar la petición AJAX
+                        formData.append('proA', proA);
                         $.ajax({
                             url: '../ajax/documentosol.php?op=guardaryeditar',
                             type: 'POST',
@@ -230,15 +246,12 @@ function guardar(event) {
                             contentType: false,
                             processData: false,
                             success: function (response) {
-                                // Cerrar el dialogo al finalizar la carga
                                 dialog.modal('hide');
                                 bootbox.alert(response);
                                 tabla.ajax.reload();
                             },
                             error: function (error) {
-                                // Cerrar el dialogo al finalizar la carga
                                 dialog.modal('hide');
-                                // Manejar errores
                                 console.error(error);
                             }
                         });
@@ -250,7 +263,6 @@ function guardar(event) {
         } else if (file.size > 2 * 1024 * 1024) {
             bootbox.alert('El límite de tamaño permitido (2 MB). Por favor, selecciona un archivo más pequeño.');
             fileInput.value = '';
-
         } else {
             bootbox.alert('Por favor, selecciona un archivo PDF antes de guardar.');
             fileInput.value = '';

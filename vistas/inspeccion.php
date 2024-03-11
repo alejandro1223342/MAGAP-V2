@@ -13,14 +13,14 @@ if (!isset($_SESSION['usu_nombre'])) {
 
             <section class="content">
                 <div class="container-fluid">
-                    <div class="card">
+                    <div class="card card-default mb-0">
                         <div class="card-header">
                             <h3 class="card-title">Lista de Solicitantes</h3>
                         </div>
                         <!-- /.card-header -->
 
-                        <div class="card-body">
-                            <table id="tbllistado" class="table table-bordered table-striped">
+                        <div class="card-body p-1">
+                            <table id="tbllistado" class="table table-bordered table-striped" style="width: 100%">
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -40,7 +40,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                 <div class="container-fluid">
                                     <div class="card card-default">
                                         <div class="card-header">
-                                            <h3 class="card-title">Solicitante:</h3>
+                                            <h3 class="card-title">Documentos</h3>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -54,18 +54,26 @@ if (!isset($_SESSION['usu_nombre'])) {
                                             <div id="my-modal" class="modal">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
+                                                        <h2 id="modal-title"></h2>
                                                         <span class="close">&times;</span>
-                                                        <h2>Modal Header</h2>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <iframe id="modal-iframe" width="100%" height="480"
-                                                                allow="autoplay"></iframe>
+                                                        <iframe id="modal-iframe" width="100%" height="480" allow="autoplay"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <h3>Modal Footer</h3>
+                                                        <div class="form-group">
+                                                            <select id="doc_estado" name="doc_estado" class="form-control"></select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" id="doc_descripcion" name="doc_descripcion" class="form-control" placeholder="Observación">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button class="btn btn-success" id="modalG" name="modalG" onclick="guardarModal()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
 
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -116,11 +124,9 @@ if (!isset($_SESSION['usu_nombre'])) {
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-
         <?php
     } else {
-        require 'noacceso.php';
+        header("Location: login.html");
     }
     require 'footer.php';
     ?>
