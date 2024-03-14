@@ -194,7 +194,8 @@ function guardar(event) {
 
     if (rowData) {
         let docID = rowData[1];
-        let docNombre = rowData[3];
+        let docNombre = rowData[2];
+        console.log('Valor de doc_nombre:', docNombre);
         let cat_id_tipodoc;
         if (docNombre === 'COPIA DE CEDULA') {
             cat_id_tipodoc = 14;

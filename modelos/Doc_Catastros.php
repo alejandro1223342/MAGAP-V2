@@ -2,24 +2,19 @@
 //incluir la conexion de base de datos
 require "../config/Conexion.php";
 
-require "../ajax/solicitante.php";
+require "../ajax/usuario.php";
 
 class Doc_Catastros
 {
-
-
     //implementamos nuestro constructor
     public function __construct()
     {
 
     }
 
-//metodo insertar regiustro
-
-
-    public function insertar($sol_iden, $cat_id_tipodoc, $fileName, $doc_url)
+    public function insertar($usu_cedula, $cat_id_tipodoc, $fileName, $doc_url, $tra_pro)
     {
-        $sql_check = "Call sp_documentosol('compDoc', '0', 0, '$fileName', '0')";
+        $sql_check = "Call sp_documentosol('compDoc', $tra_pro + 2, 0, '$fileName', '0')";
         $result_check = ejecutarConsultaSP($sql_check);
         $row_check = $result_check->fetch_assoc();
 
@@ -28,7 +23,7 @@ class Doc_Catastros
             return false;
         } else {
             // El id con ese nombre no existe, se puede realizar la inserción
-            $sql = "CALL sp_documentosol('ing', '$sol_iden', $cat_id_tipodoc, '$fileName', '$doc_url')";
+            $sql = "CALL sp_documentosol('ing', '$usu_cedula', $cat_id_tipodoc, '$fileName', '$doc_url')";
             $result = ejecutarConsultaSP($sql);
 
             if ($result !== false) {
@@ -70,10 +65,24 @@ class Doc_Catastros
     }
 
 //listar registros
-    public function listar($sol_identificacion)
+    public function listar()
     {
-        $sql = "CALL sp_documentosol('list',$sol_identificacion, 0,'','')";
+        $sql = "call sp_catastro ('listCheck', 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
+    }
+
+    public function listarPredefinido($usu_cedula, $nombre)
+    {
+        $doc_nombre = $nombre . '-' . $usu_cedula;
+        $sql = "CALL sp_documentosol('listGestor','$usu_cedula', 0,'$doc_nombre','');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function aprobardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
+    {
+        // Ejecutar la consulta y obtener el resultado
+        $sql = "CALL sp_procesos('catCheck', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
+        return ejecutarConsulta($sql);
     }
 
 //listar y mostrar en selct

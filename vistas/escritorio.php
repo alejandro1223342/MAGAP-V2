@@ -31,7 +31,7 @@ require 'header.php';
                
             
                   <div class="col-sm-12">
-                    <div class="position-relative" style="min-height: 180px;">
+                    <div class="position-relative" style="min-height: 180px; max-width: 100%">
                       <img src="../files/img/FRONTAL.png" alt="Photo 3" class="img-fluid">
                       
                     </div>

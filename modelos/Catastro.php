@@ -19,6 +19,12 @@ class Catastro
         return ejecutarConsultaSP($sql);
     }
 
+    public function listarIns()
+    {
+        $sql = "call sp_catastro ('catIns', 0, 0, 0, 0, 0);";
+        return ejecutarConsultaSP($sql);
+    }
+
     public function estado()
     {
         $sql = "CALL sp_catalgo('spa','0','', '',15)";
@@ -43,6 +49,11 @@ class Catastro
         return ejecutarConsulta($sql);
     }
 
+    public function tablaCatIns($id)
+    {
+        $sql = "call sp_catastro('listCatIns',0,0,'$id',0,0)";
+        return ejecutarConsulta($sql);
+    }
 
     public function insertar($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
     {
@@ -122,6 +133,13 @@ class Catastro
     {
         // Ejecutar la consulta y obtener el resultado
         $sql = "CALL sp_procesos('cat', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
+        return ejecutarConsulta($sql);
+    }
+
+    public function aprobardocumentoIns($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
+    {
+        // Ejecutar la consulta y obtener el resultado
+        $sql = "CALL sp_procesos('inspCatastro', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
         return ejecutarConsulta($sql);
     }
 

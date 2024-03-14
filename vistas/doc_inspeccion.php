@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION['usu_nombre'])) {
     header("Location: login.html");
 } else {
-    if ($_SESSION['Catastros'] == 1) {
+    if ($_SESSION['Inspección'] == 1) {
         require 'header.php';
         ?>
         <div class="content-wrapper">
@@ -13,14 +13,14 @@ if (!isset($_SESSION['usu_nombre'])) {
 
             <section class="content">
                 <div class="container-fluid">
-                    <div class="card card-navy mb-0">
+                    <div class="card card-default mb-0">
                         <div class="card-header">
                             <h3 class="card-title">Lista de Solicitantes</h3>
                         </div>
                         <!-- /.card-header -->
 
                         <div class="card-body p-1">
-                            <table id="tbllistado" class="table table-bordered table-striped" style="width:100%">
+                            <table id="tbllistado" class="table table-bordered table-striped" style="width: 100%">
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                         <form action="" name="formulario" id="formulario" method="POST">
                             <section class="content" id="formularioregistros">
                                 <div class="container-fluid">
-                                    <div class="card card-gray-dark">
+                                    <div class="card card-default">
                                         <div class="card-header">
                                             <h3 class="card-title">Documentos</h3>
                                         </div>
@@ -58,35 +58,28 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         <span class="close">&times;</span>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <iframe id="modal-iframe" width="100%" height="480" allow="autoplay"></iframe>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div class="form-group">
-                                                            <select id="doc_estado" name="doc_estado" class="form-control"></select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" id="doc_descripcion" name="doc_descripcion" class="form-control" placeholder="Observación">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button class="btn btn-success" id="modalG" name="modalG" onclick="guardarModal()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>
-                                                        </div>
+                                                        <iframe id="modal-iframe" width="100%" height="600"
+                                                                allow="autoplay"></iframe>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="row">
+                                                <input type="hidden" name="proA" id="proA">
                                                 <div class="col-md-12">
-                                                    <table id="tabla_pdf" class="table table-head-fixed table-bordered table-striped" style="width:100%">
+                                                    <table id="tabla_pdf"
+                                                           class="table table-head-fixed table-bordered table-striped"
+                                                           style="width:100%">
                                                         <thead>
                                                         <tr>
+                                                            <th>Cargar</th>
                                                             <th></th>
+                                                            <th>Tipo de Documento</th>
+                                                            <th>Fecha de Registro</th>
                                                             <th></th>
-                                                            <th>ID</th>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th>Documento</th>
-                                                            <th>Fecha</th>
+                                                            <th>Estado</th>
                                                             <th>Observación</th>
-                                                            <th></th>
+                                                            <th>Gestor</th>
                                                             <th>Acción</th>
                                                             <th></th>
                                                         </tr>
@@ -101,9 +94,9 @@ if (!isset($_SESSION['usu_nombre'])) {
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                                        <!--<button class="btn btn-primary" type="submit" id="btnGuardar" onclick="aprobar(event)">
                                                             <i class="fa fa-save"></i> Guardar
-                                                        </button>
+                                                        </button>-->
                                                         <button class="btn btn-danger" onclick="cancelarform()"
                                                                 type="button">
                                                             <i class="fa fa-arrow-circle-left"></i> Cancelar
@@ -130,7 +123,7 @@ if (!isset($_SESSION['usu_nombre'])) {
     }
     require 'footer.php';
     ?>
-    <script src="scripts/catastro.js"></script>
+    <script src="scripts/doc_inspeccion.js"></script>
     <!--   <script src="../public/js/select2.full.min.js"></script>
      -->
     <?php

@@ -38,7 +38,7 @@ CREATE TABLE `catalogo` (
 
 LOCK TABLES `catalogo` WRITE;
 /*!40000 ALTER TABLE `catalogo` DISABLE KEYS */;
-INSERT INTO `catalogo` VALUES (1,'IDENTIFICACION','ASDASDASD',0,1),(3,'PASAPORTE','',1,1),(4,'PROVINCIA',NULL,0,1),(5,'CANTON',NULL,0,1),(6,'PARROQUIA',NULL,0,1),(7,'SECTOR',NULL,0,1),(8,'IMBABURA','',4,1),(9,'IBARRA','',5,1),(10,'EL SAGRARIO','',6,1),(11,'LA FLORESTA','',7,1),(12,'LAS PALMAS','',7,1),(13,'DOCUMENTOS',NULL,0,1),(14,'COPIA DE CEDULA','',13,1),(15,'ESTADOS',NULL,0,1),(16,'APROBADO','',-1,1),(17,'PLANIMETRICO','',13,1),(18,'APROBADO','',15,1),(19,'PROCESO',NULL,0,1),(20,'CATASTROS','',19,1),(21,'ADJUDICACION DE TIERRAS','',13,1),(22,'INSPECCION','',19,1),(23,'PROVIDENCIA','',19,1),(24,'PERFECCIONAMIENTO DE PROVIDENCIA','',19,1),(25,'CEDULA','',1,1),(26,'SUBIDO','',15,1),(27,'LOS CEIBOS','this is',7,1),(28,'NO APROBADO','ssss',15,1),(29,'IDENTIFICACION','ssss',-1,1),(30,'Alejandro','ssss',7,0),(31,'VENTANILLA',NULL,19,1),(32,'DOCUMENTO CATASTRO',NULL,0,1),(33,'Catastro 1',NULL,32,1),(34,'Catastro 2',NULL,32,1),(35,'Catastro 3',NULL,32,1),(36,'FINALIZADO',NULL,15,1),(37,'ANTONIO ANTE',NULL,5,1),(38,'COTACACHI',NULL,5,1),(39,'OTAVALO',NULL,5,1),(40,'PIMAMPIRO',NULL,5,1),(41,'URCUQUI',NULL,5,1),(42,'EL SAGRARIO','',9,1),(43,'SAN FRANCISCO','',9,1),(44,'CARANQUI','',9,1),(45,'ALPACHACA','',9,1),(46,'PRIORATO','',9,1),(47,'AMBUQUI','',9,1),(48,'ANGO-CHAGUA','',9,1),(49,'CAROLINA','',9,1),(50,'LA ESPERANZA','',9,1),(51,'LITA','',9,1),(52,'SALINAS','',9,1),(53,'SAN ANTONIO','',9,1),(54,'URCUQUI','',41,1),(55,'CAHUASQUI','',41,1),(56,'SAN BLAS','',41,1),(57,'TUMBABIRO','',41,1),(58,'PABLO ARENAS','',41,1),(59,'BUENOS AIRES','',41,1),(60,'EL JORDAN','',39,1),(61,'GONZALES SUAREZ','',39,1),(62,'EUGENIO ESPEJO','',39,1),(63,'SAN JUAN DE ILUMÁN','',39,1),(64,'MIGUEL EGAS CABEZAS','',39,1),(65,'SAN PEDRO DE PATAQUI','',39,1),(66,'SAN JOSE DE QUICHINCHE','',39,1),(67,'SAN PABLO','',39,1),(68,'SAN RAFAEL','',39,1),(69,'SELVA ALEGRE','',39,1),(70,'SAN FRANCISCO','',38,1),(71,'EL SAGRARIO','',38,1),(72,'IMANTAG','',38,1),(73,'QUIROGA','',38,1),(74,'APUELA','',38,1),(75,'GARCIA MORENO','',38,1),(76,'PEÑAHERRERA','',38,1),(77,'CUELLAJE','',38,1),(78,'VACAS GALINDO','',38,1),(79,'ATUNTAQUI','',37,1),(80,'ANDRADE MARIN','',37,1),(81,'SAN ROQUE','',37,1),(82,'CHALTURA','',37,1),(83,'NATABUELA','',37,1),(84,'IMBAYA','',37,1),(85,'PIMAMPIRO','',40,1),(86,'MARIANO ACOSTA','',40,1),(87,'SAN FRANCISCO DE SIGSIPAMBA','',40,1),(88,'CHUGA','',40,1);
+INSERT INTO `catalogo` VALUES (1,'IDENTIFICACION','ASDASDASD',0,1),(3,'PASAPORTE','',1,1),(4,'PROVINCIA',NULL,0,1),(5,'CANTON',NULL,0,1),(6,'PARROQUIA',NULL,0,1),(7,'SECTOR',NULL,0,1),(8,'IMBABURA','',4,1),(9,'IBARRA','',5,1),(10,'EL SAGRARIO','',6,1),(11,'LA FLORESTA','',7,1),(12,'LAS PALMAS','',7,1),(13,'DOCUMENTOS',NULL,0,1),(14,'COPIA DE CEDULA','',13,1),(15,'ESTADOS',NULL,0,1),(16,'APROBADO','',-1,1),(17,'PLANIMETRICO','',13,1),(18,'APROBADO','',15,1),(19,'PROCESO',NULL,0,1),(20,'CATASTROS','',19,1),(21,'ADJUDICACION DE TIERRAS','',13,1),(22,'INSPECCION','',19,1),(23,'PROVIDENCIA','',19,1),(24,'PERFECCIONAMIENTO DE PROVIDENCIA','',19,1),(25,'CEDULA','',1,1),(26,'SUBIDO','',15,1),(27,'LOS CEIBOS','this is',7,1),(28,'NO APROBADO','ssss',15,1),(29,'IDENTIFICACION','ssss',-1,1),(30,'Alejandro','ssss',7,0),(31,'VENTANILLA',NULL,19,1),(32,'DOCUMENTO INSPECCION',NULL,0,1),(33,'INFORME TECNICO DE INSPECCION',NULL,32,1),(34,'PLAN RURAL',NULL,32,1),(35,'INFORME RURAL',NULL,32,1),(36,'FINALIZADO',NULL,15,1),(37,'ANTONIO ANTE',NULL,5,1),(38,'COTACACHI',NULL,5,1),(39,'OTAVALO',NULL,5,1),(40,'PIMAMPIRO',NULL,5,1),(41,'URCUQUI',NULL,5,1),(42,'EL SAGRARIO','',9,1),(43,'SAN FRANCISCO','',9,1),(44,'CARANQUI','',9,1),(45,'ALPACHACA','',9,1),(46,'PRIORATO','',9,1),(47,'AMBUQUI','',9,1),(48,'ANGO-CHAGUA','',9,1),(49,'CAROLINA','',9,1),(50,'LA ESPERANZA','',9,1),(51,'LITA','',9,1),(52,'SALINAS','',9,1),(53,'SAN ANTONIO','',9,1),(54,'URCUQUI','',41,1),(55,'CAHUASQUI','',41,1),(56,'SAN BLAS','',41,1),(57,'TUMBABIRO','',41,1),(58,'PABLO ARENAS','',41,1),(59,'BUENOS AIRES','',41,1),(60,'EL JORDAN','',39,1),(61,'GONZALES SUAREZ','',39,1),(62,'EUGENIO ESPEJO','',39,1),(63,'SAN JUAN DE ILUMÁN','',39,1),(64,'MIGUEL EGAS CABEZAS','',39,1),(65,'SAN PEDRO DE PATAQUI','',39,1),(66,'SAN JOSE DE QUICHINCHE','',39,1),(67,'SAN PABLO','',39,1),(68,'SAN RAFAEL','',39,1),(69,'SELVA ALEGRE','',39,1),(70,'SAN FRANCISCO','',38,1),(71,'EL SAGRARIO','',38,1),(72,'IMANTAG','',38,1),(73,'QUIROGA','',38,1),(74,'APUELA','',38,1),(75,'GARCIA MORENO','',38,1),(76,'PEÑAHERRERA','',38,1),(77,'CUELLAJE','',38,1),(78,'VACAS GALINDO','',38,1),(79,'ATUNTAQUI','',37,1),(80,'ANDRADE MARIN','',37,1),(81,'SAN ROQUE','',37,1),(82,'CHALTURA','',37,1),(83,'NATABUELA','',37,1),(84,'IMBAYA','',37,1),(85,'PIMAMPIRO','',40,1),(86,'MARIANO ACOSTA','',40,1),(87,'SAN FRANCISCO DE SIGSIPAMBA','',40,1),(88,'CHUGA','',40,1),(89,'DOCUMENTO CATASTROS',NULL,0,1),(90,'CHECKLIST',NULL,89,1);
 /*!40000 ALTER TABLE `catalogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `documentos` (
   PRIMARY KEY (`doc_id`),
   KEY `documento_catalogo_tipodoc_idx` (`cat_id_tipodoc`),
   CONSTRAINT `documento_catalogo_tipodoc` FOREIGN KEY (`cat_id_tipodoc`) REFERENCES `catalogo` (`cat_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `documentos` (
 
 LOCK TABLES `documentos` WRITE;
 /*!40000 ALTER TABLE `documentos` DISABLE KEYS */;
-INSERT INTO `documentos` VALUES (93,14,'COPIA DE CEDULA-1001399490','','https://drive.google.com/file/d/14-_Dayuoy-uYs7nwRzZjRrOGYOgZj0cJ/preview','2024-02-25 15:23:43',36,36),(94,17,'PLANIMETRICO-1001399490','','https://drive.google.com/file/d/1a_QsD-o-hTQmVDmR09tXS66otqgXciP4/preview','2024-02-25 15:23:54',36,36),(95,21,'ADJUDICACION DE TIERRAS-1001399490','','https://drive.google.com/file/d/1mRCIzm-3Bw8WvXuWD7ysz9eTQsVYcLHo/preview','2024-02-25 15:24:04',36,36),(108,14,'COPIA DE CEDULA-1001399490','','https://drive.google.com/file/d/1YYnif7iXXmR-GcLxQYtlGmV-87IyYLbb/preview','2024-03-02 12:08:33',36,36),(109,17,'PLANIMETRICO-1001399490','','https://drive.google.com/file/d/1I0IWtgDrqv35F5xTH1GFi7eda8T7IrXB/preview','2024-03-02 12:08:56',36,36),(110,21,'ADJUDICACION DE TIERRAS-1001399490','','https://drive.google.com/file/d/1U-oERymNE4tLZf0teHmYNmpFA-4ZXWEs/preview','2024-03-02 12:09:06',36,36),(111,14,'COPIA DE CEDULA-1001399490','','https://drive.google.com/file/d/19WJOBdGE_9adFsCGlxXRQIch9Bb1x2GR/preview','2024-03-10 20:06:21',0,26),(112,17,'PLANIMETRICO-1001399490','','https://drive.google.com/file/d/1o4rQDoUgNhbbhHpsK0h3LKzp9WfQA3oB/preview','2024-03-10 20:06:54',0,26),(113,21,'ADJUDICACION DE TIERRAS-1001399490','','https://drive.google.com/file/d/1mQ2UOn5lnKFVpLz0ZhbW0n156n8Qmp-M/preview','2024-03-10 20:16:20',0,26),(114,14,'COPIA DE CEDULA-1005233679','','https://drive.google.com/file/d/10SYEVNu8ryOiirgAV-ZHEHSz88QAtNp-/preview','2024-03-09 15:01:56',26,0),(115,17,'PLANIMETRICO-1005233679','','https://drive.google.com/file/d/1ByG9ST0VmNNisqSQ_t50Ftmi-g_0J-vX/preview','2024-03-09 15:02:07',26,0),(116,21,'ADJUDICACION DE TIERRAS-1005233679','Seveno de Limon','https://drive.google.com/file/d/1aIkqRv7IUjyvDTqgxxfu2_oKN0wTpCi7/preview','2024-03-09 15:02:17',28,0);
+INSERT INTO `documentos` VALUES (117,14,'COPIA DE CEDULA-1001399490','','https://drive.google.com/file/d/1SwBC2MjFUi9CNZV_4LJQVOnU15ubGA5X/preview','2024-03-11 02:00:27',36,36),(118,17,'PLANIMETRICO-1001399490','','https://drive.google.com/file/d/1G6aHUqMZot0LrTfYBha1HH1CSaYtPN6c/preview','2024-03-11 02:00:37',36,36),(119,21,'ADJUDICACION DE TIERRAS-1001399490','','https://drive.google.com/file/d/1JGqCSBfTZSslYVYnoiBwwkH3Cw0bw0hk/preview','2024-03-11 02:00:46',36,36),(120,14,'COPIA DE CEDULA-1001399490','','https://drive.google.com/file/d/1xpY5TEuQGNiUflwJXYGusa_i34r4h6i9/preview','2024-03-13 14:05:55',0,26),(121,17,'PLANIMETRICO-1001399490','','https://drive.google.com/file/d/1yhlYjH6jzQjfDdWFXL18tdzRvJOWzbnW/preview','2024-03-13 22:36:17',0,26),(122,21,'ADJUDICACION DE TIERRAS-1001399490','','https://drive.google.com/file/d/13IDWfj6sfuFDxkrvlIz4uNPp9SKrbSdK/preview','2024-03-13 14:13:33',0,26),(123,90,'CHECKLIST-1001399490',NULL,'https://drive.google.com/file/d/1nZJA0EQMw6jgjzw5VOq7h7lS7VIYC6hn/preview','2024-03-13 19:01:56',0,26),(124,33,'INFORME TECNICO DE INSPECCION-1001399490','','https://drive.google.com/file/d/1-lZvIUJbk0ptA3x9pqRtO8jgPNu9-UUH/preview','2024-03-14 00:39:38',0,26),(125,34,'PLAN RURAL-1001399490','','https://drive.google.com/file/d/1WQd7_AQc30wYqFv11XlfiUCjsOew1z_f/preview','2024-03-13 23:33:55',0,26),(126,35,'INFORME RURAL-1001399490','','https://drive.google.com/file/d/1s1wS98TaY2QNlRArbmLRiQM1UlUrv1r7/preview','2024-03-13 23:34:11',0,26),(127,14,'COPIA DE CEDULA-1002501466','','https://drive.google.com/file/d/1-oezC7zuj_9jyTNM63h6aCWPcq7hc-wX/preview','2024-03-14 01:03:52',0,26),(128,17,'PLANIMETRICO-1002501466','','https://drive.google.com/file/d/1jMHOY2mCZPBisOa6ong1M9L6o3PnjgAV/preview','2024-03-14 01:04:08',0,26),(129,21,'ADJUDICACION DE TIERRAS-1002501466','','https://drive.google.com/file/d/1vrCwNkVpoVroAnf6o6x8zzPsECJiktCJ/preview','2024-03-14 01:04:23',0,26),(130,90,'CHECKLIST-1002501466',NULL,'https://drive.google.com/file/d/17eJtJ4Wsqo0d9QOmoICm-Uh2BWNtbVp7/preview','2024-03-14 01:06:24',0,26),(131,33,'INFORME TECNICO DE INSPECCION-1002501466','','https://drive.google.com/file/d/13_WWYtqgRa45Chwg2rPu_VepqHYAx_b_/preview','2024-03-14 01:07:19',0,26),(132,34,'PLAN RURAL-1002501466','','https://drive.google.com/file/d/1jv4i7QiCiN6xPHkoIrQqecLUWwcrdpFb/preview','2024-03-14 01:07:30',0,26),(133,35,'INFORME RURAL-1002501466','','https://drive.google.com/file/d/1bixaHArqJAiYzUotDbIhcVwj2zLFU955/preview','2024-03-14 01:07:45',0,26),(134,14,'COPIA DE CEDULA-1005233679','','https://drive.google.com/file/d/1lsvbHjOJj51JNasE8foypkv-XRL1lmRn/preview','2024-03-14 01:28:47',0,26),(135,17,'PLANIMETRICO-1005233679','','https://drive.google.com/file/d/1Jl61zYRyJrLNr2mOrJtoSkppW69KMNdn/preview','2024-03-14 01:27:13',0,26),(136,21,'ADJUDICACION DE TIERRAS-1005233679','','https://drive.google.com/file/d/1taNMLujhSG0D-Ga9yLUuWg2EDUVQZ-NQ/preview','2024-03-14 01:32:36',0,26),(137,90,'CHECKLIST-1005233679',NULL,'https://drive.google.com/file/d/1uEXUsfEtL4EPKWYbYqXmVMdM_ZwQkFJb/preview','2024-03-14 01:33:34',0,26),(138,33,'INFORME TECNICO DE INSPECCION-1005233679','','https://drive.google.com/file/d/1yadmbpvjMYwwVsjxqeijFR_k9bz1BLmb/preview','2024-03-14 01:36:40',0,26),(139,34,'PLAN RURAL-1005233679','','https://drive.google.com/file/d/1nJxdoVx5mBI14eO2VXJidebm0BxG3y6E/preview','2024-03-14 01:36:51',0,26),(140,35,'INFORME RURAL-1005233679','','https://drive.google.com/file/d/1U7UZpyTUa-pFc9ITLqCpx_zYFojkurpj/preview','2024-03-14 01:37:03',0,26);
 /*!40000 ALTER TABLE `documentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `proceso` (
   CONSTRAINT `fk_proceso_catalogo1` FOREIGN KEY (`cat_id_estado`) REFERENCES `catalogo` (`cat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `proceso_catalogo` FOREIGN KEY (`cat_id_proceso`) REFERENCES `catalogo` (`cat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `proceso_usuario` FOREIGN KEY (`usu_id`) REFERENCES `usuario` (`usu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `proceso` (
 
 LOCK TABLES `proceso` WRITE;
 /*!40000 ALTER TABLE `proceso` DISABLE KEYS */;
-INSERT INTO `proceso` VALUES (5,2,1,18,20,'','2024-02-25 15:27:08',NULL,0),(6,3,1,18,22,'','2024-02-25 15:27:08','2024-02-25 15:43:25',5),(7,2,2,18,20,'','2024-03-02 15:04:05',NULL,0),(8,3,2,18,22,'','2024-03-02 15:04:05','2024-03-02 15:58:27',7),(9,4,2,18,23,'','2024-03-02 15:58:27','2024-03-02 16:26:25',8),(10,5,2,18,24,'','2024-03-02 16:26:25','2024-03-03 00:13:32',9),(11,6,2,18,36,'','2024-03-03 00:13:32','2024-03-03 00:24:19',10),(12,2,3,18,20,'','2024-03-09 14:49:23',NULL,0),(13,2,4,18,20,'','2024-03-09 15:03:05',NULL,0),(14,3,3,18,22,'Registrado','2024-03-09 14:49:23','2024-03-10 20:18:13',12);
+INSERT INTO `proceso` VALUES (16,2,1,18,20,'','2024-03-11 01:56:37',NULL,0),(17,3,1,18,22,'Registrado','2024-03-11 01:56:37','2024-03-11 02:00:50',16),(18,4,1,18,23,'','2024-03-11 01:56:37','2024-03-11 02:01:36',17),(19,5,1,18,24,'','2024-03-11 01:56:37','2024-03-11 02:12:46',18),(21,6,1,18,36,'','2024-03-11 01:56:37','2024-03-12 11:29:00',19),(22,2,2,18,20,'','2024-03-13 13:39:49',NULL,0),(24,3,2,18,20,'Registrado','2024-03-13 13:39:49','2024-03-13 14:15:21',22),(25,3,2,18,22,'Catastro sube Checklist','2024-03-13 13:39:49','2024-03-13 22:12:34',24),(26,4,2,18,22,'','2024-03-13 13:39:49','2024-03-13 22:38:28',25),(27,4,2,18,22,'','2024-03-13 13:39:49','2024-03-14 00:32:58',26),(28,3,2,18,23,'Registrado','2024-03-13 13:39:49','2024-03-14 00:42:40',27),(29,2,3,18,20,'','2024-03-14 01:03:06',NULL,0),(30,3,3,18,20,'Registrado','2024-03-14 01:03:06','2024-03-14 01:04:27',29),(31,3,3,18,22,'Catastro sube Checklist','2024-03-14 01:03:06','2024-03-14 01:06:27',30),(32,4,3,18,22,'','2024-03-14 01:03:06','2024-03-14 01:06:58',31),(33,3,3,18,23,'Registrado','2024-03-14 01:03:06','2024-03-14 01:09:13',32),(34,2,4,18,20,'','2024-03-14 01:18:24',NULL,0),(35,3,4,18,20,'Registrado','2024-03-14 01:18:24','2024-03-14 01:32:45',34),(36,3,4,18,22,'Catastro sube Checklist','2024-03-14 01:18:24','2024-03-14 01:35:26',35),(37,4,4,18,22,'','2024-03-14 01:18:24','2024-03-14 01:36:21',36),(38,3,4,18,23,'Registrado','2024-03-14 01:18:24','2024-03-14 01:45:33',37);
 /*!40000 ALTER TABLE `proceso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +238,7 @@ CREATE TABLE `tramite_solicitante` (
   KEY `tramite_solicitante_solicitante_idx` (`sol_id`),
   CONSTRAINT `tramite_solicitante_documentos` FOREIGN KEY (`doc_id`) REFERENCES `documentos` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tramite_solicitante_solicitante` FOREIGN KEY (`sol_id`) REFERENCES `solicitante` (`sol_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ CREATE TABLE `tramite_solicitante` (
 
 LOCK TABLES `tramite_solicitante` WRITE;
 /*!40000 ALTER TABLE `tramite_solicitante` DISABLE KEYS */;
-INSERT INTO `tramite_solicitante` VALUES (86,1,3,93,'2024-02-25 15:23:43',1),(87,1,3,94,'2024-02-25 15:23:54',1),(88,1,3,95,'2024-02-25 15:24:04',1),(141,2,3,108,'2024-03-02 12:08:33',2),(142,2,3,109,'2024-03-02 12:08:56',2),(143,2,3,110,'2024-03-02 12:09:06',2),(144,3,3,111,'2024-03-09 14:44:12',3),(145,3,3,112,'2024-03-09 14:44:23',3),(146,3,3,113,'2024-03-09 14:44:39',3),(147,4,2,114,'2024-03-09 15:01:56',1),(148,4,2,115,'2024-03-09 15:02:07',1),(149,4,2,116,'2024-03-09 15:02:17',1);
+INSERT INTO `tramite_solicitante` VALUES (150,1,3,117,'2024-03-11 01:55:18',1),(151,1,3,118,'2024-03-11 01:55:42',1),(152,1,3,119,'2024-03-11 01:55:53',1),(153,2,3,120,'2024-03-13 13:38:26',2),(154,2,3,121,'2024-03-13 13:38:45',2),(155,2,3,122,'2024-03-13 13:39:00',2),(156,2,3,123,'2024-03-13 19:01:56',2),(157,2,3,124,'2024-03-13 23:17:57',2),(158,2,3,125,'2024-03-13 23:33:55',2),(159,2,3,126,'2024-03-13 23:34:11',2),(160,3,1,127,'2024-03-14 01:02:04',1),(161,3,1,128,'2024-03-14 01:02:15',1),(162,3,1,129,'2024-03-14 01:02:26',1),(163,3,1,130,'2024-03-14 01:06:24',1),(164,3,1,131,'2024-03-14 01:07:19',1),(165,3,1,132,'2024-03-14 01:07:30',1),(166,3,1,133,'2024-03-14 01:07:45',1),(167,4,2,134,'2024-03-14 01:17:28',1),(168,4,2,135,'2024-03-14 01:17:40',1),(169,4,2,136,'2024-03-14 01:17:51',1),(170,4,2,137,'2024-03-14 01:33:34',1),(171,4,2,138,'2024-03-14 01:36:40',1),(172,4,2,139,'2024-03-14 01:36:51',1),(173,4,2,140,'2024-03-14 01:37:03',1);
 /*!40000 ALTER TABLE `tramite_solicitante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `usuario` (
   `usu_clave` varchar(200) NOT NULL,
   `usu_condicion` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`usu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +278,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'ADMINISTRADOR DEL SISTEMA','-1','782541239','yosdado@gmail.com','Administrador','admin','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(2,'ALEJANDRO JAVIER MUÑOZ PUETATE','1050518594','0989650479','alejomuoss@gmail.com','VENTANILLA','AMP123','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(3,'ANDERSON FERNANDO MUÑOZ PUETATE','1005233679','1234567891','andersonf@gmail.com','CATASTRO','123','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(4,'Usuario Inspección','8731789321','0989650479','inspeccion@gmail.com','Inspección','inspeccion','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(5,'Usuario Providencia','1005236784','0989650471','providencia@gmail.com','Providencia','providencia','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(6,'Usuario Perfeccionamiento Providencia','1005235421','0989650471','perfeccionamiento@gmail.com','Perfeccionamiento Providencia','perfeccionamiento','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1);
+INSERT INTO `usuario` VALUES (1,'ADMINISTRADOR DEL SISTEMA','-1','782541239','yosdado@gmail.com','Administrador','admin','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(2,'ALEJANDRO JAVIER MUÑOZ PUETATE','1050518594','0989650479','alejomuoss@gmail.com','VENTANILLA','AMP123','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(3,'ANDERSON FERNANDO MUÑOZ PUETATE','1005233679','1234567891','andersonf@gmail.com','CATASTRO','123','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(4,'Usuario Inspección','8731789321','0989650479','inspeccion@gmail.com','Inspección','inspeccion','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(5,'Usuario Providencia','1005236784','0989650471','providencia@gmail.com','Providencia','providencia','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(6,'Usuario Perfeccionamiento Providencia','1005235421','0989650471','perfeccionamiento@gmail.com','Perfeccionamiento Providencia','perfeccionamiento','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1),(7,'','','','','','','',1),(8,'','','','','','','',1),(9,'','','','','','','',1),(10,'','','','','','','',1),(11,'','','','','','','',1),(12,'','','','','','','',1),(13,'','','','','','','',1),(14,'','','','','','','',1),(15,'','','','','','','',1),(16,'','','','','','','',1),(17,'','','','','','','',1),(18,'','','','','','','',1),(19,'','','','','','','',1),(20,'','','','','','','',1),(21,'','','','','','','',1),(22,'','','','','','','',1),(23,'','','','','','','',1),(24,'','','','','','','',1),(25,'','','','','','','',1),(26,'','','','','','','',1),(27,'','','','','','','',1),(28,'','','','','','','',1),(29,'','','','','','','',1),(30,'','','','','','','',1),(31,'','','','','','','',1),(32,'','','','','','','',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +437,7 @@ BEGIN
 DECLARE ultimo_proceso_id INT;
 
 IF op = 'list' THEN
-    SELECT DISTINCT
+SELECT DISTINCT
     solicitante.sol_identificacion AS s_ident,
     sol_identificacion,
     sol_nombre,
@@ -461,7 +461,76 @@ INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
 INNER JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
 INNER JOIN documentos ON tramite_solicitante.doc_id = documentos.doc_id  
 WHERE documentos.doc_temporal = 0
-    AND proceso.cat_id_proceso = 20;
+    AND proceso.cat_id_proceso = 20
+    AND proceso.pro_id = (
+        SELECT MAX(p2.pro_id)
+        FROM proceso AS p2
+        WHERE p2.tra_id = proceso.tra_id
+    );
+    
+ELSEIF op = 'catIns' THEN
+SELECT DISTINCT
+    solicitante.sol_identificacion AS s_ident,
+    sol_identificacion,
+    sol_nombre,
+    sol_telefono,
+    cat_id_proceso,
+    CONCAT(
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
+        ),
+        ', ',
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
+        ),
+        ', ',
+        COALESCE(sol_direccion, '')
+    ) AS sol_direccion
+FROM proceso
+INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
+INNER JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
+INNER JOIN documentos ON tramite_solicitante.doc_id = documentos.doc_id  
+WHERE documentos.doc_temporal = 0
+    AND proceso.cat_id_proceso = 22
+    AND proceso.pro_id = (
+        SELECT MAX(p2.pro_id)
+        FROM proceso AS p2
+        WHERE p2.tra_id = proceso.tra_id
+    );
+    
+ELSEIF op = 'listCheck' THEN
+SELECT DISTINCT
+    solicitante.sol_identificacion AS s_ident,
+    sol_identificacion,
+    sol_nombre,
+    sol_telefono,
+    cat_id_proceso,
+    CONCAT(
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
+        ),
+        ', ',
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
+        ),
+        ', ',
+        COALESCE(sol_direccion, '')
+    ) AS sol_direccion
+FROM proceso
+INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
+INNER JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
+INNER JOIN documentos ON tramite_solicitante.doc_id = documentos.doc_id  
+WHERE documentos.doc_estado = 0
+    AND proceso.cat_id_proceso = 20
+    AND proceso.pro_id = (
+        SELECT MAX(p2.pro_id)
+        FROM proceso AS p2
+        WHERE p2.tra_id = proceso.tra_id
+    );       
 
 elseif op='mos' then
 
@@ -479,6 +548,20 @@ JOIN solicitante s ON ts.sol_id = s.sol_id
 JOIN documentos d ON ts.doc_id = d.doc_id 
 WHERE s.sol_identificacion = tramite
 AND (d.doc_estado <> 36 OR d.doc_temporal <> 36);
+
+elseif op='listCatIns' then
+
+SELECT ts.tra_iden, d.doc_nombre, d.doc_fechareg, d.doc_url
+FROM tramite_solicitante ts
+JOIN solicitante s ON ts.sol_id = s.sol_id
+JOIN documentos d ON ts.doc_id = d.doc_id
+WHERE s.sol_identificacion = tramite
+    AND d.cat_id_tipodoc IN (
+        SELECT cat_id 
+        FROM catalogo 
+        WHERE cat_nombre IN ('INFORME TECNICO DE INSPECCION', 'PLAN RURAL', 'INFORME RURAL')
+    )
+    AND (d.doc_estado <> 36 OR d.doc_temporal <> 36);
 
 elseif op='ing' then 
  
@@ -566,7 +649,46 @@ BEGIN
         JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id
         LEFT JOIN proceso ON tramite_solicitante.tra_id = proceso.tra_id  
         WHERE solicitante.sol_identificacion = id
-        AND documentos.doc_nombre = nombre;
+        and documentos.doc_nombre = nombre;
+        
+    elseif op = 'listGestor' then
+    SELECT DISTINCT
+            COALESCE(NULLIF(documentos.doc_estado, ''), documentos.doc_temporal) AS doc_tabla,
+            documentos.doc_id, 
+            documentos.doc_fechareg, 
+            documentos.doc_url, 
+            (
+                SELECT cat_nombre 
+                FROM catalogo 
+                WHERE cat_id = 
+                    CASE 
+                        WHEN documentos.doc_estado IS NOT NULL AND documentos.doc_estado != '' THEN documentos.doc_estado
+                        ELSE documentos.doc_temporal
+                    END
+            ) as doc_estado,
+            documentos.doc_descripcion, 
+            COALESCE(
+                (
+                    SELECT cat_nombre 
+                    FROM catalogo
+                    INNER JOIN proceso ON catalogo.cat_id = proceso.cat_id_proceso
+                    INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
+                    WHERE tramite_solicitante.doc_id = documentos.doc_id
+                    ORDER BY proceso.cat_id_proceso DESC LIMIT 1
+                ),
+                (
+                    SELECT cat_nombre 
+                    FROM catalogo 
+                    WHERE cat_id = 31 LIMIT 1
+                )
+            ) as doc_gestor,
+            tramite_solicitante.tra_pro
+        FROM documentos
+        JOIN tramite_solicitante ON documentos.doc_id = tramite_solicitante.doc_id
+        JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id
+        LEFT JOIN proceso ON tramite_solicitante.tra_id = proceso.tra_id  
+        WHERE solicitante.sol_identificacion = id
+        and documentos.doc_nombre = nombre;
 
     elseif op='ing' then
         INSERT INTO `documentos`
@@ -577,11 +699,10 @@ BEGIN
         SELECT LAST_INSERT_ID() AS insertedId;
 
     elseif op='ingGestor' then
-		SELECT cat_id_tipodoc INTO cat_id_doc FROM documentos WHERE doc_nombre = nombre LIMIT 1;
         INSERT INTO `documentos`
         (`cat_id_tipodoc`,`doc_nombre`,`doc_url`,`doc_fechareg`)
         VALUES
-        (cat_id_doc,nombre,url,now());
+        (tipodoc,nombre,url,now());
 
         SELECT LAST_INSERT_ID() AS insertedId;
 
@@ -598,30 +719,36 @@ BEGIN
         WHERE s.sol_identificacion = nombre and doc_estado=26;
 
     elseif op = 'notify' then
-        SELECT distinct
-            documentos.doc_id, 
-            documentos.doc_fechareg, 
-            documentos.doc_url, 
-            (
-                SELECT cat_nombre 
-                FROM catalogo 
-                WHERE cat_id = 
-                    CASE 
-                        WHEN documentos.doc_estado IS NOT NULL AND documentos.doc_estado != '' THEN documentos.doc_estado
-                        ELSE documentos.doc_temporal
-                    END
-            ) as doc_estado,
-            documentos.doc_descripcion, 
+        SELECT DISTINCT
+    documentos.doc_id, 
+    documentos.doc_fechareg, 
+    documentos.doc_url, 
+    (
+        SELECT cat_nombre 
+        FROM catalogo 
+        WHERE cat_id = 
             CASE 
-                WHEN proceso.cat_id_proceso IS NULL THEN (SELECT cat_nombre FROM catalogo WHERE cat_id = 31)
-                ELSE (SELECT cat_nombre FROM catalogo WHERE documentos.doc_estado = catalogo.cat_id)
-            END as doc_gestor,
-            SUBSTRING_INDEX(documentos.doc_nombre, '-', 1) AS doc_nombre
-        FROM documentos
-        JOIN tramite_solicitante ON documentos.doc_id = tramite_solicitante.doc_id
-        JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id
-        LEFT JOIN proceso ON tramite_solicitante.tra_id = proceso.tra_id 
-        WHERE solicitante.sol_identificacion = id;
+                WHEN documentos.doc_estado IS NOT NULL AND documentos.doc_estado != '' THEN documentos.doc_estado
+                ELSE documentos.doc_temporal
+            END
+    ) AS doc_estado,
+    documentos.doc_descripcion, 
+    CASE 
+        WHEN proceso.cat_id_proceso IS NULL THEN (SELECT cat_nombre FROM catalogo WHERE cat_id = 31)
+        ELSE (SELECT cat_nombre FROM catalogo WHERE documentos.doc_estado = catalogo.cat_id)
+    END AS doc_gestor,
+    SUBSTRING_INDEX(documentos.doc_nombre, '-', 1) AS doc_nombre
+FROM 
+    documentos
+JOIN 
+    tramite_solicitante ON documentos.doc_id = tramite_solicitante.doc_id
+JOIN 
+    solicitante ON tramite_solicitante.sol_id = solicitante.sol_id
+LEFT JOIN 
+    proceso ON tramite_solicitante.tra_id = proceso.tra_id 
+WHERE 
+    solicitante.sol_identificacion = id
+    AND documentos.cat_id_tipodoc IN (14, 17, 21);
 
     elseif op = 'prosol' then 
         SELECT MAX(ts.tra_pro) as tra_pro
@@ -733,32 +860,117 @@ BEGIN
     DECLARE ultimo_proceso_id INT;
 
     IF op = 'list' THEN
-        SELECT DISTINCT
-            solicitante.sol_identificacion AS s_ident,
-            sol_identificacion,
-            sol_nombre,
-            sol_telefono,
-            cat_id_proceso,
-            CONCAT(
-                CONCAT(
-                    UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
-                    LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
-                ),
-                ', ',
-                CONCAT(
-                    UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
-                    LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
-                ),
-                ', ',
-                COALESCE(sol_direccion, '')
-            ) AS sol_direccion
-        FROM proceso
+SELECT
+    solicitante.sol_identificacion AS s_ident,
+    solicitante.sol_identificacion,
+    solicitante.sol_nombre,
+    solicitante.sol_telefono,
+    proceso.cat_id_proceso,
+    CONCAT(
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = solicitante.cat_id_canton), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = solicitante.cat_id_canton), 2))
+        ),
+        ', ',
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = solicitante.cat_id_sector), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = solicitante.cat_id_sector), 2))
+        ),
+        ', ',
+        COALESCE(solicitante.sol_direccion, '')
+    ) AS sol_direccion,
+    documentos.doc_estado
+FROM
+    proceso
+INNER JOIN
+    tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
+INNER JOIN
+    solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
+INNER JOIN
+    documentos ON tramite_solicitante.doc_id = documentos.doc_id  
+WHERE
+    documentos.doc_estado = 0
+    AND proceso.cat_id_proceso = 22
+    AND proceso.pro_id = (
+        SELECT
+            MAX(p2.pro_id)
+        FROM
+            proceso AS p2
+        WHERE
+            p2.tra_id = proceso.tra_id
+    )
+    AND documentos.cat_id_tipodoc = 17;
+    
+    ELSEIF op = 'listInspCat' THEN
+SELECT DISTINCT
+    solicitante.sol_identificacion AS s_ident,
+    sol_identificacion,
+    sol_nombre,
+    sol_telefono,
+    cat_id_proceso,
+    CONCAT(
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
+        ),
+        ', ',
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
+        ),
+        ', ',
+        COALESCE(sol_direccion, '')
+    ) AS sol_direccion
+FROM proceso
 INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
 INNER JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
 INNER JOIN documentos ON tramite_solicitante.doc_id = documentos.doc_id  
 WHERE documentos.doc_temporal = 0
-    AND proceso.cat_id_proceso = (SELECT MAX(cat_id_proceso) FROM proceso)
-    AND proceso.cat_id_proceso = 22;
+    AND proceso.cat_id_proceso = 22
+    AND proceso.pro_id = (
+        SELECT MAX(p2.pro_id)
+        FROM proceso AS p2
+        WHERE p2.tra_id = proceso.tra_id
+    );
+    
+    elseif op = 'listGestor' then
+    SELECT DISTINCT
+            COALESCE(NULLIF(documentos.doc_estado, ''), documentos.doc_temporal) AS doc_tabla,
+            documentos.doc_id, 
+            documentos.doc_fechareg, 
+            documentos.doc_url, 
+            (
+                SELECT cat_nombre 
+                FROM catalogo 
+                WHERE cat_id = 
+                    CASE 
+                        WHEN documentos.doc_estado IS NOT NULL AND documentos.doc_estado != '' THEN documentos.doc_estado
+                        ELSE documentos.doc_temporal
+                    END
+            ) as doc_estado,
+            documentos.doc_descripcion, 
+            COALESCE(
+                (
+                    SELECT cat_nombre 
+                    FROM catalogo
+                    INNER JOIN proceso ON catalogo.cat_id = 20
+                    INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
+                    WHERE tramite_solicitante.doc_id = documentos.doc_id
+                    ORDER BY proceso.cat_id_proceso DESC LIMIT 1
+                ),
+                (
+                    SELECT cat_nombre 
+                    FROM catalogo 
+                    WHERE cat_id = 31 LIMIT 1
+                )
+            ) as doc_gestor,
+            tramite_solicitante.tra_pro
+        FROM documentos
+        JOIN tramite_solicitante ON documentos.doc_id = tramite_solicitante.doc_id
+        JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id
+        LEFT JOIN proceso ON tramite_solicitante.tra_id = proceso.tra_id  
+        WHERE solicitante.sol_identificacion = id
+        and documentos.doc_nombre = observacion;
 
     elseif op = 'mos' THEN
 
@@ -775,6 +987,7 @@ WHERE documentos.doc_temporal = 0
         JOIN solicitante s ON ts.sol_id = s.sol_id
         JOIN documentos d ON ts.doc_id = d.doc_id
         WHERE s.sol_identificacion = tramite
+			AND d.cat_id_tipodoc = (SELECT cat_id FROM catalogo WHERE cat_nombre = 'PLANIMETRICO')
             AND (d.doc_estado <> 36 OR d.doc_temporal <> 36);
     END IF;
 
@@ -852,31 +1065,35 @@ BEGIN
 
     IF op = 'list' THEN
         SELECT DISTINCT
-            solicitante.sol_identificacion AS s_ident,
-            sol_identificacion,
-            sol_nombre,
-            sol_telefono,
-            cat_id_proceso,
-            CONCAT(
-                CONCAT(
-                    UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
-                    LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
-                ),
-                ', ',
-                CONCAT(
-                    UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
-                    LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
-                ),
-                ', ',
-                COALESCE(sol_direccion, '')
-            ) AS sol_direccion
-        FROM proceso
+    solicitante.sol_identificacion AS s_ident,
+    sol_identificacion,
+    sol_nombre,
+    sol_telefono,
+    cat_id_proceso,
+    CONCAT(
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
+        ),
+        ', ',
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
+        ),
+        ', ',
+        COALESCE(sol_direccion, '')
+    ) AS sol_direccion
+FROM proceso
 INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
 INNER JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
 INNER JOIN documentos ON tramite_solicitante.doc_id = documentos.doc_id  
 WHERE documentos.doc_estado = 0
-    AND proceso.cat_id_proceso = (SELECT MAX(cat_id_proceso) FROM proceso)
-    AND proceso.cat_id_proceso = 24;
+    AND proceso.cat_id_proceso = 24
+    AND proceso.pro_id = (
+        SELECT MAX(p2.pro_id)
+        FROM proceso AS p2
+        WHERE p2.tra_id = proceso.tra_id
+    );
 
     elseif op = 'mos' THEN
 
@@ -990,7 +1207,7 @@ BEGIN
         WHERE doc_id IN (SELECT t1.doc_id FROM tramite_solicitante t1 WHERE t1.tra_id = tramite_actual);    
 
     ELSEIF op = 'cat' THEN
-        SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'INSPECCION';
+        SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'CATASTROS';
         SELECT tra_id INTO tramite_actual FROM tramite_solicitante WHERE tra_iden = tramite LIMIT 1;
         SELECT MAX(cat_id_proceso) INTO ultimo_cat_proceso FROM proceso WHERE tra_id = tramite_actual;
         SELECT MAX(pro_id) INTO ultimo_proceso_id FROM proceso WHERE tra_id = tramite_actual AND cat_id_proceso = ultimo_cat_proceso;
@@ -1005,8 +1222,39 @@ BEGIN
         SET doc_temporal = 26, doc_estado = 0
         WHERE doc_id IN (SELECT t1.doc_id FROM tramite_solicitante t1 WHERE t1.tra_id = tramite_actual);
         
-    ELSEIF op = 'insp' THEN
+    ELSEIF op = 'catCheck' THEN
+        SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'INSPECCION';
+        SELECT MAX(cat_id_proceso) INTO ultimo_cat_proceso FROM proceso WHERE tra_id = tramite;
+        SELECT MAX(pro_id) INTO ultimo_proceso_id FROM proceso WHERE tra_id = tramite AND cat_id_proceso = ultimo_cat_proceso;
+        SELECT pro_fecha INTO fecha_ini FROM proceso WHERE pro_id = ultimo_proceso_id;
+        
+        -- Insertar un nuevo registro
+        INSERT INTO proceso (usu_id, tra_id, cat_id_estado, cat_id_proceso, pro_observacion, pro_fecha, pro_fechafin, pro_trasabilidad)
+        VALUES (usuario,tramite, 18, cat_id_actual, observacion, fecha_ini, NOW(), ultimo_proceso_id);
+        
+        -- Actualizar el doc_estado a para todos los doc_id asociados al tra_id
+        UPDATE documentos
+        SET doc_temporal = 0, doc_estado = 26
+        WHERE doc_id IN (SELECT t1.doc_id FROM tramite_solicitante t1 WHERE t1.tra_id = tramite_actual);
+        
+   ELSEIF op = 'catIns' THEN
         SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'PROVIDENCIA';
+        SELECT tra_id INTO tramite_actual FROM tramite_solicitante WHERE tra_iden = tramite LIMIT 1;
+        SELECT MAX(cat_id_proceso) INTO ultimo_cat_proceso FROM proceso WHERE tra_id = tramite_actual;
+        SELECT MAX(pro_id) INTO ultimo_proceso_id FROM proceso WHERE tra_id = tramite_actual AND cat_id_proceso = ultimo_cat_proceso;
+        SELECT pro_fecha INTO fecha_ini FROM proceso WHERE pro_id = ultimo_proceso_id;
+        
+        -- Insertar un nuevo registro
+        INSERT INTO proceso (usu_id, tra_id, cat_id_estado, cat_id_proceso, pro_observacion, pro_fecha, pro_fechafin, pro_trasabilidad)
+        VALUES (usuario, tramite_actual, 18, cat_id_actual, observacion, fecha_ini, NOW(), ultimo_proceso_id);
+        
+        -- Actualizar el doc_estado a para todos los doc_id asociados al tra_id
+        UPDATE documentos
+        SET doc_temporal = 26, doc_estado = 0
+        WHERE doc_id IN (SELECT t1.doc_id FROM tramite_solicitante t1 WHERE t1.tra_id = tramite_actual);     
+        
+    ELSEIF op = 'insp' THEN
+        SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'INSPECCION';
         SELECT tra_id INTO tramite_actual FROM tramite_solicitante WHERE tra_iden = tramite LIMIT 1;
         SELECT MAX(cat_id_proceso) INTO ultimo_cat_proceso FROM proceso WHERE tra_id = tramite_actual;
         SELECT MAX(pro_id) INTO ultimo_proceso_id FROM proceso WHERE tra_id = tramite_actual AND cat_id_proceso = ultimo_cat_proceso;
@@ -1020,6 +1268,21 @@ BEGIN
         UPDATE documentos
         SET doc_temporal = 0, doc_estado = 26
         WHERE doc_id IN (SELECT t1.doc_id FROM tramite_solicitante t1 WHERE t1.tra_id = tramite_actual);
+        
+    ELSEIF op = 'inspCatastro' THEN
+        SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'PROVIDENCIA';
+        SELECT MAX(cat_id_proceso) INTO ultimo_cat_proceso FROM proceso WHERE tra_id = tramite;
+        SELECT MAX(pro_id) INTO ultimo_proceso_id FROM proceso WHERE tra_id = tramite AND cat_id_proceso = ultimo_cat_proceso;
+        SELECT pro_fecha INTO fecha_ini FROM proceso WHERE pro_id = ultimo_proceso_id;
+        
+        -- Insertar un nuevo registro
+        INSERT INTO proceso (usu_id, tra_id, cat_id_estado, cat_id_proceso, pro_observacion, pro_fecha, pro_fechafin, pro_trasabilidad)
+        VALUES (usuario,tramite, 18, cat_id_actual, observacion, fecha_ini, NOW(), ultimo_proceso_id);
+        
+        -- Actualizar el doc_estado a para todos los doc_id asociados al tra_id
+        UPDATE documentos
+        SET doc_temporal = 26, doc_estado = 0
+        WHERE doc_id IN (SELECT t1.doc_id FROM tramite_solicitante t1 WHERE t1.tra_id = tramite_actual);    
         
     ELSEIF op = 'prov' THEN
         SELECT cat_id INTO cat_id_actual FROM catalogo WHERE cat_nombre = 'PERFECCIONAMIENTO DE PROVIDENCIA';
@@ -1138,32 +1401,36 @@ BEGIN
     DECLARE ultimo_proceso_id INT;
 
     IF op = 'list' THEN
-        SELECT DISTINCT
-            solicitante.sol_identificacion AS s_ident,
-            sol_identificacion,
-            sol_nombre,
-            sol_telefono,
-            cat_id_proceso,
-            CONCAT(
-                CONCAT(
-                    UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
-                    LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
-                ),
-                ', ',
-                CONCAT(
-                    UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
-                    LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
-                ),
-                ', ',
-                COALESCE(sol_direccion, '')
-            ) AS sol_direccion
-        FROM proceso
+       SELECT DISTINCT
+    solicitante.sol_identificacion AS s_ident,
+    sol_identificacion,
+    sol_nombre,
+    sol_telefono,
+    cat_id_proceso,
+    CONCAT(
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_canton), 2))
+        ),
+        ', ',
+        CONCAT(
+            UPPER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 1, 1)),
+            LOWER(SUBSTRING((SELECT cat_nombre FROM catalogo WHERE cat_id = cat_id_sector), 2))
+        ),
+        ', ',
+        COALESCE(sol_direccion, '')
+    ) AS sol_direccion
+FROM proceso
 INNER JOIN tramite_solicitante ON proceso.tra_id = tramite_solicitante.tra_id
 INNER JOIN solicitante ON tramite_solicitante.sol_id = solicitante.sol_id 
 INNER JOIN documentos ON tramite_solicitante.doc_id = documentos.doc_id  
-WHERE documentos.doc_temporal = 0
-    AND proceso.cat_id_proceso = (SELECT MAX(cat_id_proceso) FROM proceso)
-    AND proceso.cat_id_proceso = 23;
+WHERE documentos.doc_estado = 0
+    AND proceso.cat_id_proceso = 23
+    AND proceso.pro_id = (
+        SELECT MAX(p2.pro_id)
+        FROM proceso AS p2
+        WHERE p2.tra_id = proceso.tra_id
+    );
 
     elseif op = 'mos' THEN
 
@@ -1212,6 +1479,8 @@ INSERT INTO `solicitante`(`cat_id_identificacion`,`sol_identificacion`,`sol_corr
 VALUES
 (tipoiden,numiden,correo,nombre,telefono,direccion,provincia,canton,parroquia,sector,clave,NOW(),1);
 
+elseif op = 'id' then 
+SELECT sol_id FROM solicitante WHERE sol_identificacion  = numiden;
 end if;
 
 END ;;
@@ -1305,7 +1574,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_tramite_actual`(
-    IN p_sol_id INT
+    IN p_sol_id INT, identificacion VARCHAR(15)
 )
 BEGIN
     DECLARE max_tra_pro INT;
@@ -1317,6 +1586,15 @@ SELECT MAX(ts.tra_pro) AS max_tra_pro, MAX(ts.tra_id) AS max_tra_id
 INTO max_tra_pro, max_tra_id
 FROM tramite_solicitante ts
 WHERE ts.sol_id = p_sol_id;
+
+ -- Si no se encontraron registros con sol_id, intenta buscar con sol_identificacion
+    IF max_tra_pro IS NULL THEN
+        SELECT MAX(ts.tra_pro) AS max_tra_pro, MAX(ts.tra_id) AS max_tra_id
+        INTO max_tra_pro, max_tra_id
+        FROM tramite_solicitante ts
+        JOIN solicitante s ON ts.sol_id = s.sol_id
+        WHERE s.sol_identificacion = identificacion;
+    END IF;
 
 -- Verificar cuántos documentos existen con doc_estado o doc_temporal igual a 36
 SELECT COUNT(*)
@@ -1331,7 +1609,7 @@ IF doc_count > 0 THEN
 END IF;
 
 -- Devolver el valor ajustado de tra_pro
-SELECT max_tra_pro AS tra_pro;
+SELECT max_tra_pro AS tra_pro, max_tra_id as tra_id;
 
 END ;;
 DELIMITER ;
@@ -1452,4 +1730,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-10 20:24:57
+-- Dump completed on 2024-03-14  1:56:05

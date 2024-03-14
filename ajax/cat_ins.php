@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-require_once "../modelos/Inspeccion.php";
+require_once "../modelos/Catastro.php";
 
-$inspeccion = new Inspeccion();
+
+$catastro = new Catastro();
 
 $tra_id = isset($_POST["tra_id"]) ? limpiarCadena($_POST["tra_id"]) : "";
 $sol_id = isset($_POST["sol_id"]) ? limpiarCadena($_POST["sol_id"]) : "";
@@ -21,8 +22,8 @@ $usu_id = isset($_SESSION['usu_id']) ? $_SESSION['usu_id'] : '';
 
 switch ($_GET["op"]) {
 
-    case 'listar':
-        $rspta = $inspeccion->listar();
+    case 'listarIns':
+        $rspta = $catastro->listarIns();
         $data = array();
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
@@ -43,7 +44,7 @@ switch ($_GET["op"]) {
         break;
 
     case 'documentos':
-        $rspta = $inspeccion->estado();
+        $rspta = $catastro->estado();
         while ($reg = $rspta->fetch_object()) {
             echo '<option value=' . $reg->cat_id . '>' . $reg->cat_nombre . '</option>';
         }
@@ -51,7 +52,7 @@ switch ($_GET["op"]) {
 
     case 'tabla':
         $s_ident = isset($_GET['s_ident']) ? $_GET['s_ident'] : '';
-        $rspta = $inspeccion->tabla($s_ident);
+        $rspta = $catastro->tablaCatIns($s_ident);
         $data = array();
         if ($rspta) {
             while ($row = $rspta->fetch_object()) {
@@ -59,12 +60,14 @@ switch ($_GET["op"]) {
                     "0" => '<button class="btn btn-secondary btn-xs">Ver</button>',
                     "1" => '',
                     "2" => $row->tra_iden,
-                    "3" => $row->doc_nombre,
-                    "4" => $row->doc_fechareg,
-                    "5" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
-                    "6" => $row->doc_url,
-                    "7" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
-                    "8" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
+                    "3" => $row->tra_pro,
+                    "4" => $row->doc_id,
+                    "5" => $row->doc_nombre,
+                    "6" => $row->doc_fechareg,
+                    "7" => '<input class="form-control" type="text" name="pro_observacion" id="pro_observacion" maxlength="100" placeholder="Observación" readonly>',
+                    "8" => $row->doc_url,
+                    "9" => '<button class="btn btn-success btn-xs" onclick="guardar(event)">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>',
+                    "10" => "<input type='text' name='s_ident' id='s_ident' value='" . $s_ident . "' style='display:none;'>"
 
                 );
             }
@@ -89,10 +92,10 @@ switch ($_GET["op"]) {
             $observacion = $primerRegistro['observacion'];
 
             // Llama a la función para guardar el documento
-            $rspta = $inspeccion->aprobardocumento($usu_id, $tra_id, $estado, $observacion);
+            $rspta = $catastro->aprobardocumentoIns($usu_id, $tra_id, $estado, $observacion);
 
             if ($rspta) {
-                echo "El primer documento se registró correctamente";
+                echo "Todo se registró correctamente";
             } else {
                 echo "Hubo un problema al registrar el primer documento";
             }
@@ -106,7 +109,6 @@ switch ($_GET["op"]) {
         $cat_id_estado = $_POST['cat_id_estado'];
         $tra_id = $_POST['tra_id'];
         $pro_observacion = $_POST['pro_observacion'];
-        $rspta = $inspeccion->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
+        $rspta = $catastro->guardardocumento($tra_id, $cat_id_estado, $pro_observacion);
         break;
-
 }

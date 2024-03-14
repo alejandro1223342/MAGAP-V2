@@ -1,7 +1,6 @@
 <?php
 //incluir la conexion de base de datos
 require "../config/Conexion.php";
-
 require "../ajax/solicitante.php";
 
 class Documentosol
@@ -107,7 +106,7 @@ class Documentosol
 
     public function procesoActual($sol_id)
     {
-        $sql = "CALL sp_tramite_actual($sol_id);";
+        $sql = "CALL sp_tramite_actual($sol_id,'0');";
         return ejecutarConsultaSP($sql);
     }
 

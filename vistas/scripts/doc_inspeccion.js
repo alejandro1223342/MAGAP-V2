@@ -6,23 +6,10 @@ var tabla_pdf;
 function init() {
     mostrarform(false, (formulario = ""));
     mostrarform(false, (formulario = "#editar_documento"));
-    listarCheck();
+    listInspCat();
 
     $("#formulario").on("submit", function (e) {
         aprobar(e);
-    });
-    $("#editar").on("submit", function (e) {
-        editarDocumento(e);
-    });
-    //cargamos los items al celect categoria
-    $.post("../ajax/doc_catastros.php?op=documentos", function (r) {
-        $("#cat_id_tipodoc").html(r);
-        $("#cat_id_tipodoc").select2();
-    });
-    // Captura el cambio en el select y guarda el nombre seleccionado en el input
-    $("#cat_id_tipodoc").change(function () {
-        var nombreSeleccionado = $("#cat_id_tipodoc option:selected").text();
-        $("#nombre_tipodoc").val(nombreSeleccionado);
     });
 }
 
@@ -38,13 +25,6 @@ function procesoActual(cedula) {
         $("#traA").val(tramiteInt);
     });
 }
-
-$(document).ready(function () {
-    // Inicializar Select2
-    $(".select2").select2();
-    $(".select2bs4").select2({ theme: "bootstrap4" });
-});
-
 //funcion limpiar
 function limpiar() {
     $("#cat_id_tipodoc").val("");
@@ -84,14 +64,14 @@ function mostrarform(flag, formulario = "") {
         }
     }
 }
-function listarCheck() {
+function listInspCat() {
     tabla = $("#tbllistado")
         .dataTable({
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
             },
             ajax: {
-                url: "../ajax/doc_catastros.php?op=listarCheck",
+                url: "../ajax/doc_inspeccion.php?op=listInspCat",
                 type: "get",
                 dataType: "json",
                 error: function (e) {
@@ -154,7 +134,7 @@ function mostrarTabla(s_ident) {
                 url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
             },
             ajax: {
-                url: "../ajax/doc_catastros.php?op=listarPredefinido&cedula=" + cedula,
+                url: "../ajax/doc_inspeccion.php?op=listarPredefinido&cedula=" + cedula,
                 type: "get",
                 dataType: "json",
                 error: function (e) {
@@ -209,8 +189,12 @@ function guardar(event) {
         let docNombre = rowData[2];
 
         let cat_id_tipodoc;
-        if (docNombre === 'CHECKLIST') {
-            cat_id_tipodoc = 90;
+        if (docNombre === 'INFORME TECNICO DE INSPECCION') {
+            cat_id_tipodoc = 33;
+        } else if (docNombre === 'PLAN RURAL') {
+            cat_id_tipodoc = 34;
+        } else if (docNombre === 'INFORME RURAL') {
+            cat_id_tipodoc = 35;
         }
 
         let fileInput = fila.find('#pdf')[0];
@@ -291,7 +275,7 @@ function aprobar(e) {
     let todosRegistrado = true;
     $("#tabla_pdf tbody tr").each(function (index, row) {
         let textoEstado = $(row).find("td:eq(3)").text().trim();
-        if (textoEstado !== "SUBIDO") {
+        if (textoEstado !== "Registrado") {
             todosRegistrado = false;
             return false;  // Detener el bucle si encontramos un registro no "Registrado"
         }
@@ -320,8 +304,8 @@ function aprobar(e) {
                             let tra_id = $("#traA").val();
                             let estado = $(row).find("td:eq(3)").text();
                             // Convertir el estado a un valor específico
-                            let estadoValue = (estado === "SUBIDO") ? 26 : null;
-                            let observacion = "Catastro sube Checklist";
+                            let estadoValue = (estado === "Aprobado") ? 18 : (estado === "No Aprobado") ? 28 : null;
+                            let observacion = "Inspeccion sube documentos a catastros";
                             let rowData = {
                                 tra_id: tra_id,
                                 estado: estadoValue,
@@ -333,7 +317,7 @@ function aprobar(e) {
                         let formData = new FormData();
                         formData.append('tabla_pdf', JSON.stringify(tableData));
                         $.ajax({
-                            url: "../ajax/doc_catastros.php?op=aprobardocumento",
+                            url: "../ajax/doc_inspeccion.php?op=aprobardocumento",
                             type: "POST",
                             data: formData,
                             contentType: false,
@@ -356,7 +340,7 @@ function aprobar(e) {
             }
         });
     } else {
-        bootbox.alert("No se puede guardar hasta que suba el checklist.");
+        bootbox.alert("No se puede continuar hasta que se hayan 'Registrado' todos los documentos");
         $("#btnGuardar").prop("disabled", false);
     }
 }

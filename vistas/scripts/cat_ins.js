@@ -12,7 +12,7 @@ function init() {
         guardaryeditar(e);
     });
     //cargamos los items al celect categoria
-    $.post("../ajax/catastro.php?op=documentos", function (r) {
+    $.post("../ajax/cat_ins.php?op=documentos", function (r) {
         $("#doc_estado").html(r);
     });
     $('#pdf').on('change', uploadPDF);
@@ -53,7 +53,7 @@ function listar() {
                 url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
             },
             ajax: {
-                url: "../ajax/catastro.php?op=listar",
+                url: "../ajax/cat_ins.php?op=listarIns",
                 type: "get",
                 dataType: "json",
                 error: function (e) {
@@ -123,7 +123,7 @@ function guardaryeditar(e) {
                         let formData = new FormData();
                         formData.append('tabla_pdf', JSON.stringify(tableData));
                         $.ajax({
-                            url: "../ajax/catastro.php?op=aprobardocumento",
+                            url: "../ajax/cat_ins.php?op=aprobardocumento",
                             type: "POST",
                             data: formData,
                             contentType: false,
@@ -161,23 +161,6 @@ function guardaryeditar(e) {
     }
 }
 
-
-/*function mostrar(tra_id) {
-    $.post(
-        "../ajax/ventanilla.php?op=mostrar",
-        { tra_id: tra_id },
-        function (data, status) {
-            data = JSON.parse(data);
-            mostrarform(true);
-            $("#tra_id").val(data.tra_id);
-            $("#sol_nombre").val(data.sol_nombre);
-            $("#doc_url").val(data.doc_url);
-            $("#sol_iden").val(data.sol_identificacion);
-            $("#tra_id").val(data.tra_id);
-        }
-    );
-}*/
-
 function mostrarTabla(s_ident) {
     mostrarform(true);
     tabla_pdf = $('#tabla_pdf').DataTable({
@@ -186,7 +169,7 @@ function mostrarTabla(s_ident) {
         },
         "serverSide": true,
         "ajax": {
-            url: '../ajax/catastro.php?op=tabla&s_ident=' + s_ident,
+            url: '../ajax/cat_ins.php?op=tabla&s_ident=' + s_ident,
             type: "GET",
             dataType: "json",
             error: function (e) {
@@ -329,7 +312,7 @@ function guardar(event) {
                 };
 
                 $.ajax({
-                    url: "../ajax/catastro.php?op=guardardocumento",
+                    url: "../ajax/cat_ins.php?op=guardardocumento",
                     type: "POST",
                     data: datosFila,
                     success: function (response) {

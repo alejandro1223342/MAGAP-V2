@@ -104,7 +104,6 @@ if (strlen(session_id()) < 1)
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
 
-
                     <?php
 
                     if ($_SESSION['Inspección'] == 1) {
@@ -157,12 +156,12 @@ if (strlen(session_id()) < 1)
                     <p>Documentos</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="doc_providencia.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Perfeccionamiento</p>
                   </a>
-                </li>
+                </li>-->
                 <!--<li class="nav-item">
                   <a href="pages/tables/jsgrid.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

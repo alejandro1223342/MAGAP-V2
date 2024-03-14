@@ -58,26 +58,34 @@ if (!isset($_SESSION['usu_nombre'])) {
                                                         <span class="close">&times;</span>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <iframe id="modal-iframe" width="100%" height="480" allow="autoplay"></iframe>
+                                                        <iframe id="modal-iframe" width="100%" height="480"
+                                                                allow="autoplay"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <div class="form-group">
-                                                            <select id="doc_estado" name="doc_estado" class="form-control"></select>
+                                                            <select id="doc_estado" name="doc_estado"
+                                                                    class="form-control"></select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" id="doc_descripcion" name="doc_descripcion" class="form-control" placeholder="Observación">
+                                                            <input type="text" id="doc_descripcion"
+                                                                   name="doc_descripcion" class="form-control"
+                                                                   placeholder="Observación">
                                                         </div>
                                                         <div class="form-group">
-                                                            <button class="btn btn-success" id="modalG" name="modalG" onclick="guardarModal()">Guardar <i class="fa fa-save" style="margin-left: 5px;"></i></button>
+                                                            <button class="btn btn-success" id="modalG" name="modalG"
+                                                                    onclick="guardarModal()">Guardar <i
+                                                                        class="fa fa-save"
+                                                                        style="margin-left: 5px;"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <table id="tabla_pdf" class="table table-head-fixed table-bordered table-striped" style="width:100%">
+                                                    <table id="tabla_pdf"
+                                                           class="table table-head-fixed table-bordered table-striped"
+                                                           style="width:100%">
                                                         <thead>
                                                         <tr>
                                                             <th></th>

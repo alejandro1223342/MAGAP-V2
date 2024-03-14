@@ -130,7 +130,7 @@ if (!isset($_SESSION['usu_nombre'])) {
     }
     require 'footer.php';
     ?>
-    <script src="scripts/catastro.js"></script>
+    <script src="scripts/cat_ins.js"></script>
     <!--   <script src="../public/js/select2.full.min.js"></script>
      -->
     <?php

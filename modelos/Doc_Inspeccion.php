@@ -1,15 +1,18 @@
 <?php
+//incluir la conexion de base de datos
 require "../config/Conexion.php";
+
 require "../ajax/usuario.php";
 
-class DocumentosGestores
+class Doc_Inspeccion
 {
+    //implementamos nuestro constructor
     public function __construct()
     {
 
     }
 
-    public function insertarGestor($sol_iden, $cat_id_tipodoc, $fileName, $doc_url, $tra_pro, $sol_id)
+    public function insertar($usu_cedula, $cat_id_tipodoc, $fileName, $doc_url, $tra_pro)
     {
         $sql_check = "Call sp_documentosol('compDoc', $tra_pro + 2, 0, '$fileName', '0')";
         $result_check = ejecutarConsultaSP($sql_check);
@@ -20,13 +23,15 @@ class DocumentosGestores
             return false;
         } else {
             // El id con ese nombre no existe, se puede realizar la inserción
-            $sql = "CALL sp_documentosol('ing', '$sol_iden', $cat_id_tipodoc, '$fileName', '$doc_url')";
+            $sql = "CALL sp_documentosol('ing', '$usu_cedula', $cat_id_tipodoc, '$fileName', '$doc_url')";
             $result = ejecutarConsultaSP($sql);
+
             if ($result !== false) {
                 $iddoc = $result->fetch_row()[0];
-                $current_sol_id = $sol_id;
+                $current_sol_id = $_SESSION['sol_id'];
                 $sql_detalle = "CALL sp_tramites('ing','$current_sol_id', '$iddoc');";
                 ejecutarConsultaSP($sql_detalle);
+
                 return true;
             } else {
                 return false;
@@ -34,31 +39,28 @@ class DocumentosGestores
         }
     }
 
-    public function editar($doc_id, $doc_nombre, $doc_url)
-    {
-        $sql = "call sp_documentosol('edit','$doc_id','0','$doc_nombre','$doc_url')";
-        return ejecutarConsulta($sql);
-    }
 
-    public function editarGestor($doc_id, $doc_nombre, $doc_url)
+//listar registros
+    public function listar()
     {
-        $sql = "call sp_documentosol('edit','$doc_id','0','$doc_nombre','$doc_url')";
-        return ejecutarConsulta($sql);
-    }
-
-    public function procesoActual($cedula)
-    {
-        $sql = "CALL sp_tramite_actual(0,'$cedula');";
+        $sql = "call sp_inspeccion ('listInspCat', 0, 0, 0, 0, 0)";
         return ejecutarConsultaSP($sql);
     }
 
-    public function obtenerIDSol($cedula)
+    public function listarPredefinido($usu_cedula, $nombre)
     {
-        $sql = "call sp_solicitante('id','0','$cedula','0',
-	            '0','0','0','0','0','0','0','0')";
-        $result = ejecutarConsultaSP($sql);
-        $row = $result->fetch_assoc();
-        return $row['sol_id'];
+        $doc_nombre = $nombre . '-' . $usu_cedula;
+        $sql = "CALL sp_inspeccion('listGestor','$usu_cedula', 0,0,0,'$doc_nombre');";
+        return ejecutarConsultaSP($sql);
+    }
+
+    public function aprobardocumento($usu_id, $tra_id, $cat_id_estado, $pro_observacion)
+    {
+        // Ejecutar la consulta y obtener el resultado
+        $sql = "CALL sp_procesos('inspCatastro', 0, $usu_id, $tra_id, $cat_id_estado, '$pro_observacion')";
+        return ejecutarConsulta($sql);
     }
 
 }
+
+?>
