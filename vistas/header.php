@@ -45,6 +45,11 @@ if (strlen(session_id()) < 1)
   <!-- BS Stepper -->
   <link rel="stylesheet" href="../public/css/bs-stepper.min.css">
   <link rel="stylesheet" href="../public/css/modal-iframe.css">
+  <style>
+    .selection span {
+      height: 38px !important;
+    }
+  </style>
 
 </head>
 
@@ -129,6 +134,12 @@ if (strlen(session_id()) < 1)
                         <p>Cargar Documentos</p>
                       </a>
                     </li>
+                    <li class="nav-item">
+                    <a href="inspeccion_informes.php" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Informes</p>
+                    </a>
+                  </li>
                     <!--<li class="nav-item">
                       <a href="pages/tables/jsgrid.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
